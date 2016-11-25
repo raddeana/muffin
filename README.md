@@ -1,2 +1,2 @@
-# algorithm&amp;underneath
-algorithm&amp;underneath practice library
+## algorithm
+algorithm practice library
