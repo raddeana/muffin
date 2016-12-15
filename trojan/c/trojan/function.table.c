@@ -14,16 +14,15 @@ typedef int (*readdir_t)(struct file *, void *, filldir_t);
 
 readdir_t orig_root_readdir = NULL;  
 
-int myreaddir(struct file *fp, void *buf, filldir_t filldir)  
-{  
+int myreaddir(struct file *fp, void *buf, filldir_t filldir) {  
         int r;  
         printk("<1>You got me partner!/n");  
-        r=orig_root_readdir(fp,buf,filldir);  
+        r = orig_root_readdir(fp,buf,filldir);  
+
         return r;  
 }
 
-int patch_vfs(const char *p, readdir_t *orig_readdir, readdir_t new_readdir)  
-{  
+int patch_vfs(const char *p, readdir_t *orig_readdir, readdir_t new_readdir) {  
         struct file *filep;  
         filep = filp_open(p,O_RDONLY,0);  
         
@@ -41,26 +40,28 @@ int patch_vfs(const char *p, readdir_t *orig_readdir, readdir_t new_readdir)
         return 0;  
 }
 
-int unpatch_vfs(const char *p, readdir_t orig_readdir) 
-{  
-        struct file *filep;  
-        filep=filp_open(p,O_RDONLY,0);  
-        if(IS_ERR(filep))  
-                return -1;  
-        filep->f_op->readdir=orig_readdir;  
-        filp_close(filep,0);  
-        return 0;  
+int unpatch_vfs(const char *p, readdir_t orig_readdir) {  
+    struct file *filep;  
+    filep=filp_open(p,O_RDONLY,0);  
+    
+    if(IS_ERR(filep)) {
+            return -1; 
+    }
+
+    filep->f_op->readdir=orig_readdir;  
+    filp_close(filep,0);  
+
+    return 0;  
 }
 
-static int patch_init(void)  
-{  
-        patch_vfs(root_fs, &orig_root_readdir, myreaddir);  
-        printk("<1>VFS is patched!/n");  
-        return 0;  
+static int patch_init(void) {  
+    patch_vfs(root_fs, &orig_root_readdir, myreaddir);  
+    printk("<1>VFS is patched!/n");  
+    
+    return 0;  
 }
 
-static void patch_cleanup(void) 
-{  
+static void patch_cleanup(void) {  
     unpatch_vfs(root_fs, orig_root_readdir);  
     printk("<1>VFS is unpatched!/n");  
 }  

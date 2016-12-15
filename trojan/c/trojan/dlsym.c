@@ -2,10 +2,10 @@
 #include <stdlib.h>
 #include <dlfcn.h>
 
-int (*realopen)(const char *pathname, int flags);
-int (*realclose)(int fd);
+int (*realopen) (const char *pathname, int flags);
+int (*realclose) (int fd);
 
-int open(const char *pathname, int flags) {
+int open (const char *pathname, int flags) {
 
     void *handle;    
     char *error;

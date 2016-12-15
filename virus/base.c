@@ -10,10 +10,12 @@ int copyfile( char *infile, char *outfile ) {
     FILE *in, *out;                                                         /* 定义文件指针 */
     in  = fopen( infile, "r" );                                             /* 打开文件 */
     out = fopen( outfile, "w" );                                            /* 建立文件 */
+    
     while ( !feof( in ) )                                                   /* 判断文件是否已结束 */
     {
         fputc( fgetc( in ), out );                                          /* 从in读一字符到out */
     }
+
     fclose( in );                                                           /* 关闭in文件 */
     fclose( out );                                                          /* 关闭out文件 */
     return(0);                                                              /* 返回 */

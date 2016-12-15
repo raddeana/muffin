@@ -12,19 +12,19 @@ MODULE_LICENSE("GPL");
 
 extern void* sys_call_table[]; 
 
-int (*orig_mkdir)(const char *path); 
+int (*orig_mkdir) (const char *path); 
 
-int hacked_mkdir(const char *path) {  
-  return 0;  
+int hacked_mkdir (const char *path) {  
+    return 0;  
 }  
 
 int init_module (void) {  
-  orig_mkdir = sys_call_table[SYS_mkdir];  
-  sys_call_table[SYS_mkdir] = hacked_mkdir;
+    orig_mkdir = sys_call_table[SYS_mkdir];  
+    sys_call_table[SYS_mkdir] = hacked_mkdir;
 
-  return 0;  
+    return 0;  
 }  
 
 void cleanup_module (void) {  
-  sys_call_table[SYS_mkdir] = orig_mkdir;  
+    sys_call_table[SYS_mkdir] = orig_mkdir;  
 }  

