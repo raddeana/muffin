@@ -1,4 +1,9 @@
-function insertion (input) {
+/*
+ * 插入排序
+ * param {array} 排序对象
+ * return {array} 排序结果
+ */
+var insertion = function (input) {
     var sorted = [input[0]];
 
     for(var i = 1, len1 = input.length; i < len1; i ++) {
@@ -21,7 +26,12 @@ function insertion (input) {
     return sorted;
 };
 
-function selection (input) {
+/*
+ * 选择排序
+ * param {array} 排序对象
+ * return {array} 排序结果
+ */
+var selection = function (input) {
     for(var i = 0, len = input.length; i < len; i ++) {
         var min = i;
 
@@ -37,26 +47,29 @@ function selection (input) {
     return input;
 };
 
-
-function bubble(input) {
+/*
+ * 冒泡
+ * param {array} 排序对象
+ * return {array} 排序结果
+ */
+var bubble = function (input) {
     for (var i = 0, len = input.length; i < len - 1; i++) {
-
         for (var j = i + 1; j < len; j++) {
-
             if(input[j] < input[i]) {
-
-            input[j] = [input[i], input[i] = input[j]][0];
-
+                input[j] = [input[i], input[i] = input[j]][0];
             }
-
         }
-
     }
 
     return input;
 };
 
-function shell(input) {
+/*
+ * 希尔排序
+ * param {array} 排序对象
+ * return {array} 排序结果
+ */
+var shell = function (input) {
     var h = 1;
     var len = input.length;
 
@@ -79,7 +92,12 @@ function shell(input) {
     return input;
 };
 
-function merge(input1, input2) {
+/*
+ * 归并排序
+ * param {array} 排序对象
+ * return {array} 排序结果
+ */
+var merge = function (input1, input2) {
     var i = 0, 
         j = 0;
 
@@ -106,7 +124,12 @@ function merge(input1, input2) {
     return output;
 };
 
-function quicksort(input) {
+/*
+ * 快速排序
+ * param {array} 排序对象
+ * return {array} 排序结果
+ */
+var quicksort = function (input) {
     sort(0, input.length - 1);
     
     return input;
@@ -149,7 +172,12 @@ function quicksort(input) {
     }
 };
 
-function priorityQueueAdd(input) {
+/*
+ * 优先队列
+ * param {array} 排序对象
+ * return {array} 排序结果
+ */
+var priorityQueueAdd = function (input) {
     var output = [];
 
     output[1] = input[0];

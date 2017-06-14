@@ -13,8 +13,8 @@ int main (int argc, char* argv[]) {
     struct sockaddr_in sin;
     int iFromPort;              // 开始端口
     int iToPort;                // 结束端口
-    int iNowPort;               // 正在扫描的端口
-    char* cHost;                // 要扫描的主机
+    int iNowPort;                  // 正在扫描的端口
+    char* cHost;                  // 要扫描的主机
     SOCKET s;                   // 保存创建socket时的返回值
     int iOpenPort;              // 开放端口个数
     iOpenPort = 0;
