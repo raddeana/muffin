@@ -11,12 +11,12 @@ int main (int argc, char* argv[]) {
 
     // sockaddr_in结构
     struct sockaddr_in sin;
-    int iFromPort;              // 开始端口
-    int iToPort;                // 结束端口
+    int iFromPort;                 // 开始端口
+    int iToPort;                     // 结束端口
     int iNowPort;                  // 正在扫描的端口
     char* cHost;                  // 要扫描的主机
     SOCKET s;                   // 保存创建socket时的返回值
-    int iOpenPort;              // 开放端口个数
+    int iOpenPort;                // 开放端口个数
     iOpenPort = 0;
 
     // 如果命令行下参数不是4个（包括portscan.exe本身），提示正确的用法
