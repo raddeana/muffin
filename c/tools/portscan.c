@@ -11,17 +11,17 @@ int main (int argc, char* argv[]) {
 
     // sockaddr_in结构
     struct sockaddr_in sin;
-    int iFromPort;                 // 开始端口
-    int iToPort;                     // 结束端口
-    int iNowPort;                  // 正在扫描的端口
-    char* cHost;                  // 要扫描的主机
-    SOCKET s;                   // 保存创建socket时的返回值
-    int iOpenPort;                // 开放端口个数
+    int iFromPort;                  // 开始端口
+    int iToPort;                    // 结束端口
+    int iNowPort;                   // 正在扫描的端口
+    char* cHost;                    // 要扫描的主机
+    SOCKET s;                       // 保存创建socket时的返回值
+    int iOpenPort;                  // 开放端口个数
     iOpenPort = 0;
 
     // 如果命令行下参数不是4个（包括portscan.exe本身），提示正确的用法
     if(argc != 4) {
-        Help();     // 给出帮助
+        Help();                                                         // 给出帮助
         return -1;
     }
 
@@ -86,7 +86,7 @@ int main (int argc, char* argv[]) {
 void Help () {
     printf("\nPortScan V1.0 by:MulberryX\n");
     printf("Usage:\n");
-    printf("  PortScan.exe <TargetIP> <BeginPort> <EndPort>\n");
+    printf(" PortScan.exe <TargetIP> <BeginPort> <EndPort>\n");
     printf("Example:\n");
-    printf("  PortScan.exe 127.0.0.1 135 445\n");  
+    printf(" PortScan.exe 127.0.0.1 135 445\n");  
 }
