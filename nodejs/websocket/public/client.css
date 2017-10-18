@@ -1,0 +1,49 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#message-window {
+    padding: 20px;
+    font: 20px Arial, Helvetica;
+    width: 95%;
+    list-style-type: none;
+    margin: 10px auto;
+    border: 1px solid #888;
+    min-height: 300px;
+    border-radius: 5px;
+}
+
+#message-window li {
+    padding: 10px 10px;
+}
+
+#message-window li:nth-child(odd) {
+    background: #eee;
+}
+
+.input-container {
+    background: #888888;
+    padding: 1px;
+    margin: auto;
+    width: 95%;
+    border-radius: 5px;
+}
+
+.input-container input {
+    border: 0;
+    padding: 10px 7px;
+    width: 90%;
+    outline: none;
+}
+
+.input-container button {
+    width: 10%;
+    background: rgb(130, 224, 255);
+    color: white;
+    border: none;
+    padding: 10px;
+    float: right;
+    outline: none;
+}

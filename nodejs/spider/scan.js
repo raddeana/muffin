@@ -1,10 +1,9 @@
 /*
- * 插入排序
- * param {array} 排序对象
- * return {array} 排序结果
+ * 扫描
+ * @author mulberry
  */
-var scaner = function () {
-
+var scaner = () => {
+	
 };
 
 module.exports = function () {

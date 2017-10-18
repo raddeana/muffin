@@ -1,5 +1,6 @@
 /*
- * 编译
+ * 解析
+ * @author mulberry
  */
 module.exports = function () {
 	

@@ -1,0 +1,34 @@
+{
+  "name": "muffin",
+  "version": "0.1.1",
+  "description": "small cake in the way to eve",
+  "main": "server/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mulberryx/muffin.git"
+  },
+  "author": "chenxiangyu",
+  "license": "MIT",
+  "bugs": {
+    "url": "",
+    "email": "wowcxy2008@126.com"
+  },
+  "homepage": "",
+  "private": true,
+  "engines": {
+    "node": ">= 6.9.1"
+  },
+  "files": [
+    "README.md",
+    ".eslintrc",
+    ".babelrc"
+  ],
+  "scripts": {
+    "spider": "node spider.js"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
+    "express": "^4.16.2",
+    "socket.io": "^2.0.3"
+  }
+}
