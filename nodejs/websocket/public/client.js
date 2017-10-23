@@ -1,10 +1,16 @@
-var socket = io()
+/**
+ * 客户端
+ */
 
-$('#send').click(function () {
-  socket.emit('message', $('#message').val())
-  $('#message').val('')
-})
+(function () {
+	var socket = io()
 
-socket.on('message', function (data) {
-  $('#message-window').append($('<li>').text(data))
-})
+	$('#send').click(function () {
+	  socket.emit('message', $('#message').val())
+	  $('#message').val('')
+	})
+
+	socket.on('message', function (data) {
+	  $('#message-window').append($('<li>').text(data))
+	})
+})()

@@ -1,7 +1,3 @@
-/**
- * 
- */
-
 module.exports = {
   root: true,
   parser: 'babel-eslint',
@@ -11,7 +7,7 @@ module.exports = {
   env: {
     browser: true,
   },
-  // https://github.com/standard/standard/blob/master/docs/RULES-en.md
+  // https://github.com/standard/standard/blob/master/docs/rules-en.md
   extends: 'standard',
   // add your custom rules here
   'rules': {

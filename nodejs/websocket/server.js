@@ -12,17 +12,17 @@ app.get('/', function (req, res) {
 })
 
 io.on('connection', function (socket) {
-    console.log('a user connected')
+    console.info('a user connected')
 
     socket.on('message', function (data) {
       io.emit('message', data)
     })
 
     socket.on('disconnect', function () {
-      console.log('a user left')
+      console.info('a user left')
     })
 })
 
 server.listen(port, function () {
-  console.log('server start on port : %d', port)
+  console.info('server start on port : %d', port)
 })

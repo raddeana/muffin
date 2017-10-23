@@ -3,9 +3,9 @@
  * @author mulberry
  */
 
-var http = require('http');
-var parser = require('./parser');
+var http = require('http')
+var parser = require('./parser')
 
 module.exports = function () {
 	
-};
+}

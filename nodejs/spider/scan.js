@@ -2,22 +2,26 @@
  * 扫描
  * @author mulberry
  */
-var scaner = () => {
-	
-};
+const http = require('http');
+const fs = require('fs');
+const cheerio = require('cheerio');
+const request = require('request');
 
-module.exports = function () {
+/**
+ * 扫描器
+ */
+let scan = () => {
 	
-};
+}
 
 app.get('/', function(req, res) {
  
-  request('http://www.jd.com', function (error, response, body) {
+  request('https://www.ibm.com/us-en/', function (error, response, body) {
     if (!error && response.statusCode == 200) {
-      $ = cheerio.load(body);
+      $ = cheerio.load(body)
       res.json({
           cat: $('.cate_menu_item').length
-      });
+      })
     }
   })
-});
+})
