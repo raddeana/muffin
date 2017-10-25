@@ -19,11 +19,14 @@ module.exports = function (config, html) {
 	let links = query('a')
 	let imgs = query('img')
 
-	links.forEach((link) => {
-		
+	let linksArr = []
+	let imgsArr = []
+
+	links.forEach((ele) => {
+		linksArr.push(ele.href)
 	})
 
-	imgs.forEach((link) => {
-
+	imgs.forEach((ele) => {
+		imgsArr.push(ele.src)
 	})
 }
