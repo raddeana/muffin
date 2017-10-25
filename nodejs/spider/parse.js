@@ -3,30 +3,29 @@
  * @author mulberry
  */
 
-const defaultConfig = {
-	tags: ['img', 'a'],
-	attributes: ['href', 'src']
-}
-
 /**
  * 解析函数
- * @param {object} 
+ * @param {string} 模板
  */
-module.exports = function (config, html) {
-	let config = Object.assign({}, defaultConfig, config)
+module.exports = function (html) {
 	let query = cheerio.load(html)
 
 	let links = query('a')
 	let imgs = query('img')
 
-	let linksArr = []
-	let imgsArr = []
+	let hrefs = []
+	let srcs = []
 
 	links.forEach((ele) => {
-		linksArr.push(ele.href)
+		hrefs.push(ele.href)
 	})
 
 	imgs.forEach((ele) => {
-		imgsArr.push(ele.src)
+		srcs.push(ele.src)
 	})
+
+	return {
+		links: hrefs,
+		imgs: srcs
+	}
 }

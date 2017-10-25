@@ -4,7 +4,7 @@
  */
 
 var http = require('http')
-var parser = require('./parser')
+var parser = require('./parse')
 
 module.exports = function () {
 	
