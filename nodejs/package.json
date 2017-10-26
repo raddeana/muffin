@@ -26,6 +26,7 @@
   "scripts": {
     "spider": "node spider/app.js",
     "start": "node server/app.js",
+    "webgl": "node webgl/server.js",
     "websocket": "node websocket/server.js",
     "test": "npm run unit",
     "lint": "eslint --ext .js src nodejs"
