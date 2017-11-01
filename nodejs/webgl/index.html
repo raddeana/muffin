@@ -7,16 +7,13 @@
 	<body>
 		<canvas id="canvas" class="canvas" width="1024" height="720"></canvas>
 		<script id="vs" type="x-shader/x-vertex">  
-			void main() {
-				// 设置坐标
-				gl_Position = vec4(0.0, 0.0, 0.0, 1.0);
-				// 设置尺寸
-				gl_PointSize = 10.0;
+			void main () {
+				gl_Position = vec4(0.0, 0.0, 0.0, 1.0)
+				gl_PointSize = 10.0
 			}
 		</script>
 		<script id="fs" type="x-shader/x-fragment">  
-	    void main() {
-	      //设置颜色
+	    void main () {
 	    	gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
 	    }
 		</script>

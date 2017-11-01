@@ -6,6 +6,11 @@
 var http = require('http')
 var parser = require('./parse')
 
-module.exports = function () {
+/*
+ * 爬虫
+ * @param {string} 网页地址
+ * @return none
+ */
+module.exports = function (url) {
 	
 }
