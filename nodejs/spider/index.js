@@ -3,8 +3,9 @@
  * @author mulberry
  */
 
-var http = require('http')
-var parser = require('./parse')
+let http = require('http')
+let parser = require('./parse')
+let scanResult = require('./scanResult')
 
 /*
  * 爬虫
