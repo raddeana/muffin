@@ -24,10 +24,10 @@
     ".babelrc"
   ],
   "scripts": {
-    "spider": "node spider/app.js",
-    "start": "node server/app.js",
-    "webgl": "node webgl/server.js",
-    "websocket": "node websocket/server.js",
+    "spider": "node nodejs/spider/app.js",
+    "start": "node nodejs/server/app.js",
+    "webgl": "node nodejs/webgl/server.js",
+    "websocket": "node nodejs/websocket/server.js",
     "test": "npm run unit",
     "lint": "eslint --ext .js src nodejs"
   },
