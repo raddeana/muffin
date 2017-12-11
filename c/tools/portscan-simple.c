@@ -1,4 +1,9 @@
-﻿#include <string.h>  
+﻿/*
+ * @端口扫描 sample
+ * @author 陈翔宇
+ */
+
+#include <string.h>  
 #include <Winsock2.h>  
 #include <windows.h>
 #pragma comment(lib,"ws2_32.lib")
@@ -8,7 +13,7 @@
   
 int main () {
     // 初始化WinSock
-    WORD wVersionRequested = MAKEWORD(2,2);  
+    WORD wVersionRequested = MAKEWORD(2, 2);  
     WSADATA wsaData;
 
     if (WSAStartup(wVersionRequested, &wsaData) != 0) {  

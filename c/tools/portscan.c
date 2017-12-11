@@ -1,6 +1,11 @@
+/*
+ * @端口扫描
+ * @author 陈翔宇
+ */
+
 #include <winsock2.h>
 #include <stdio.h>                      // printf函数要用的头文件
-#pragma comment(lib,"ws2_32.lib")
+#pragma comment(lib, "ws2_32.lib");
 
 void Help();                            // 申明帮助函数
 
