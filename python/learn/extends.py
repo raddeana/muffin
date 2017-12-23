@@ -15,7 +15,7 @@ class people:
   def speak(self):
     print("%s 说: 我 %d 岁。" %(self.name,self.age))
  
-#单继承示例
+# 单继承示例
 class student (people):
   grade = ''
   def __init__(self, n, a, w, g):
@@ -26,7 +26,7 @@ class student (people):
   def speak(self):
     print("%s 说: 我 %d 岁了，我在读 %d 年级" % (self.name, self.age, self.grade))
  
-#另一个类，多重继承之前的准备
+# 另一个类，多重继承之前的准备
 class speaker ():
   topic = ''
   name = ''
@@ -36,7 +36,7 @@ class speaker ():
   def speak(self):
     print("我叫 %s，我是一个演说家，我演讲的主题是 %s" % (self.name, self.topic))
  
-#多重继承
+# 多重继承
 class sample (speaker, student):
   a =''
   def __init__(self, n, a, w, g, t):
