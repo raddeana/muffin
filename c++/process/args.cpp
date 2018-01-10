@@ -15,13 +15,13 @@ struct thread_data{
  * 输出hello
  * @param {void *} 
  */
-void *printHello(void *threadarg)
+void *printHello (void *threadarg)
 {
   struct thread_data *my_data;
 
   my_data = (struct thread_data *) threadarg;
 
-  cout << "Thread ID : " << my_data->thread_id ;
+  cout << " Thread ID : " << my_data->thread_id ;
   cout << " Message : " << my_data->message << endl;
 
   pthread_exit(NULL);
@@ -34,16 +34,16 @@ int main ()
   int rc;
   int i;
 
-  for( i=0; i < NUM_THREADS; i++ ){
+  for (i = 0; i < NUM_THREADS; i++) {
     cout <<"main() : creating thread, " << i << endl;
     
     td[i].thread_id = i;
-    td[i].message = (char*)"This is message";
+    td[i].message = (char*) "This is message";
 
     rc = pthread_create(&threads[i], NULL, printHello, (void *)&td[i]);
     
     if (rc) {
-      cout << "Error:unable to create thread," << rc << endl;
+      cout << "Error: unable to create thread," << rc << endl;
       exit(-1);
     }
   }

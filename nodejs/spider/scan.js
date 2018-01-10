@@ -10,7 +10,7 @@ const scanResult = require('./scanResult')
  * 扫描器
  * @param {string} 扫描地址
  */
-let scan = (url) => {
+const scan = (url) => {
   request(url, function (error, response, body) {
     
   })
