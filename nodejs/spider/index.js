@@ -4,8 +4,7 @@
  */
 
 let http = require('http')
-let parser = require('./parse')
-let scanResult = require('./scanResult')
+let scan = require('./scan')
 
 /*
  * 爬虫
@@ -13,5 +12,5 @@ let scanResult = require('./scanResult')
  * @return none
  */
 module.exports = function (url) {
-	
+	scan(url);
 }
