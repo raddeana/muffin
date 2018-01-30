@@ -1,5 +1,6 @@
 #### 扫描
 - zoomeye
+- metasploit
 
 #### 爆破
 
@@ -10,5 +11,5 @@
 - PyGeoIP
 - Dpkt
 
-#### 集成框架
-- metasploit
+#### 攻击向量
+- LOIC
