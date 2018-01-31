@@ -12,5 +12,5 @@ void swap (int &ele1, int &ele2) {
   int temp;
   temp = ele1;
   ele1 = ele2;
-  ele2 = ele1;
+  ele2 = temp;
 } 
