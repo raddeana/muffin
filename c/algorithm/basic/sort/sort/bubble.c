@@ -4,6 +4,7 @@
  */
 
 #include <stdio.h>
+#include <swap.h>
 
 /**
  * 冒泡排序
