@@ -1,12 +1,30 @@
+/**
+ * 冒泡排序
+ * @author mulberry
+ */
+
 #include <stdio.h>
 
-int main () {
-  int a, b;
+/**
+ * 冒泡排序
+ * @param {int[]} 排序数组
+ * @return void
+ */
+void bubble_sort(int arr[])
+{
+  bool isSorted = true;
+  int len = sizeof(arr) - 1;
   
-  a = 56;
-  b = 45;
-  printf("sum is:%d\n",a+b);
-  printf("test exec!\n");
-
-  return 0;
+  for (int i = 0; i < len; i ++) {
+    for (int j = 0; j < len - i; j ++) {
+      if (arr[j] > arr[j + 1]) {
+        isSorted = false;
+        swap(arr[j], arr[j+1]);
+      }
+    }
+    
+    if (isSorted) {
+      break;
+    }
+  }
 }
