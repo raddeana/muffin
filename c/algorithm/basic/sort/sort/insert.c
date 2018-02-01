@@ -1,12 +1,27 @@
 #include <stdio.h>
 
-int main () {
-  int a, b;
-  
-  a = 56;
-  b = 45;
-  printf("sum is:%d\n",a+b);
-  printf("test exec!\n");
+void insert (int arr[]);
 
-  return 0;
+/**
+ * 插入排序
+ * @param {int[]} 排序整形数组 
+ */
+void insert (int arr[]) {
+  int len = sizeof(arr);
+  
+  for (int i = 1; i < len; i ++) {
+    int val = arr[i];
+    int j = i - 1;
+    
+    arr[i] = arr[j];
+    
+    while(j >= 0 && val < arr[j]) {
+      arr[j] = arr[j + 1];
+      j --;
+    }
+    
+    arr[j + 1] = val;
+  }
 }
+
+int arr[] = { 3, 4, 5, 1, 2, 3, 0, 9 };
