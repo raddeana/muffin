@@ -1,12 +1,19 @@
 #include <stdio.h>
 
-int main () {
-  int a, b;
-  
-  a = 56;
-  b = 45;
-  printf("sum is:%d\n",a+b);
-  printf("test exec!\n");
+void selection (int arr[]);
 
-  return 0;
+void selection (int arr[]) {
+  int len = sizeof(arr);
+  
+  for (int i = 0; i < len; i ++) {
+    int min = arr[i];
+    
+    for (int j = i + 1; j < len; j ++) {
+      if (arr[j] < min) {
+        min = arr[j];
+      }
+    }
+    
+    arr[i] = min;
+  }
 }
