@@ -11,7 +11,6 @@ void bubble_sort(int arr[]);
 /**
  * 冒泡排序
  * @param {int[]} 排序数组
- * @return void
  */
 void bubble_sort(int arr[])
 {
