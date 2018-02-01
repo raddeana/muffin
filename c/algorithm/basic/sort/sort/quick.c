@@ -11,13 +11,13 @@ void quicksort (int arr[], int low, int hight);
  * 快速排序
  * @param {int []} 快速排序数组
  */
-void quicksort (int arr[], int low, int hight) {
+void quicksort (int arr[], int low, int high) {
    int i, j, t, m;
 
-   if (low < hight)
+   if (low < high)
    {
       i = low;  
-      j = hight;  
+      j = high;  
       t = arr[low];      // 第一个数为轴
 
       while(i < j)
@@ -51,6 +51,6 @@ void quicksort (int arr[], int low, int hight) {
        
       arr[i] = t;  
       quicksort(arr, 0, i - 1);  
-      quicksort(arr, i + 1, hight);  
+      quicksort(arr, i + 1, high);  
    }
 }
