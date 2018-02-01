@@ -6,6 +6,8 @@
 #include <stdio.h>
 #include <swap.h>
 
+void bubble_sort(int arr[]);
+
 /**
  * 冒泡排序
  * @param {int[]} 排序数组
