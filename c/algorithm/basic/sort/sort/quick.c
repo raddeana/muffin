@@ -1,12 +1,20 @@
+/**
+ * 快速排序
+ * @author mulberry
+ */
+
 #include <stdio.h>
 
-int main () {
-  int a, b;
-  
-  a = 56;
-  b = 45;
-  printf("sum is:%d\n",a+b);
-  printf("test exec!\n");
+void quicksort (int arr[]);
 
-  return 0;
+/**
+ * 快速排序
+ * @param {int []} 快速排序数组
+ */
+void quicksort (int arr[]) {
+  int len = sizeof(arr);
+  
+  for (var i = 0; i < len; i ++) {
+    
+  }
 }
