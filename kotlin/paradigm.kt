@@ -1,5 +1,5 @@
-class Box<T>(t : T) {
-  var value = t
+class Box<T>(box : T) {
+  var value = box
 }
 
 fun <T> boxIn(value: T) = Box(value)
