@@ -1,3 +1,11 @@
+#### Memcached是一个自由开源的，高性能，分布式内存对象缓存系统
+
+#### memcached 特点
+- 协议简单
+- 基于libevent的事件处理
+- 内置内存存储方式
+- memcached不互相通信的分布式
+
 #### ubantu
 sudo apt-get install libevent libevent-deve
 sudo apt-get install memcached
