@@ -1,4 +1,4 @@
-#### Redis Keys
+### Redis Keys
 - DEL key 该命令用于在 key 存在时删除 key
 - DUMP key 序列化给定 key ，并返回被序列化的值
 - EXISTS key 检查给定 key 是否存在
