@@ -1,6 +1,9 @@
 #### 基本语法
+
+```memcached
 set key flags exptime bytes [noreply] 
-value 
+value
+```
 
 #### 参数说明
 - key: 键值 key-value 结构中的 key，用于查找缓存值
