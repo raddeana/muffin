@@ -1,5 +1,5 @@
-#### 基本语法
-
+#### set 命令
+set 命令用于将 value(数据值) 存储在指定的 key(键) 中
 ```memcached
 set key flags exptime bytes [noreply] 
 value
@@ -20,7 +20,7 @@ exptime → 900 (以秒为单位)
 bytes → 9 (数据存储的字节数)
 value → memcached
 
-```shell
+```memcached
 set runoob 0 900 9
 memcached
 STORED
@@ -32,6 +32,6 @@ memcached
 END
 ```
 
-#### 输出信息说明
+#### 输出信息
 - STORED: 保存成功后输出
 - ERROR: 在保持失败后输出
