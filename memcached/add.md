@@ -1,4 +1,5 @@
 #### add 命令
+memcached add 命令用于将 value(数据值) 存储在指定的 key(键) 中
 
 ```memcached
 add key flags exptime bytes [noreply]
