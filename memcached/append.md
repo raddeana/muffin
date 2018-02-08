@@ -1,3 +1,5 @@
+#### append 命令
+
 memcached append 命令用于向已存在 key(键) 的 value(数据值) 后面追加数据
 
 ```memcached
@@ -5,7 +7,7 @@ append key flags exptime bytes [noreply]
 value
 ```
 
-参数说明:
+#### 参数说明
 - key：键值 key-value 结构中的 key，用于查找缓存值
 - flags：可以包括键值对的整型参数，客户机使用它存储关于键值对的额外信息 
 - exptime：在缓存中保存键值对的时间长度（以秒为单位，0 表示永远）
@@ -35,7 +37,7 @@ memcachedredis
 END
 ```
 
-输出信息:
+#### 输出信息
 - STORED：保存成功后输出
 - NOT_STORED：该键在 memcached 上不存在
 - CLIENT_ERROR：执行错误
