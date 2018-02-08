@@ -1,5 +1,5 @@
 #### replace 命令
-
+replace 命令用于替换已存在的 key(键) 的 value(数据值)
 ```memcached
 replace key flags exptime bytes [noreply]
 value
