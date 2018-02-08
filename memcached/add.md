@@ -1,5 +1,10 @@
 #### add 命令
 
+```memcached
+add key flags exptime bytes [noreply]
+value
+```
+
 参数说明：
 - key：键值 key-value 结构中的 key，用于查找缓存值
 - flags：可以包括键值对的整型参数，客户机使用它存储关于键值对的额外信息
