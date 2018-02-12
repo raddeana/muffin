@@ -30,7 +30,7 @@ public class Mp4Player : AdvancedMediaPlayer{
 }
 
 public class MediaAdapter : MediaPlayer {
-   AdvancedMediaPlayer advancedMusicPlayer;
+   var advancedMusicPlayer : AdvancedMediaPlayer?;
 
    constructor (audioType: String){
       if(audioType.equalsIgnoreCase("vlc") ){
@@ -50,7 +50,7 @@ public class MediaAdapter : MediaPlayer {
 }
 
 public class AudioPlayer : MediaPlayer {
-   MediaAdapter mediaAdapter; 
+   var mediaAdapter : MediaAdapter?; 
    
    override public play(audioType: String, fileName: String) {
       if (audioType == "mp3") {
