@@ -1,18 +1,18 @@
 ### 1. malloc 和 free
 #### 声明
 ```c
-void* malloc(size_t size);
-void* free(void* pointer);
+void* malloc (size_t size)
+void* free (void* pointer)
 ```
 
 #### Example
 ```c
-int* pi;
-pi = malloc(100);
+int* pi
+pi = malloc(100)
 
 if(pi == NULL) {
-  printf("out of memory\n");
-  exit(1);
+  printf("out of memory\n")
+  exit(1)
 }
 ```
 
