@@ -1,12 +1,20 @@
+#### MediaPlayer.java
+```java
 public interface MediaPlayer {
    public void play(String audioType, String fileName);
 }
+```
 
+#### AdvancedMediaPlayer.java
+```java
 public interface AdvancedMediaPlayer {    
    public void playVlc(String fileName);
    public void playMp4(String fileName);
 }
+```
 
+#### VlcPlayer.java
+```java
 public class VlcPlayer implements AdvancedMediaPlayer{
    @Override
    public void playVlc(String fileName) {
@@ -17,7 +25,10 @@ public class VlcPlayer implements AdvancedMediaPlayer{
       //什么也不做
    }
 }
+```
 
+#### Mp4Player.java
+```java
 public class Mp4Player implements AdvancedMediaPlayer{
    @Override
    public void playVlc(String fileName) {
@@ -28,7 +39,10 @@ public class Mp4Player implements AdvancedMediaPlayer{
       System.out.println("Playing mp4 file. Name: "+ fileName);        
    }
 }
+```
 
+#### MediaAdapter.java
+```java
 public class MediaAdapter implements MediaPlayer {
    AdvancedMediaPlayer advancedMusicPlayer;
    public MediaAdapter(String audioType){
@@ -47,7 +61,10 @@ public class MediaAdapter implements MediaPlayer {
       }
    }
 }
+```
 
+#### AudioPlayer.java
+```java
 public class AudioPlayer implements MediaPlayer {
    MediaAdapter mediaAdapter; 
 
@@ -70,14 +87,4 @@ public class AudioPlayer implements MediaPlayer {
       }
    }   
 }
-
-public class AdapterPatternDemo {
-   public static void main(String[] args) {
-      AudioPlayer audioPlayer = new AudioPlayer();
-
-      audioPlayer.play("mp3", "beyond the horizon.mp3");
-      audioPlayer.play("mp4", "alone.mp4");
-      audioPlayer.play("vlc", "far far away.vlc");
-      audioPlayer.play("avi", "mind me.avi");
-   }
-}
+```
