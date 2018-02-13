@@ -1,3 +1,6 @@
+### 适配器模式
+适配器模式（Adapter Pattern）是作为两个不兼容的接口之间的桥梁
+
 #### MediaPlayer.java
 ```java
 public interface MediaPlayer {
