@@ -10,7 +10,7 @@ public interface DrawAPI {
 public class RedCircle implements DrawAPI {
    @Override
    public void drawCircle(int radius, int x, int y) {
-      System.out.println("Drawing Circle[ color: red, radius: " + radius +", x: " +x+", "+ y +"]");
+      System.out.println("Drawing Circle[ color: red, radius: " + radius + ", x: " + x + ", " + y + "]");
    }
 }
 ```
@@ -20,7 +20,7 @@ public class RedCircle implements DrawAPI {
 public class GreenCircle implements DrawAPI {
    @Override
    public void drawCircle(int radius, int x, int y) {
-      System.out.println("Drawing Circle[ color: green, radius: " + radius +", x: " +x+", "+ y +"]");
+      System.out.println("Drawing Circle[ color: green, radius: " + radius + ", x: " + x + ", " + y + "]");
    }
 }
 ```
@@ -51,7 +51,7 @@ public class Circle extends Shape {
    }
 
    public void draw() {
-      drawAPI.drawCircle(radius,x,y);
+      drawAPI.drawCircle(radius, x, y);
    }
 }
 ```
