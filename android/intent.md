@@ -18,6 +18,6 @@ startActivity(Intent.createChooser(email, "Choose an email client from..."))
 - 标记 这些标记是意图的可选部分
 - 组件名称对象是一个可选的域，代表活动、服务或者广播接收器类
 
-# 意图的类型
+#### 意图的类型
 - 显式意图
 - 隐式意图
