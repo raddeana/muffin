@@ -9,7 +9,7 @@ public abstract class Game {
    abstract void endPlay ();
 
    // 模板
-   public final void play (){
+   public final void play () {
       // 初始化游戏
       initialize();
       // 开始游戏
