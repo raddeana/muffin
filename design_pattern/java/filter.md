@@ -16,9 +16,11 @@ public class Person {
    public String getName() {
       return name;
    }
+   
    public String getGender() {
       return gender;
    }
+   
    public String getMaritalStatus() {
       return maritalStatus;
    }    
@@ -86,12 +88,14 @@ public class CriteriaSingle implements Criteria {
 
    @Override
    public List<Person> meetCriteria(List<Person> persons) {
-      List<Person> singlePersons = new ArrayList<Person>(); 
+      List<Person> singlePersons = new ArrayList<Person>();
+      
       for (Person person : persons) {
          if(person.getMaritalStatus().equalsIgnoreCase("SINGLE")){
             singlePersons.add(person);
          }
       }
+      
       return singlePersons;
    }
 }
