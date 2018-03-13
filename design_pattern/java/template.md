@@ -9,7 +9,7 @@ public abstract class Game {
    abstract void endPlay ();
 
    // 模板
-   public final void play(){
+   public final void play (){
       // 初始化游戏
       initialize();
       // 开始游戏
@@ -24,15 +24,15 @@ public abstract class Game {
 ```java
 public class Cricket extends Game {
    @Override
-   void endPlay() {
+   void endPlay () {
       System.out.println("Cricket Game Finished!");
    }
    @Override
-   void initialize() {
+   void initialize () {
       System.out.println("Cricket Game Initialized! Start playing.");
    }
    @Override
-   void startPlay() {
+   void startPlay () {
       System.out.println("Cricket Game Started. Enjoy the game!");
    }
 }
