@@ -13,7 +13,7 @@ public interface Shape {
 public class Rectangle implements Shape {
 
    @Override
-   public void draw() {
+   public void draw () {
       System.out.println("Rectangle::draw()");
    }
 }
@@ -24,7 +24,7 @@ public class Rectangle implements Shape {
 public class Square implements Shape {
 
    @Override
-   public void draw() {
+   public void draw () {
       System.out.println("Square::draw()");
    }
 }
@@ -35,7 +35,7 @@ public class Square implements Shape {
 public class Circle implements Shape {
 
    @Override
-   public void draw() {
+   public void draw () {
       System.out.println("Circle::draw()");
    }
 }
@@ -48,20 +48,20 @@ public class ShapeMaker {
    private Shape rectangle;
    private Shape square;
 
-   public ShapeMaker() {
+   public ShapeMaker () {
       circle = new Circle();
       rectangle = new Rectangle();
       square = new Square();
    }
 
    public void drawCircle(){
-      circle.draw();
+      circle.draw ();
    }
    public void drawRectangle(){
-      rectangle.draw();
+      rectangle.draw ();
    }
    public void drawSquare(){
-      square.draw();
+      square.draw ();
    }
 }
 ```
