@@ -1,4 +1,4 @@
-# 更新已存在的文档
+#### 更新已存在的文档
 db.collection.update(
    <query>,
    <update>,
@@ -9,7 +9,7 @@ db.collection.update(
    }
 )
 
-# 方法通过传入的文档来替换已有文档
+#### 方法通过传入的文档来替换已有文档
 db.collection.save(
    <document>,
    {
