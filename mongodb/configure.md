@@ -135,3 +135,6 @@ mongodump将整个databases全部内容导出到一个二进制文件中，可�
 #### mongoimport&mongoexport
 mongoexport将数据导出为JSON或者CSV格式，以便其他应用程序解析
 mongostat指令可以间歇性的打印出当前mongod实例中“数据存储”、“flush”、读写次数、网络输出等参数，是查看mongod性能的有效手段
+
+#### 启动命令
+mongod –config /usr/local/etc/mongod.conf
