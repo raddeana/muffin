@@ -1,4 +1,4 @@
-# 嵌入式关系
+#### 嵌入式关系
 "_id":ObjectId("52ffc33cd85242f436000001"),
 "contact": "987654321",
 "dob": "01-01-1991",
@@ -15,10 +15,10 @@
   "state": "Illinois"
 }]
 
-#query
+#### query
 db.users.findOne({ "name": "Tom Benzamin" }, { "address" : 1 })
 
-# 引用式关系
+#### 引用式关系
 {
   "_id":ObjectId("52ffc33cd85242f436000001"),
   "contact": "987654321",
@@ -30,6 +30,6 @@ db.users.findOne({ "name": "Tom Benzamin" }, { "address" : 1 })
   ]
 }
 
-# query
+#### query
 db.users.findOne({"name": "Tom Benzamin"}, {"address_ids": 1})
 db.address.find({"_id": {"$in": result["address_ids"]}})
