@@ -35,7 +35,7 @@ function initShader (gl) {
     gl.program = shaderProgram;
 }
 
-function main() {
+function main () {
     var canvas = document.getElementById("container");
     var gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
     initShader(gl);                                                       // 初始化着色器
@@ -85,7 +85,7 @@ void main () {
 var fragmentShaderSrc = `
 precision mediump float;          // 设置精度
 uniform vec4 u_FragColor;         // 接收传入的颜色参数
-void main(){
+void main () {
     gl_FragColor = u_FragColor;   // gl_FragColor 内置变量，表示片元颜色，必须赋值
 }`;
 
@@ -129,7 +129,7 @@ function main () {
 g_points = [];
 g_colors = [];
 
-function onClick(event, gl, canvas, a_Position, u_FragColor) {
+function onClick (event, gl, canvas, a_Position, u_FragColor) {
     // 记录鼠标点击过的位置
     var rect = event.target.getBoundingClientRect();
     var x = ((event.clientX - rect.left) - canvas.width * 0.5) / (canvas.width * 0.5);
