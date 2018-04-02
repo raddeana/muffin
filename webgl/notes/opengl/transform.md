@@ -16,7 +16,7 @@ glScale {fd} (TYPE x, TYPE y, TYPE z)
 #### 投影变换
 将三维模型投影到屏幕上显示
 - 透视投影
-离视点近的物体大，离视点远的物体小，远到极点即为消失，成为灭点
+离视点近的物体大，离视点远的物体小，远到极点即为消失，成为消失点
 void glFrustum(GLdouble left, GLdouble Right, GLdouble bottom, GLdouble top, GLdouble near, GLdouble far)
 void gluPerspective(GLdouble fovy, GLdouble aspect, GLdouble zNear, GLdouble zFar)
 
