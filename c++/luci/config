@@ -1,0 +1,4 @@
+config  "server" "webserver"
+list    "index" "index.html"
+list    "index" "index.php"
+list    "index" "default.html"
