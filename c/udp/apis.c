@@ -71,8 +71,7 @@ int Socket(int domain, int type, int protocol)
     return sockfd;
 }
 
-int Setsockopt(int sockfd, int level, int optname,
-           const void *optval, socklen_t optlen)
+int Setsockopt(int sockfd, int level, int optname, const void *optval, socklen_t optlen)
 {
     int retval = setsockopt(sockfd, level, optname, optval, optlen);
     if(retval == -1)
@@ -83,8 +82,7 @@ int Setsockopt(int sockfd, int level, int optname,
     return retval;
 }
 
-int Select(int nfds, fd_set *readfds, fd_set *writefds,
-       fd_set *exceptfds, struct timeval *timeout)
+int Select(int nfds, fd_set *readfds, fd_set *writefds, fd_set *exceptfds, struct timeval *timeout)
 {
     int ret = select(nfds, readfds, writefds, exceptfds, timeout);
     if(ret == -1)
