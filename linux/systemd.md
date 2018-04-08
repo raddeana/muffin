@@ -21,28 +21,18 @@ Service 单元负责后台服务，Timer 单元负责定时器，Slice 单元负
 - /usr/lib/systemd/system 用户自己定义的单元文件
 
 查看所有的单元文件的命令:
-# 查看所有单元
-- systemctl list-unit-files
-# 查看所有 Service 单元
-- systemctl list-unit-files --type service
-# 查看所有 Timer 单元
-- systemctl list-unit-files --type timer
+- 查看所有单元 systemctl list-unit-files
+- 查看所有 Service 单元 systemctl list-unit-files --type service
+- 查看所有 Timer 单元 systemctl list-unit-files --type timer
 
 单元的管理命令:
-# 启动单元
-- systemctl start [UnitName]
-# 关闭单元
-- systemctl stop [UnitName]
-# 重启单元
-- systemctl restart [UnitName]
-# 杀死单元进程
-- systemctl kill [UnitName]
-# 查看单元状态
-- systemctl status [UnitName]
-# 开机自动执行该单元
-- systemctl enable [UnitName]
-# 关闭开机自动执行
-- systemctl disable [UnitName]
+- 启动单元 systemctl start [UnitName]
+- 关闭单元 systemctl stop [UnitName]
+- 重启单元 systemctl restart [UnitName]
+- 杀死单元进程 systemctl kill [UnitName]
+- 查看单元状态 systemctl status [UnitName]
+- 开机自动执行该单元 systemctl enable [UnitName]
+- 关闭开机自动执行 systemctl disable [UnitName]
 
 #### Service 单元
 新建 Service 非常简单，就是在/usr/lib/systemd/system目录里面新建一个文件，例子：
@@ -99,14 +89,9 @@ mytimer.timer文件里面，还有一个[Install]部分，定义开机自启动�
 - 关闭开机自启动 systemctl disable myscript.timer
 
 #### 日志
-# 查看整个日志
-- sudo journalctl
-# 查看 mytimer.timer 的日志
-- sudo journalctl -u mytimer.timer
-# 查看 mytimer.timer 和 mytimer.service 的日志
-- sudo journalctl -u mytimer
-# 从结尾开始查看最新日志
-- sudo journalctl -f
-# 从结尾开始查看 mytimer.timer 的日志
-- journalctl -f -u timer.timer
+- 查看整个日志 sudo journalctl
+- 查看 mytimer.timer 的日志 sudo journalctl -u mytimer.timer
+- 查看 mytimer.timer 和 mytimer.service 的日志 sudo journalctl -u mytimer
+- 从结尾开始查看最新日志 sudo journalctl -f
+- 从结尾开始查看 mytimer.timer 的日志 journalctl -f -u timer.timer
 
