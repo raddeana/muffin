@@ -1,0 +1,2 @@
+- webpack => webpack-cli => 242
+- extract-text-webpack-plugin => @next
