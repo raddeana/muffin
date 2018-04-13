@@ -8,13 +8,8 @@
 #include<linux/init.h>    
 #include<linux/module.h>    
   
-#define BUFFSIZE 1024  
-  
-void jiang_debug( void )  
-{  
-    printk("just debug");  
-}  
-  
+#define BUFFSIZE 1024
+
 int myserver(void)  
 {    
     
@@ -86,7 +81,6 @@ int myserver(void)
     vec.iov_len=1024;
     msg.msg_flags=MSG_NOSIGNAL;
     msleep(1000);
-    jiang_debug();
     ret=kernel_recvmsg(client_sock,&msg,&vec,1,1024, msg.msg_flags); /* receive message */    
     recvbuf[1023] = 0;  
     printk("receive message:\n %s\n",recvbuf);
@@ -154,8 +148,9 @@ int connect_send_recv (void){
     s_addr.sin_family = AF_INET;  
     s_addr.sin_port = htons(port_num);  
     s_addr.sin_addr.s_addr = in_aton("192.168.0.71");  
-    sock = (struct socket *)kmalloc(sizeof(struct socket), GFP_KERNEL);  
-    // 创建一个sock, &init_net是默认网络命名空间  
+    sock = (struct socket *)kmalloc(sizeof(struct socket), GFP_KERNEL);
+    
+    // 创建一个sock, &init_net是默认网络命名空间
     ret = sock_create_kern(&init_net, AF_INET, SOCK_STREAM, IPPROTO_TCP, &sock);
     
     if (ret < 0) {
@@ -185,35 +180,37 @@ int connect_send_recv (void){
     if (ret < 0) {  
         printk("client: kernel_sendmsg error!\n");  
         return ret;  
-    } else if(ret != BUFFER_SIZE){  
-        printk("client: ret!=BUFFER_SIZE");  
+    } else if (ret != BUFFER_SIZE) {  
+        printk("client: ret!=BUFFER_SIZE");
     }
     
-    printk("client: send ok!\n");  
-    memset(recv_buf, 0, BUFFER_SIZE);  
-    memset(&recv_vec, 0, sizeof(recv_vec));  
-    memset(&recv_msg, 0, sizeof(recv_msg));  
-    recv_vec.iov_base = recv_buf;  
-    recv_vec.iov_len = BUFFER_SIZE;  
+    printk("client: send ok!\n");
+    memset(recv_buf, 0, BUFFER_SIZE);
+    memset(&recv_vec, 0, sizeof(recv_vec));
+    memset(&recv_msg, 0, sizeof(recv_msg));
+    recv_vec.iov_base = recv_buf;
+    recv_vec.iov_len = BUFFER_SIZE;
+    
     // 接收数据  
     ret = kernel_recvmsg(sock, &recv_msg, &recv_vec, 1, BUFFER_SIZE, 0);  
-    printk("client: received message:\n %s\n", recv_buf);  
+    printk("client: received message:\n %s\n", recv_buf);
+    
     // 关闭连接  
-    kernel_sock_shutdown(sock, SHUT_RDWR);  
-    sock_release(sock);  
-    return 0;  
+    kernel_sock_shutdown(sock, SHUT_RDWR);
+    sock_release(sock);
+    return 0;
 }
 
-static int client_example_init(void){  
-    printk("client: init\n");  
-    return connect_send_recv();  
+static int client_example_init (void) {
+    printk("client: init\n");
+    return connect_send_recv();
 }
 
-static void client_example_exit(void){  
-    printk("client: exit!\n");  
+static void client_example_exit (void) {
+    printk("client: exit!\n");
 }
 
-module_init(client_example_init);  
-module_exit(client_example_exit);  
+module_init(client_example_init);
+module_exit(client_example_exit);
 MODULE_LICENSE("GPL");
 ```
