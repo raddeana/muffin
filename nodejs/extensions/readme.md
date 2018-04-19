@@ -55,3 +55,20 @@ namespace demo {
   ]
 }
 ```
+
+将会在build目录下生成一个Makefile(Unix-like系统)或者一个vcxproj文件(Windows系统)还有一部分其他文件
+```cmd
+node-gyp configure
+```
+
+生成一个编译过的addon.node文件，这个文件会被放在build/Release/目录下
+```cmd
+node-gyp build
+```
+
+引用二进制的C++扩展
+```javascript
+const addon = require('./build/Release/addon')
+// 'world'
+console.log(addon.hello())
+```
