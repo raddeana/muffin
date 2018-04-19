@@ -1,4 +1,4 @@
-#### 原则
+#### principles
 - no tracking
 - no tracing
 - no moral
