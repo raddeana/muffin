@@ -3,11 +3,8 @@
   'targets': [
     {
       'target_name': 'addon',
-      'sources': [
-        'src/hello.cc'
-      ],
-      'dependencies': [
-      ]
+      'sources': ['src/hello.cc'],
+      'dependencies': []
     }
   ]
 }
