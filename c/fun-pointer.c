@@ -13,7 +13,8 @@ int getNextRandomValue(void)
 {
     return rand();
 }
- 
+
+// 主函数
 int main(void)
 {
     int myarray[10];
