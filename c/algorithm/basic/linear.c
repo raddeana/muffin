@@ -119,7 +119,7 @@ bool listDelete(seq_list* list, int key){
 
 // 追加元素
 bool listAppend(seq_list* list, int value) {
-     bool n = Flase;
+     bool n = False;
      // 表未满， 就可以追加
      if (list->length < SIZE){
          list->data[list->length] = value;
@@ -132,7 +132,7 @@ bool listAppend(seq_list* list, int value) {
 
 // 删除末尾元素
 bool listPop(seq_list* list) {
-    bool n = Flase;
+    bool n = False;
     if (list->length != 0){
         list->length--;
     }
