@@ -5,7 +5,7 @@
 spQueue queueInit ()
 {
     spQueue q;
-    q->front = q->rear = 0;
+    q.front = q.rear = 0;
     return q;
 }
 
