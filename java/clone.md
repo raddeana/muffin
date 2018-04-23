@@ -1,4 +1,4 @@
-##### 浅克隆
+### 浅克隆
 - 被复制的类需要实现Clonenable接口（不实现的话在调用clone方法会抛出CloneNotSupportedException异常)， 该接口为标记接口(不含任何方法)
 - 覆盖clone()方法，访问修饰符设为public。方法中调用super.clone()方法得到需要的复制对象。（native为本地方法)
 
@@ -25,7 +25,7 @@ class Student implements Cloneable{
 }
 ```
 
-##### 深克隆
+### 深克隆
 ```java
 package abc;    
 class Address implements Cloneable {  
