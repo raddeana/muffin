@@ -1,6 +1,6 @@
-DAO - ORM  JEE - WEB
--- AOP --  ---------
-------- CORE -------
+DAO - ORM  JEE - WEB<br/>
+-- AOP --  ---------<br/>
+------- CORE -------<br/>
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>  
