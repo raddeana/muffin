@@ -1,33 +1,31 @@
 #### server
 ```c
-#include<linux/in.h>    
-#include<linux/inet.h>    
-#include<linux/socket.h>    
-#include<net/sock.h>    
+#include<linux/in.h>
+#include<linux/inet.h>
+#include<linux/socket.h>
+#include<net/sock.h>
     
-#include<linux/init.h>    
-#include<linux/module.h>    
+#include<linux/init.h>
+#include<linux/module.h>
   
 #define BUFFSIZE 1024
 
-int myserver(void)  
-{    
-    
-    struct socket *sock,*client_sock;    
+int myserver (void)  
+{
+    struct socket *sock, *client_sock;    
     struct sockaddr_in s_addr;    
-    unsigned short portnum=8888;    
-    int ret=0;    
+    unsigned short portnum = 8888;    
+    int ret = 0;    
   
-    memset(&s_addr,0,sizeof(s_addr));    
-    s_addr.sin_family=AF_INET;    
-    s_addr.sin_port=htons(portnum);    
-    s_addr.sin_addr.s_addr=in_aton("192.168.0.70");    
+    memset(&s_addr, 0, sizeof(s_addr));    
+    s_addr.sin_family = AF_INET;
+    s_addr.sin_port = htons(portnum);
+    s_addr.sin_addr.s_addr = in_aton("192.168.0.70");
   
-  
-    sock=(struct socket *)kmalloc(sizeof(struct socket), GFP_KERNEL);    
+    sock = (struct socket *)kmalloc(sizeof(struct socket), GFP_KERNEL);    
   
     /* create a socket */    
-    ret=sock_create_kern(&init_net, AF_INET,SOCK_STREAM, IPPROTO_TCP,&sock);    
+    ret = sock_create_kern(&init_net, AF_INET,SOCK_STREAM, IPPROTO_TCP,&sock);    
     
     if (ret) {    
         printk("server:socket_create error!\n");    
@@ -38,26 +36,27 @@ int myserver(void)
     /* bind the socket */    
     ret = kernel_bind(sock,(struct sockaddr *)&s_addr,sizeof(struct sockaddr_in));
     
-    if(ret<0){    
+    if(ret < 0) {    
         printk("server: bind error\n");    
         return ret;    
-    }    
+    }
+    
     printk("server:bind ok!\n");    
   
     /*listen*/    
-    ret=kernel_listen(sock,10);    
-    if (ret<0) {    
+    ret = kernel_listen(sock,10);    
+    if (ret < 0) {    
         printk("server: listen error\n");    
         return ret;    
-    }    
-    printk("server:listen ok!\n");    
-  
-    ret=kernel_accept(sock,&client_sock,10);
+    }
     
-    if (ret<0){    
+    printk("server:listen ok!\n");
+    ret = kernel_accept(sock,&client_sock,10);
+
+    if (ret < 0) {    
         printk("server:accept error!\n");    
         return ret;    
-    }    
+    }
   
     printk("server: accept ok, Connection Established\n");    
   
@@ -75,13 +74,13 @@ int myserver(void)
     /* receive message from client */    
     struct kvec vec;
     struct msghdr msg;
-    memset(&vec,0,sizeof(vec));
-    memset(&msg,0,sizeof(msg));
-    vec.iov_base=recvbuf;
-    vec.iov_len=1024;
-    msg.msg_flags=MSG_NOSIGNAL;
+    memset(&vec, 0, sizeof(vec));
+    memset(&msg, 0, sizeof(msg));
+    vec.iov_base = recvbuf;
+    vec.iov_len = 1024;
+    msg.msg_flags = MSG_NOSIGNAL;
     msleep(1000);
-    ret=kernel_recvmsg(client_sock,&msg,&vec,1,1024, msg.msg_flags); /* receive message */    
+    ret = kernel_recvmsg(client_sock,&msg,&vec,1,1024, msg.msg_flags); /* receive message */    
     recvbuf[1023] = 0;  
     printk("receive message:\n %s\n",recvbuf);
             
@@ -96,11 +95,11 @@ int myserver(void)
 static int server_init(void){    
     printk("server init:\n");    
     return (myserver());    
-}    
+}
 
 static void server_exit(void){    
     printk("good bye\n"); 
-}    
+} 
 
 module_init(server_init);    
 module_exit(server_exit);    
