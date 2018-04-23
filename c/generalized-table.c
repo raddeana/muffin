@@ -3,7 +3,7 @@
 
 typedef char elemType; 
 
-//
+// 广义表
 struct GNode {
   int tag;    /* 标志域：取0表示单元素结点；取1时表示子表结点 */
 
