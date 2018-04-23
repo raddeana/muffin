@@ -6,12 +6,13 @@
 ```c
 #include <stdio.h>
 #define STRINGMAX 100
+
 typedef struct
 {
-    char vec[STRINGMAX];  
-    int len;         //储存串的实际数据的长度而不是下标；  
-                     /**（顺便提示一句：往往需要在字符串的末尾加一个结束标志'\0'而这个标志在操作中不算做实际数据，除在某些操作中作为循环结束条件，其它都将这个标志看为空的；）**/  
-} str;               //定义一个串结构的结构体
+    char vec[STRINGMAX];
+    int len;         // 储存串的实际数据的长度而不是下标
+                     // 需要在字符串的末尾加一个结束标志'\0'
+} str;               // 定义一个串结构的结构体
 ```
 
 ##### 字符串链接
@@ -22,19 +23,19 @@ typedef struct
  * @param {str} 字符串2
  * @return {void}
  */
-void Concarstr (str *r1, str *r2) {
+void concarStr (str *r1, str *r2) {
     int i;
     printf("\n\t\tr1=%s \t\t  r2=%s", r1->vec, r2->vec);
-    
-    if(r1 -> len+r2 -> len > STRINGMAX) {
+
+    if (r1 -> len+r2 -> len > STRINGMAX) {
         printf("\n\t\t两个串太长，溢出！\n");  
     } else {
         for(i = 0; i < r2 -> len; i++) {
             r1->vec[r1 -> len+i] = r2 -> vec[i];      // 将r2的字符逐个赋值到r1的尾部；r1 -> len 储存的不是实际数据而是结束标志'\0'
         }
-        
-        r1 -> vec[r1->len+i] = '\0';                  // 在新串的末尾加一个结束标志'\0',（链接时覆盖掉这个数据）
-        r1 -> len=r1->len+r2 -> len;
+
+        r1 -> vec[r1 -> len + i] = '\0';                  // 在新串的末尾加一个结束标志'\0',（链接时覆盖掉这个数据）
+        r1 -> len=r1 -> len + r2 -> len;
     }
 }
 ```
@@ -48,7 +49,7 @@ void Concarstr (str *r1, str *r2) {
  * @param {int} 子串结束位置
  * @return {void}
  */
-void Substr (str *r, int i, int j) {  
+void subStr (str *r, int i, int j) {  
     int k;
     str a;                                // 因为下面的指针r1需要一个空间；  
     str *r1 = &a;  
@@ -57,13 +58,13 @@ void Substr (str *r, int i, int j) {
         printf("\n\t\t子串超界!\n");  
     } else {  
         for(k = 0; k < j; k ++) {  
-            r1->vec[k] = r->vec[i+k-1];   // 位置-1即为所需下标；  
+            r1 -> vec[k] = r -> vec[i+k-1];   // 位置-1即为所需下标；  
         }
-        
-        r1->len=j;
-        r1->vec[r1->len] = '0';
+
+        r1 -> len = j;
+        r1 -> vec[r1->len] = '0';
         printf("\n\t\t取出字符为：");
-        puts(r1->vec);
+        puts(r1 -> vec);
     }  
 }  
 ```
@@ -77,7 +78,7 @@ void Substr (str *r, int i, int j) {
  * @param {int} 子串结束位置
  * @return {void}
  */
-void Delstr (str *r, int i ,int j)      // 删除子串；  
+void delStr (str *r, int i ,int j)      // 删除子串；  
 {  
     int k;
     
@@ -105,18 +106,17 @@ void Delstr (str *r, int i ,int j)      // 删除子串；
  * @param {int} 插入位置
  * @return {void}
  */
-str Insstr(str *r, str *r1, int i) {  
+str insertStr(str *r, str *r1, int i) {  
     int k;
   
-    if(i>=r->len || r->len+r1->len>STRINGMAX) {
+    if(i >= r->len || r -> len+r1 -> len > STRINGMAX) {
         printf("\n\t\t不能插入！\n");  
-    } else {  
-        for(k=r->len-1;k>=i-1;i--)  
-        {  
+    } else {
+        for(k = r -> len-1; k >= i-1; i--) {
             r->vec[r1->len-1+k] = r->vec[k];          // 利用循环从串r的最后一个实际元素开始，向后移动r1->len个单位；  
-        }  
-        for(k=0;k<r1->len;k++)  
-        {  
+        }
+        
+        for(k = 0; k < r1->len; k ++) {
             r->vec[i-1+k] = r1->vec[k];               // 从插入位置开始，利用循环将r1的实际元素逐个赋值给r；  
         }  
     }  
@@ -131,15 +131,12 @@ str Insstr(str *r, str *r1, int i) {
  * @param {str} 子字符串
  * @return {int} 子字符串开始位置
  */
-int Indexstr (str *r, str *r1) {
-    int i, j, k;  
-  
-    for(i = 0;r -> vec[i];i ++)                            // 主串的结束标志作为循环终止条件；  
-    {  
-        for(j=i,k=0;r->vec[j]==r1->vec[k];j++,i++)         // 将i值交给j用于保护i值，记录位置；把r->vec[j]==r1->vec[k];作为循环条件，若匹配则继续循环，否则退出内层循环；  
-        {  
-            if(!r1->vec[k+1])                              // 利用结束标志，判断子串r1的实际数据是否完全与主串r匹配；  
-            {  
+int indexStr (str *r, str *r1) {
+    int i, j, k;
+    
+    for(i = 0;r -> vec[i];i ++) {  
+        for (j = i, k = 0;r -> vec[j] == r1 -> vec[k]; j ++, i ++) {  
+            if (!r1->vec[k+1]) {
                 return i;                                  // 如果完全与主串匹配，怎返回位置i，结束函数；  
             }  
         }  
