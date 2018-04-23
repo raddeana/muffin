@@ -1,5 +1,5 @@
 #!/bin/bash
-index=1
+index = 1
 for line in `cat file.txt`
 do
     if [ $index == 10 ]
