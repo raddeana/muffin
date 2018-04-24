@@ -1,4 +1,4 @@
-Aggregate:
+#### Aggregate:
 - AVG() 返回平均值
 - COUNT() 返回行数
 - FIRST() 返回第一个记录的值
@@ -7,7 +7,7 @@ Aggregate:
 - MIN() 返回最小值
 - SUM() 返回总和
 
-Scalar:
+#### Scalar:
 - UCASE() 将某个字段转换为大写
 - LCASE() 将某个字段转换为小写
 - MID() 从某个文本字段提取字符, MySql 中使用
@@ -17,7 +17,7 @@ Scalar:
 - NOW() 返回当前的系统日期和时间
 - FORMAT() 格式化某个字段的显示方式
 
-#### exa
+#### eg
 ```sql
 SELECT LEN(column_name) FROM table_name;
 ```
