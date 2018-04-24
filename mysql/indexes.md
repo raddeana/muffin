@@ -3,6 +3,73 @@
 快速查找排好序的一种数据结构
 Mysql索引主要有两种结构：B+Tree索引和Hash索引
 如果没有特别指明，一般指B树结构组织的索引(B+Tree索引)
+<br/>
+虽然索引大大提高了查询速度，同时却会降低更新表的速度，如对表进行INSERT、UPDATE和DELETE。
+因为更新表时，MySQL不仅要保存数据，还要保存一下索引文件。
+
+#### 普通索引
+##### 创建索引
+```sql
+CREATE INDEX indexName ON mytable(username(length))
+```
+##### 修改表结构(添加索引)
+```sql
+ALTER table tableName ADD INDEX indexName(columnName)
+```
+
+##### 创建表的时候直接指定
+```sql
+CREATE TABLE mytable(
+  ID INT NOT NULL,
+  username VARCHAR(16) NOT NULL,
+  INDEX [indexName] (username(length))
+);
+```
+##### 删除索引的语法
+```sql
+DROP INDEX [indexName] ON mytable;
+```
+#### 唯一索引
+索引列的值必须唯一，但允许有空值。如果是组合索引，则列值的组合必须唯一
+
+##### 创建索引
+```sql
+CREATE UNIQUE INDEX indexName ON mytable(username(length))
+```
+
+##### 修改表结构
+```sql
+ALTER table mytable ADD UNIQUE [indexName] (username(length))
+```
+
+##### 创建表的时候直接指定
+```sql
+CREATE TABLE mytable(
+  ID INT NOT NULL,
+  username VARCHAR(16) NOT NULL,
+  UNIQUE [indexName] (username(length))
+);
+```
+
+#### 使用ALTER 命令添加和删除索引
+```sql
+ALTER TABLE tbl_name ADD PRIMARY KEY (column_list): 该语句添加一个主键，这意味着索引值必须是唯一的，且不能为NULL
+ALTER TABLE tbl_name ADD UNIQUE index_name (column_list): 这条语句创建索引的值必须是唯一的（除了NULL外，NULL可能会出现多次）
+ALTER TABLE tbl_name ADD INDEX index_name (column_list): 添加普通索引，索引值可出现多次
+ALTER TABLE tbl_name ADD FULLTEXT index_name (column_list): 该语句指定了索引为 FULLTEXT，用于全文索引
+```
+
+#### 使用 ALTER 命令添加和删除主键
+```sql
+ALTER TABLE testalter_tbl MODIFY i INT NOT NULL;
+ALTER TABLE testalter_tbl ADD PRIMARY KEY (i);
+ALTER TABLE testalter_tbl DROP PRIMARY KEY;
+```
+
+#### 显示索引信息
+```sql
+SHOW INDEX FROM table_name;
+```
 
 #### explain
 对 SELECT 语句进行分析, 并输出 SELECT 执行的详细信息, 以供开发人员针对性优化
@@ -38,16 +105,3 @@ expain出来的信息有10列，分别是id、select_type、table、type、possi
 - range: 表示使用索引范围查询, 通过索引字段范围获取表中部分数据记录
 - index: 表示全索引扫描(full index scan), 和 ALL 类型类似, 只不过 ALL 类型是全表扫描, 而 index 类型则仅仅扫描所有的索引, 而不扫描数据
 - index 类型通常出现在: 所要查询的数据直接在索引树中就可以获取到, 而不需要扫描数据. 当是这种情况时, Extra 字段 会显示 Using index
-
-#### possible_keys
-
-#### key
-
-#### ref
-
-#### rows
-
-#### filtered
-
-#### extra
-
