@@ -47,7 +47,7 @@ int emptyQueue (PSeqQueue queue) {
 }
 
 // 入队列  
-int pushQueue(PSeqQueue queue, Bnode *node){  
+int pushQueue (PSeqQueue queue, Bnode *node){  
   if ((queue->rear+1) % MAXSIZE == queue -> front){  // 判断队列是否满了  
     return -1;  
   } else {  
