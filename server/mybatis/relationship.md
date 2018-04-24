@@ -1,7 +1,5 @@
 #### 测试demo
 ```java
-package com.ys.test;
- 
 import java.io.InputStream;
 import java.util.List;
  
