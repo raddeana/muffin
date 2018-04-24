@@ -113,9 +113,9 @@ public String saveProduct(@Valid @ModelAttribute  Product product, BindingResult
     }
 
     // FieldError fieldError = bindingResult.getFieldError();
-    // logger.info("code:"+fieldError.getCode()+",object:"+fieldError.getObjectName()+",field:"+fieldError.getField());
+    // logger.info("code:" + fieldError.getCode() + ", object:" + fieldError.getObjectName() + ",field:" + fieldError.getField());
     product.setProductionDate(null);
-    model.addAttribute("product",product);
+    model.addAttribute("product", product);
     return "ProductForm";
   }
 
