@@ -1,3 +1,33 @@
+#### 具有以下特殊功能
+- 使用CREATE TEMPORARY TABLE语句创建临时表。请注意，在CREATE和TABLE关键字之间添加TEMPORARY关键字
+- 当会话结束或连接终止时，MySQL会自动删除临时表。当您不再使用临时表时，也可以使用DROP TABLE语句来显式删除临时表
+- 一个临时表只能由创建它的客户机访问。不同的客户端可以创建具有相同名称的临时表，而不会导致错误，因为只有创建临时表的客户端才能看到它。 
+- 在同一个会话中，两个临时表不能共享相同的名称
+- 临时表可以与数据库中的普通表具有相同的名称。 例如，如果在示例数据库(yiibaidb)中创建一个名为employees的临时表，则现有的employees表将变得无法访问
+- 对employees表发出的每个查询现在都是指employees临时表。 当删除您临时表时，永久employees表可以再次访问
+
+#### 创建
+```sql
+CREATE TEMPORARY TABLE top10customers
+SELECT p.customerNumber, 
+       c.customerName, 
+       FORMAT(SUM(p.amount),2) total
+FROM payments p
+INNER JOIN customers c ON c.customerNumber = p.customerNumber
+GROUP BY p.customerNumber
+ORDER BY total DESC
+LIMIT 10;
+```
+
+#### 查询
+```sql
+SELECT * FROM top10customers;
+```
+#### 删除
+```sql
+DROP TEMPORARY TABLE table_name;
+```
+
 #### 在一些情况下，服务器会在处理 query 的时候创建内部临时表
 - 位于内存中，使用 MEMORY 存储引擎 (内存临时表)
 - 位于磁盘上，使用 MyISAM 存储引擎 (磁盘临时表)
