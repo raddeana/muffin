@@ -3,8 +3,8 @@
 - 线性表
 - 栈和队列
 - 串
-- 树结构（half）
-- 图
+- 树结构
+- 图（half）
 
 #### 线性代数
 - 第一章
@@ -23,7 +23,7 @@
 #### 机器学习
 - todo
 
-#### spring mvc 
+#### spring mvc
 - finish
 - blog start
 
