@@ -120,14 +120,14 @@ int pushStack (PSeqStack stack, Bnode *node) {
 
 // 出栈  
 int popStack (PSeqStack stack, BTree *node) {
-    if (emptyStack(stack) == 1) {
-      return 0;
-    } else {
-      *node = stack->data[stack->top];
-      stack->top --;
-      
-      return 1;
-    }  
+  if (emptyStack(stack) == 1) {
+    return 0;
+  } else {
+    *node = stack->data[stack->top];
+    stack->top --;
+
+    return 1;
+  }
 }
 
 // 打印元素  
