@@ -1,4 +1,4 @@
-#### inventory的表，其中包含由CREATE TABLE语句定义的结构
+#### Inventory的表，其中包含由CREATE TABLE语句定义的结构
 ```sql
 USE testdb;
 CREATE TABLE inventory(
