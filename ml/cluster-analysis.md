@@ -15,7 +15,7 @@ mydata = data.frame(a=unlist(lapply(1:g,function(i) rnorm(n/g, runif(1)*i^2))), 
 mydata = scale(mydata);
 ```
 
-##### 组内平方和
+#### 组内平方和
 画出不同聚类数目(通常是1到10)对应的组内平方和，以组内平方和基本不再明显变化为标准(较为主观)，从而确定聚类的数目
 ```
 ss=(nrow(mydata)-1)*sum(apply(mydata, 2, var))  
@@ -23,7 +23,7 @@ for(i in 2:10){ss[i]=kmeans(mydata, centers=i)$tot.withinss}
 plot(1:10,ss,type="b",xlab="聚类数目",ylab="组内平方和") 
 ```
 
-##### Medoids周围分类法
+#### Medoids周围分类法
 通过partitioning around medoids来估计最优的聚类数目
 ```c
 library(fpc)
@@ -32,7 +32,7 @@ fit=pamk(mydata)
 plot(pam(mydata,fit$nc))
 ```
 
-##### Calinsky准则
+#### Calinsky准则
 Calinsky是一个定量的评价指标，该值越大越好
 ```c
 library(vegan)
@@ -40,7 +40,7 @@ fit=cascadeKM(mydata,inf.gr=1,sup.gr=10,iter=1000)
 plot(fit,sortg=TRUE,grpmts.plot=TRUE)
 ```
 
-##### BIC
+#### BIC
 BIC就是贝叶斯信息准则(Bayesian Information Criterion)，但与其用于模型的拟合判断(越小越好)不同的是，这里用于判断聚类数目的判断标准为越大越好
 ```c
 library(mclust)  
@@ -48,7 +48,7 @@ fit=Mclust(mydata)
 plot(fit) 
 ```
 
-##### AP法
+#### AP法
 AP表示Affinity propagation的意思，旨在通过Affinity propagation的方法估计最优的聚类数目
 ```c
 library(apcluster)  
@@ -56,7 +56,7 @@ fit=apcluster(negDistMat(r=2),mydata)
 heatmap(fit) 
 ```
 
-##### 多目标决策
+#### 多目标决策
 NbClust函数提供30种的判断指标，我们可以用类似投票的原理，看看通过30种指标选出的最优聚类数目
 ```c
 library(NbClust)  
