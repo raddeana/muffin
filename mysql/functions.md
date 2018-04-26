@@ -127,3 +127,74 @@
 ```sql
 SELECT LEN(column_name) FROM table_name;
 ```
+
+```sql
+MIN(DISTINCT expression);
+```
+
+```sql
+SELECT 
+    MIN(buyPrice)
+FROM
+    products;
+```
+
+```sql
+SELECT 
+  productCode, productName, buyPrice
+FROM
+  products
+WHERE
+  buyPrice = (
+    SELECT 
+      MIN(buyPrice)
+    FROM
+      products
+  );
+```
+
+#### MySQL MIN与GROUP BY
+```sql
+SELECT 
+  productline, MIN(buyprice)
+FROM
+  products
+GROUP BY productline;
+```
+
+```sql
+SELECT 
+  productline, MIN(buyprice)
+FROM
+  products
+GROUP BY productline;
+```
+
+#### MySQL MIN与相关子查询
+```sql
+SELECT 
+  productline, productCode, productName, buyprice
+FROM
+  products a
+WHERE
+  buyprice = (
+    SELECT 
+      MIN(buyprice)
+    FROM
+      products b
+    WHERE
+      b.productline = a.productline
+  );
+```
+
+```sql
+SELECT 
+  a.productline, a.productCode, a.productName, a.buyprice
+FROM
+  products a
+    LEFT JOIN
+  products b ON a.productline = b.productline
+    AND b.buyprice < a.buyprice
+WHERE
+  b.productcode IS NULL;
+```
