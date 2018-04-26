@@ -1,4 +1,4 @@
-#### 数学函数:
+### 数学函数:
 - ABS(X)	返回X的绝对值
 - PI()	返回圆周率，默认显示小数点后6位
 - SQRT(X)	返回X的平方根
@@ -26,7 +26,7 @@
 - ATAN(X)	正切函数的反函数
 - COT(X)	余切函数
 
-#### 字符串函数:
+### 字符串函数:
 - CHAR_LENGTH(str) 计算字符串str的字符个数
 - CONCAT(s1, s2) 拼接s1, s2
 - CONCAT_WS(x, s1, s2) 使用分隔符x将s1, s2拼接起来
@@ -58,7 +58,7 @@
 - FIND_IN_SET(s1, s2) 返回字符串s1在字符串列表s2中的位置
 - MAKE_SET(x, s1, s2) 返回由x的二进制数指定的相应位的字符串组成的字符串
 
-#### 日期和时间函数
+### 日期和时间函数
 - CURDATE()	返回当前日期
 - CURRENT_DATE() 返回当前日期
 - CURTIME()	返回当前时间
@@ -91,7 +91,7 @@
 - SEC_TO_TIME(seconds) 将秒数转为时分秒形式的时间
 - DATE_FORMAT(date, format)	将日期时间格式化
 
-#### 条件判断函数、加密解密函数、系统信息函数
+### 条件判断函数、加密解密函数、系统信息函数
 - IF(expr, v1, v2) 如果表达式expr是TRUE，返回v1；否则返回v2
 - IFNULL(v1, v2) 如果v1不为NULL，返回v1；否则返回v2
 - CASE expr WHEN v1 THEN r1 [WHEN v2 THEN r2] [ELSE rn] END	case语句
@@ -123,7 +123,7 @@
 - CAST(x AS type) 将x转化为type类型
 - CONVERT(x, type) 将一个类型的x转化为另一种类型
 
-#### eg
+### eg
 ```sql
 SELECT LEN(column_name) FROM table_name;
 ```
@@ -153,7 +153,7 @@ WHERE
   );
 ```
 
-#### MySQL MIN与GROUP BY
+### MySQL MIN与GROUP BY
 ```sql
 SELECT 
   productline, MIN(buyprice)
@@ -170,7 +170,7 @@ FROM
 GROUP BY productline;
 ```
 
-#### MySQL MIN与相关子查询
+### MySQL MIN与相关子查询
 ```sql
 SELECT 
   productline, productCode, productName, buyprice
