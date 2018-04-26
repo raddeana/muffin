@@ -13,16 +13,17 @@ FROM
 LIMIT 5;
 ```
 - 使用会话变量作为派生表
-```
-SELECT 
+```sql
+SELECT
     (@row_number:=@row_number + 1) AS num, firstName, lastName
 FROM
     employees,(SELECT @row_number:=0) AS t
 LIMIT 5;
 ```
+
 #### row_number - 为每个组添加行号
-```
-SELECT 
+```sql
+SELECT
     @row_number:=CASE
         WHEN @customer_no = customerNumber THEN @row_number + 1
         ELSE 1
