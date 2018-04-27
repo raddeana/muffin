@@ -12,7 +12,7 @@
 - 在参数名之后是它的数据类型和大小。和变量一样，参数的数据类型可以是任何有效的MySQL数据类型
 
 #### 示例
-- IN
+- <font size="2">IN</font>
 ```sql
 USE `yiibaidb`;
 DROP procedure IF EXISTS `GetOfficeByCountry`;
@@ -27,7 +27,7 @@ CREATE PROCEDURE GetOfficeByCountry(IN countryName VARCHAR(255))
 DELIMITER;
 ```
 
-- OUT
+- <font size="2">OUT</font>
 ```sql
 USE `yiibaidb`;
 DROP procedure IF EXISTS `CountOrderByStatus`;
@@ -42,7 +42,7 @@ END$$
 DELIMITER;
 ```
 
-- INOUT
+- <font size="2">INOUT</font>
 ```sql
 DELIMITER $$
 CREATE PROCEDURE set_counter(INOUT count INT(4), IN inc INT(4))
