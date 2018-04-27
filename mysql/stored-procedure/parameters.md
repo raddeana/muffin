@@ -16,7 +16,6 @@
 ```sql
 USE `yiibaidb`;
 DROP procedure IF EXISTS `GetOfficeByCountry`;
-
 DELIMITER $$
 USE `yiibaidb`$$
 CREATE PROCEDURE GetOfficeByCountry(IN countryName VARCHAR(255))
@@ -33,16 +32,14 @@ DELIMITER;
 USE `yiibaidb`;
 DROP procedure IF EXISTS `CountOrderByStatus`;
 DELIMITER $$
-CREATE PROCEDURE CountOrderByStatus(
- IN orderStatus VARCHAR(25),
- OUT total INT)
+CREATE PROCEDURE CountOrderByStatus(IN orderStatus VARCHAR(25), OUT total INT)
 BEGIN
  SELECT count(orderNumber)
  INTO total
  FROM orders
  WHERE status = orderStatus;
 END$$
-DELIMITER ;
+DELIMITER;
 ```
 
 - INOUT
