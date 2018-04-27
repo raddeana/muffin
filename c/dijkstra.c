@@ -24,19 +24,21 @@ typedef struct _EdgeData {
 } EData;
 
 /**
- * 返回ch在matrix矩阵中的位置
+ * 返回 ch 在 matrix 矩阵中的位置
+ * @param {Graph} G
+ * @param {char} ch
+ * @param {int} 在矩阵中的位置
  */
-static int get_position(Graph G, char ch)  
-{  
-    int i;
-    
-    for (i = 0; i < G.vexnum; i ++) {  
-        if(G.vexs[i]==ch) {
-            return i;
-        }
+static int get_position(Graph G, char ch) {  
+  int i;
+
+  for (i = 0; i < G.vexnum; i ++) {  
+    if (G.vexs[i] == ch) {
+      return i;
     }
-    
-    return -1;  
+  }
+
+  return -1;
 }
   
 /**
@@ -46,10 +48,10 @@ static char readChar () {
     char ch;
   
     do {
-      ch = getchar();  
+      ch = getchar();
     } while(!isLetter(ch));  
   
-    return ch;  
+    return ch;
 }
  
 /** 
@@ -80,38 +82,36 @@ Graph* create_graph()
     // 初始化"顶点数"和"边数"  
     pG->vexnum = v;  
     pG->edgnum = e;  
+    
     // 初始化"顶点"  
-    for (i = 0; i < pG->vexnum; i++)  
-    {  
+    for (i = 0; i < pG -> vexnum; i ++) {
         printf("vertex(%d): ", i);  
         pG->vexs[i] = read_char();  
-    }  
+    }
   
-    // 1. 初始化"边"的权值  
-    for (i = 0; i < pG->vexnum; i++)  
-    {  
-        for (j = 0; j < pG->vexnum; j++)  
-        {  
-            if (i==j)  
-                pG->matrix[i][j] = 0;  
-            else  
-                pG->matrix[i][j] = INF;  
-        }  
+    // 初始化"边"的权值  
+    for (i = 0; i < pG -> vexnum; i ++) {
+      for (j = 0; j < pG->vexnum; j++) {  
+        if (i==j) {
+          pG->matrix[i][j] = 0;  
+        } else {
+          pG->matrix[i][j] = INF;
+        }
+      }
     }
     
     // 2. 初始化"边"的权值: 根据用户的输入进行初始化  
-    for (i = 0; i < pG->edgnum; i++)  
-    {  
+    for (i = 0; i < pG->edgnum; i++) {
         // 读取边的起始顶点，结束顶点，权值  
-        printf("edge(%d):", i);  
-        c1 = read_char();  
-        c2 = read_char();  
-        scanf("%d", &weight);  
-  
+        printf("edge(%d):", i); 
+        c1 = read_char();
+        c2 = read_char();
+        scanf("%d", &weight);
+
         p1 = get_position(*pG, c1);  
         p2 = get_position(*pG, c2);  
-        if (p1==-1 || p2==-1)  
-        {  
+        
+        if (p1==-1 || p2==-1) {  
             printf("输入有误!!!\n");  
             free(pG);  
             return NULL;  
@@ -119,12 +119,12 @@ Graph* create_graph()
   
         pG->matrix[p1][p2] = weight;  
         pG->matrix[p2][p1] = weight;  
-    }  
-  
+    }
+
     return pG;  
 }  
   
-/* 
+/**
  * 创建图(用已提供的矩阵) 
  */  
 Graph* create_example_graph () {
@@ -138,37 +138,45 @@ Graph* create_example_graph () {
     {  16, 7,   6,   INF, 2,   0,   9 },  
     {  14, INF, INF, INF, 8,   9,   0 }
     };
+
     int vlen = LENGTH(vexs);  
     int i, j;  
     Graph* pG;  
       
     // 输入"顶点数"和"边数"  
-    if ((pG=(Graph*)malloc(sizeof(Graph))) == NULL )  
-        return NULL;  
-    memset(pG, 0, sizeof(Graph));  
+    if ((pG=(Graph*)malloc(sizeof(Graph))) == NULL) {  
+        return NULL;
+    }
+  
+    memset(pG, 0, sizeof(Graph));
   
     // 初始化"顶点数"  
     pG->vexnum = vlen;  
+    
     // 初始化"顶点"  
-    for (i = 0; i < pG->vexnum; i++)  
-        pG->vexs[i] = vexs[i];  
-  
+    for (i = 0; i < pG->vexnum; i ++) {  
+        pG->vexs[i] = vexs[i];
+    }
+
     // 初始化"边"  
-    for (i = 0; i < pG->vexnum; i++)  
-        for (j = 0; j < pG->vexnum; j++)  
-            pG->matrix[i][j] = matrix[i][j];  
+    for (i = 0; i < pG->vexnum; i++) { 
+        for (j = 0; j < pG->vexnum; j++) { 
+            pG -> matrix[i][j] = matrix[i][j];
+        }
+    }
   
     // 统计边的数目  
     for (i = 0; i < pG->vexnum; i++)  
         for (j = 0; j < pG->vexnum; j++)  
             if (i!=j && pG->matrix[i][j]!=INF)  
                 pG->edgnum++;  
+    
     pG->edgnum /= 2;  
   
     return pG;  
-}  
+}
   
-/* 
+/** 
  * 返回顶点v的第一个邻接顶点的索引，失败则返回-1 
  */  
 static int first_vertex(Graph G, int v)  
@@ -223,8 +231,7 @@ static void DFS(Graph G, int i, int *visited)
 /* 
  * 深度优先搜索遍历图 
  */  
-void DFSTraverse(Graph G)  
-{  
+void DFSTraverse (Graph G) {
     int i;  
     int visited[MAX];       // 顶点访问标记  
   
@@ -233,20 +240,19 @@ void DFSTraverse(Graph G)
         visited[i] = 0;  
   
     printf("DFS: ");  
-    for (i = 0; i < G.vexnum; i++)  
-    {  
+    for (i = 0; i < G.vexnum; i++) {  
         //printf("\n== LOOP(%d)\n", i);  
         if (!visited[i])  
             DFS(G, i, visited);  
-    }  
+    }
+  
     printf("\n");  
 }  
   
 /* 
  * 广度优先搜索（类似于树的层次遍历） 
  */  
-void BFS(Graph G)  
-{  
+void BFS(Graph G) {  
     int head = 0;  
     int rear = 0;  
     int queue[MAX];     // 辅组队列  
@@ -278,13 +284,14 @@ void BFS(Graph G)
                 }  
             }  
         }  
-    }  
+    }
+
     printf("\n");  
 }  
   
 /* 
  * 打印矩阵队列图 
- */  
+ */
 void print_graph (Graph G) {
   int i,j;
 
@@ -306,7 +313,7 @@ void print_graph (Graph G) {
  *       G -- 邻接矩阵图 
  *   start -- 从图中的第start个元素开始，生成最小树 
  */  
-void prim(Graph G, int start) {
+void prim (Graph G, int start) {
     int min,i,j,k,m,n,sum;  
     int index=0;         // prim最小树的索引，即prims数组的索引  
     char prims[MAX];     // prim最小树的结果数组  
@@ -389,7 +396,7 @@ void prim(Graph G, int start) {
  * 获取图中的边
  * @param {Graph} G
  */
-EData* get_edges(Graph G) {  
+EData* get_edges (Graph G) {  
     int i,j;  
     int index=0;  
     EData *edges;  
@@ -399,13 +406,13 @@ EData* get_edges(Graph G) {
         for (j=i+1;j < G.vexnum;j++) {
             if (G.matrix[i][j]!=INF) {
                 edges[index].start  = G.vexs[i];  
-                edges[index].end    = G.vexs[j];  
-                edges[index].weight = G.matrix[i][j];  
-                index++;  
+                edges[index].end    = G.vexs[j];
+                edges[index].weight = G.matrix[i][j];
+                index++;
             }
         }
     }
-  
+
     return edges;  
 }  
   
@@ -413,14 +420,11 @@ EData* get_edges(Graph G) {
  * 对边按照权值大小进行排序
  */  
 void sorted_edges (EData* edges, int elen) {  
-    int i,j;  
+    int i, j;  
   
-    for (i=0; i<elen; i++)  
-    {  
-        for (j=i+1; j<elen; j++)  
-        {  
-            if (edges[i].weight > edges[j].weight)  
-            {  
+    for (i = 0; i < elen; i ++) {  
+        for (j = i + 1; j < elen; j ++) {  
+            if (edges[i].weight > edges[j].weight) {  
                 // 交换"第i条边"和"第j条边"  
                 EData tmp = edges[i];  
                 edges[i] = edges[j];  
