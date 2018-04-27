@@ -6,7 +6,7 @@
 #define MAX_VERTEX_NUM 10
 #define INFINITY 32768
 
-typedef enum {DG, DN, UDG, UDN} GraphKind;
+typedef enum { DG, DN, UDG, UDN } GraphKind;
 
 #define ERROR 0
 #define TRUE 1
@@ -89,9 +89,9 @@ void BuildGraph (Graph G) {
     
     if (choice == 1) {                              // 有向图
         for (i = 0; i < MAX_VERTEX_NUM; i ++) {     // 初始化弧
-            for (j = 0; j < MAX_VERTEX_NUM; j ++){
-                G->Arc[i][j] = 0;
-            }
+          for (j = 0; j < MAX_VERTEX_NUM; j ++){
+            G->Arc[i][j] = 0;
+          }
         }
         
         G->kind = DG; // 设置图的类型
@@ -99,9 +99,9 @@ void BuildGraph (Graph G) {
         printf("请输入顶点(不超过10个，以#结束):\n");
         scanf("%c",&ch);
         while(ch!='#' && num <10){
-            G->vertex[num] = ch;
-            scanf("%c",&ch);
-            num++;
+          G->vertex[num] = ch;
+          scanf("%c",&ch);
+          num++;
         }
         
         G->vexnum = num;  // 顶点个数
@@ -111,17 +111,17 @@ void BuildGraph (Graph G) {
         scanf("%c->%c",&a,&b);
         
         while (a!='#' && b!='#') {
-            printf("%c,%c",a,b);
-            FindPos(G,a,b,&pos1,&pos2);
-            printf("位置a:%d,位置b:%d\n",pos1,pos2);
-            
-            // 忽略不存在的顶点
-            if (pos1!= -1 && pos2!= -1) {
-                G->Arc[pos1][pos2] = 1;
-                G->arcnum++;
-            }
-            
-            scanf("%c->%c",&a,&b);
+          printf("%c,%c",a,b);
+          FindPos(G,a,b,&pos1,&pos2);
+          printf("位置a:%d,位置b:%d\n",pos1,pos2);
+
+          // 忽略不存在的顶点
+          if (pos1!= -1 && pos2!= -1) {
+            G->Arc[pos1][pos2] = 1;
+            G->arcnum++;
+          }
+
+          scanf("%c->%c",&a,&b);
         }
         
         getchar(); // 清空
@@ -129,9 +129,9 @@ void BuildGraph (Graph G) {
         num = 0;  // 个数初始化
         
         for(i = 0; i < MAX_VERTEX_NUM; i++) { //初始化弧
-            for(j = 0; j < MAX_VERTEX_NUM; j++) {
-                G->Arc[i][j] = INFINITY;
-            }
+          for(j = 0; j < MAX_VERTEX_NUM; j++) {
+            G->Arc[i][j] = INFINITY;
+          }
         }
         
         G->kind = DN; // 设置图的类型
@@ -152,17 +152,17 @@ void BuildGraph (Graph G) {
         scanf("%c->%c:%d",&a,&b,&weight);
         
         while (a!='#' && b!='#') {
-            printf("%c,%c",a,b);
-            FindPos(G,a,b,&pos1,&pos2);
-            printf("位置a:%d,位置b:%d\n",pos1,pos2);
-            
-            if (pos1!= -1 && pos2!= -1){  
-                //忽略不存在的顶点
-                G->Arc[pos1][pos2] = weight;
-                G->arcnum++;
-            }
-            
-            scanf("%c->%c:%d",&a,&b,&weight);
+          printf("%c,%c",a,b);
+          FindPos(G,a,b,&pos1,&pos2);
+          printf("位置a:%d,位置b:%d\n",pos1,pos2);
+
+          if (pos1!= -1 && pos2!= -1){  
+            // 忽略不存在的顶点
+            G->Arc[pos1][pos2] = weight;
+            G->arcnum++;
+          }
+
+          scanf("%c->%c:%d", &a, &b, &weight);
         }
         
         getchar(); // 清空
@@ -171,9 +171,9 @@ void BuildGraph (Graph G) {
         num = 0;
         
         for (i = 0; i < MAX_VERTEX_NUM; i ++){ //初始化弧
-            for(j = 0; j < MAX_VERTEX_NUM; j ++){
-                G->Arc[i][j] = 0;
-            }
+          for(j = 0; j < MAX_VERTEX_NUM; j ++){
+            G->Arc[i][j] = 0;
+          }
         }
         
         G->kind = UDG; // 设置图的类型
@@ -195,17 +195,17 @@ void BuildGraph (Graph G) {
         scanf("%c-%c",&a,&b);
         
         while (a!='#' && b!='#') {
-            printf("%c,%c",a,b);
-            FindPos(G,a,b,&pos1,&pos2);
-            printf("位置a:%d,位置b:%d\n",pos1,pos2);
-            
-            if(pos1!= -1 && pos2!= -1){  //忽略不存在的顶点
-                G->Arc[pos1][pos2] = 1;
-                G->Arc[pos2][pos1] = 1;
-                G->arcnum++;
-            }
-            
-            scanf("%c-%c", &a, &b);
+          printf("%c,%c",a,b);
+          FindPos(G,a,b,&pos1,&pos2);
+          printf("位置a:%d,位置b:%d\n",pos1,pos2);
+
+          if(pos1!= -1 && pos2!= -1){  //忽略不存在的顶点
+            G->Arc[pos1][pos2] = 1;
+            G->Arc[pos2][pos1] = 1;
+            G->arcnum++;
+          }
+
+          scanf("%c-%c", &a, &b);
         }
         
         getchar(); // 清空
@@ -265,17 +265,18 @@ void BuildGraph (Graph G) {
  * @return none
  */
 void DepthFS (Graph G, int pos) {
-    int i = 0,j = 0;
-    if(IsRead[pos] == 0){
-        IsRead[pos] = 1; //从第一个开始
-        printf("遍历顶点%c\n",G->vertex[pos]);
-    }
+  int i = 0,j = 0;
+  
+  if(IsRead[pos] == 0){
+    IsRead[pos] = 1; //从第一个开始
+    printf("遍历顶点%c\n",G->vertex[pos]);
+  }
 
-    for(i = 0;i<G->vexnum;i++){
-        if(G->Arc[pos][i] == 1 && IsRead[i] ==0){  //存在弧
-            DepthFS(G,i);
-        }
+  for(i = 0;i<G->vexnum;i++){
+    if(G->Arc[pos][i] == 1 && IsRead[i] ==0){  //存在弧
+      DepthFS(G,i);
     }
+  }
 }
 
 /**
@@ -285,17 +286,19 @@ void DepthFS (Graph G, int pos) {
  * @return none
  */
 void DepthFS1 (Graph G, int pos) {
-    int i = 0,j = 0;
-    if(IsRead[pos] == 0){
-        IsRead[pos] = 1; //从第一个开始
-        printf("遍历顶点%c\n",G->vertex[pos]);
-    }
+  int i = 0,
+      j = 0;
+  
+  if(IsRead[pos] == 0){
+    IsRead[pos] = 1; //从第一个开始
+    printf("遍历顶点%c\n",G->vertex[pos]);
+  }
 
-    for(i = 0;i<G->vexnum;i++){
-        if(G->Arc[pos][i] !=INFINITY && IsRead[i] ==0){  //存在弧且未被遍历
-            DepthFS1(G,i);
-        }
+  for(i = 0;i<G->vexnum;i++){
+    if(G->Arc[pos][i] !=INFINITY && IsRead[i] ==0){  //存在弧且未被遍历
+      DepthFS1(G,i);
     }
+  }
 }
 
 /**
@@ -304,11 +307,11 @@ void DepthFS1 (Graph G, int pos) {
  * @return none
  */
 void DFS (Graph G) {
-    if (G->kind == DG || G->kind == UDG) {
-        DepthFS (G, 0);
-    } else if (G->kind == DN || G->kind == UDN) {
-        DepthFS1 (G, 0);
-    }
+  if (G->kind == DG || G->kind == UDG) {
+    DepthFS (G, 0);
+  } else if (G->kind == DN || G->kind == UDN) {
+    DepthFS1 (G, 0);
+  }
 }
 
 /**
@@ -318,36 +321,37 @@ void DFS (Graph G) {
  * @return none
  */
 void BFS1 (Graph G, int pos) {
-    int i = 0,
-        temp;
+  int i = 0,
+      temp;
+
+  Queue Q;
+  InitQueue(&Q);
+
+  for (i = 0; i <G->vexnum; i++) {
+    IsRead[i] = 0;
+  }
+
+  if (IsRead[pos] == 0) {
+    IsRead[pos] = 1;
+    printf("遍历顶点:%c\n",G->vertex[pos]);
+  }
+
+  EnterQueue(Q, pos);
+
+  // 当队列不为空
+  while (!isEmpty(Q)) {
+    OutQueue(Q, &temp);
     
-    Queue Q;
-    InitQueue(&Q);
-    
-    for (i = 0; i <G->vexnum; i++) {
-        IsRead[i] = 0;
+    for(i = 0; i< G->vexnum;i++){
+      if(G->Arc[temp][i] == 1 && IsRead[i] == 0){
+        IsRead[i] = 1;
+        printf("遍历顶点:%c\n",G->vertex[i]);
+        EnterQueue(Q, i);
+      }
     }
-    
-    if (IsRead[pos] == 0) {
-        IsRead[pos] = 1;
-        printf("遍历顶点:%c\n",G->vertex[pos]);
-    }
-    
-    EnterQueue(Q, pos);
-    
-    // 当队列不为空
-    while (!isEmpty(Q)) {
-        OutQueue(Q, &temp);
-        for(i = 0; i< G->vexnum;i++){
-            if(G->Arc[temp][i] == 1 && IsRead[i] == 0){
-                IsRead[i] = 1;
-                printf("遍历顶点:%c\n",G->vertex[i]);
-                EnterQueue(Q, i);
-            }
-        }
-    }
-    
-    free(Q);
+  }
+
+  free(Q);
 }
 
 /**
@@ -356,35 +360,35 @@ void BFS1 (Graph G, int pos) {
  * @param {int} 
  */
 void BFS2 (Graph G, int pos) {
-    int i = 0, temp;
-    
-    Queue Q;
-    InitQueue(&Q);
-    
-    for (i = 0; i < G -> vexnum; i++) {  //清零
-        IsRead[i] = 0;
+  int i = 0, temp;
+
+  Queue Q;
+  InitQueue(&Q);
+
+  for (i = 0; i < G -> vexnum; i++) {  //清零
+    IsRead[i] = 0;
+  }
+
+  if(IsRead[pos] == 0) {
+    IsRead[pos] = 1;
+    printf("遍历顶点:%c\n",G->vertex[pos]);
+  }
+
+  EnterQueue(Q, pos);
+
+  // 当队列不为空
+  while (!isEmpty(Q)) {
+    OutQueue(Q, &temp);
+    for(i = 0; i< G->vexnum; i ++) {
+      if(G->Arc[temp][i] != INFINITY && IsRead[i] == 0){
+        IsRead[i] = 1;
+        printf("遍历顶点:%c\n",G->vertex[i]);
+        EnterQueue(Q,i);
+      }
     }
-    
-    if(IsRead[pos] == 0) {
-        IsRead[pos] = 1;
-        printf("遍历顶点:%c\n",G->vertex[pos]);
-    }
-    
-    EnterQueue(Q, pos);
-    
-    // 当队列不为空
-    while (!isEmpty(Q)) {
-        OutQueue(Q, &temp);
-        for(i = 0; i< G->vexnum; i ++) {
-            if(G->Arc[temp][i] != INFINITY && IsRead[i] == 0){
-                IsRead[i] = 1;
-                printf("遍历顶点:%c\n",G->vertex[i]);
-                EnterQueue(Q,i);
-            }
-        }
-    }
-    
-    free(Q);
+  }
+
+  free(Q);
 }
 
 /**
@@ -393,9 +397,9 @@ void BFS2 (Graph G, int pos) {
  * @return {void}
  */
 void BFS (Graph G) {
-    if (G->kind == DG || G->kind == UDG) {
-        BFS1(G,0);
-    } else if (G->kind == DN || G->kind == UDN) {
-        BFS2(G,0);
-    }
+  if (G->kind == DG || G->kind == UDG) {
+    BFS1(G,0);
+  } else if (G->kind == DN || G->kind == UDN) {
+    BFS2(G,0);
+  }
 }
