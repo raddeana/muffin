@@ -17,6 +17,7 @@
 #### java虚拟机（tools）
 #### Linux内核设计与实现
 - 第一章
+- 第二章
 
 #### shellbook
 -> 1.6
