@@ -1,0 +1,9 @@
+#### SHOW TABLES
+```sql
+SHOW TABLES;
+```
+
+#### SHOW FULL TABLES
+```sql
+SHOW FULL TABLES
+```
