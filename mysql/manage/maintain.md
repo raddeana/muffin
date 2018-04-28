@@ -12,3 +12,9 @@ OPTIMIZE TABLE table_name;
 ```sql
 CHECK TABLE table_name;
 ```
+
+#### 修复表语句
+```sql
+REPAIR TABLE table_name;
+```
+
