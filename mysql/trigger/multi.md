@@ -5,8 +5,8 @@
 ```sql
 DELIMITER $$
 CREATE TRIGGER  trigger_name
-[BEFORE|AFTER] [INSERT|UPDATE|DELETE] ON table_name
-FOR EACH ROW [FOLLOWS|PRECEDES] existing_trigger_name
+[BEFORE|AFTER] [INSERT | UPDATE | DELETE] ON table_name
+FOR EACH ROW [FOLLOWS | PRECEDES] existing_trigger_name
 BEGIN
 END$$
 DELIMITER ;
@@ -19,8 +19,21 @@ CREATE TRIGGER before_products_update
   BEFORE UPDATE ON products
   FOR EACH ROW
 BEGIN
-  INSERT INTO price_logs(product_code,price)
-  VALUES(old.productCode,old.msrp);
+  INSERT INTO price_logs (product_code, price)
+  VALUES (old.productCode,old.msrp);
+END$$
+
+DELIMITER ;
+```
+
+```sql
+DELIMITER $$
+CREATE TRIGGER before_products_update_2 
+   BEFORE UPDATE ON products 
+   FOR EACH ROW FOLLOWS before_products_update
+BEGIN
+   INSERT INTO user_change_logs (product_code, updated_by)
+   VALUES (old.productCode, user());
 END$$
 
 DELIMITER ;
