@@ -22,6 +22,7 @@ long sum (long num, ...) {
 
 /**
  * 入口主函数
+ * @return {int}
  */
 int main () {
   long ret;
