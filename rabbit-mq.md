@@ -160,7 +160,7 @@ import java.util.concurrent.TimeoutException;
 
 public class Producer {
   public static void main(String[] args) throws IOException, TimeoutException {
-    //创建连接工厂
+    // 创建连接工厂
     ConnectionFactory factory = new ConnectionFactory();
     factory.setUsername("guest");
     factory.setPassword("guest");
