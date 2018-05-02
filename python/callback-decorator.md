@@ -18,33 +18,32 @@ def now ():
 
 - 装饰器超
 ```python
-def Before(request, kargs):
-  print 'before'
-      
-def After(request, kargs):
-  print 'after'
+def before (request, kargs):
+  print("before")
 
-def Filter(before_func, after_func):
-  def outer(main_func):
-    def wrapper(request, kargs):        
-      before_result = before_func(request, kargs)
-      if (before_result != None):
-        return before_result;
-              
-      main_result = main_func(request,kargs)
-      if(main_result != None):
-        return main_result;
-              
-      after_result = after_func(request,kargs)
-      if(after_result != None):
-        return after_result;
-              
-    return wrapper
-  return outer
-      
-@Filter(Before, After)
-def Index (request, kargs):
-  print 'index'
+def after (request, kargs):
+  print("after")
+
+def filter(beforeFunc, afterFunc):
+  def outer (mainFunc):
+    def wrapper (request, kargs):
+      beforeResult = beforeFunc(request, kargs)
+      if (beforeResult != None):
+        return beforeResult
+
+      mainResult = afterFunc(request, kargs)
+      if (mainResult != None):
+        return mainResult
+
+      afterResult = afterFunc(request, kargs)
+      if (afterResult != None):
+        return afterResult
+    return wrapper
+  return outer
+
+@filter(before, after)
+def index (request, kargs):
+  print("index")
 ```
 
 #### 回调函数
