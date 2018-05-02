@@ -189,7 +189,8 @@ public class Producer {
 }
 ```
 
-```消息消费者
+#### 消息消费者
+```java
 package org.study.rabbitmq;
 import com.rabbitmq.client.*;
 import java.io.IOException;
