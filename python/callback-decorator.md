@@ -1,6 +1,6 @@
 #### 装饰器
 装饰器用来实现一种切面功能，即一些函数在调用前都必须实现的功能
-n个参数的函数
+- n个参数的函数
 ```python
 import functools
 
@@ -14,6 +14,37 @@ def log (func):
 @log
 def now ():
   print ('2015-3-25')
+```
+
+- 装饰器超
+```python
+def Before(request, kargs):
+  print 'before'
+      
+def After(request, kargs):
+  print 'after'
+
+def Filter(before_func, after_func):
+  def outer(main_func):
+    def wrapper(request, kargs):        
+      before_result = before_func(request, kargs)
+      if (before_result != None):
+        return before_result;
+              
+      main_result = main_func(request,kargs)
+      if(main_result != None):
+        return main_result;
+              
+      after_result = after_func(request,kargs)
+      if(after_result != None):
+        return after_result;
+              
+    return wrapper
+  return outer
+      
+@Filter(Before, After)
+def Index (request, kargs):
+  print 'index'
 ```
 
 #### 回调函数
