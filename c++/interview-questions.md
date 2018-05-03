@@ -131,7 +131,7 @@ class BaseClass {
 };
 
 class DerivedClass:BaseClass {
-  public: char* szName[100];  
+  public: char* szName[100];
   void bar () {};
 };
 
@@ -150,7 +150,7 @@ typedef void(*FuncPtr) () {};
 FuncPtr funcPtrArray[10];
 funcPtrArray[0] = reinterpreter_cast<FuncPtr>(&DoSomething);
 ```
-#### memset ,memcpy 和strcpy 的根本区别
+#### memset, memcpy 和 strcpy 的根本区别
 - memset用来对一段内存空间全部设置为某个字符，一般用在对定义的字符串进行初始化为' '或''；它对较大的结构体或数组进行清零操作的一种最快方法
 ```cpp
 char temp[30];
@@ -239,4 +239,190 @@ int **p, 在32位机器上 sizeof（p） = 4; 总共占有4*3*sizeof (p)= 48
 ```
 其中（struc*）0表示将常量0转化为struc*类型指针所指向的地址
 
-- todo 33
+#### 在main函数执行之前，还会执行什么代码和工作
+- 运行全局构造器, 全局对象的构造函数会在main函数之前执行
+- 设置栈指针, 初始化static静态和global全局变量, 即数据段的内容
+- 将未初始化部分的赋初值：数值型short, int, long 等为0, bool为FALSE, 指针为NULL等
+- 将main函数的参数, argc, argv 等传递给 main 函数
+
+#### 如何判断一段程序是由 C 编译程序还是由 C++ 编译程序编译的
+- C++ 编译时定义了 __cplusplus
+- C 编译时定义了 _STDC_
+
+#### BOOL, int, float, 指针类型的变量 a 与 "零值" 的比较语句
+```cpp
+  BOOL: if（!a）or if(a)
+  int : if( 0 == a)
+  float : const EXPRESSION EXP = 0.000001;
+  
+  if(a < EXP && a > -EXP)
+    pointer: if(a != NULL) or  if(a == NULL)
+```
+
+#### 已知String类定义如下,尝试写出类的成员函数实现
+```cpp
+class {
+  public:
+    String (const char*str = NULL);                  // 通用构造函数
+    String (const String& another);                  // 拷贝构造函数
+    ~String ();                                      // 析构函数
+    String& operator = =  (const String& rhs);       // 赋值函数
+    private:
+    char* m_data;                                    // 用于保存字符串
+};
+```
+
+```cpp
+String::String (const char* str) {
+  if (str == NULL) {
+    m_data = new char[1];
+    m_data[0] = '\0';
+  } else {
+    m_data = new char[strlen(str)+1];
+    strcpy(m_data, str);
+  }
+}   
+
+String::String(const String& another) {
+  m_data = new char[strlen(another.m_data)+1];
+  strcpy(m_data, another.m_data); 
+}                          
+
+String::String& operator = = (const String& rhs) {
+  if (this == &rhs) {
+    return &this;
+  }
+
+  delete[]  m_data;
+  m_data = new char(strlen(rhs.m_data) + 1);   // 删除原来的数据，新开一块内存
+  strcpy(m_data, rhs.m_data); 
+  
+  return *this;
+}
+
+~String () {
+    delete[] m_data;
+}
+```
+
+#### 运算符重载的三种方式
+- 普通函数, 友元函数, 类成员函数
+
+#### 不允许重载的5个运算符
+- .* (成员指针访问运算符)   
+- :: (域运算符)
+- sizeof 长度运算符   
+- ? : 条件运算符   
+- . (成员访问运算符)
+
+#### 友元关系
+单向的, 非传递的, 不能继承的
+
+#### 关键字 volatile
+一个定义为 volatile 的变量是说这变量可能会被意想不到地改变，编译器就不会去假设这个变量的值了
+- 并行设备的硬件寄存器 (如: 状态寄存器)
+- 一个中断服务子程序中会访问到的非自动变量(Non-automatic variables)
+- 多线程应用中被几个任务共享的变量
+
+#### 动态连接库的两种方式
+- 载入时动态链接 (load-time dynamic linking), 模块非常明确调用某个导出函数, 使得他们就像本地函数一样
+- 运行时动态链接 (run-time dynamic linking), 运行时可以通过 LoadLibrary 或 Loa
+
+#### i ++ 相比 ++ i 哪个更高效
+- ++ i 比i ++ 效率高
+- i ++ 要多调用一次类的构造和析够函数
+
+#### windows平台下网络编程
+有阻塞, select, 基于窗体的事件模型, 事件模型, 重叠模型, 完成端口模型
+
+#### 内核级线程
+线程有两种类型:
+- 用户级线程
+  - 用户线程指不需要内核支持而在用户程序中实现的线程, 其不依赖于操作系统核心, 应用进程利用线程库提供创建、同步、调度, 和管理线程的函数来控制用户线程
+- 内核级线程
+  - 内核级线程需要内核的参与, 由内核完成线程的调度; 其依赖于操作系统核心, 由内核的内部需求进行创建和撤销
+
+#### Windows内存管理
+内存管理有块式管理，页式管理，段式和段页式管理
+- 块式管理: 把主存分为一大块、一大块的, 当所需的程序片断不在主存时就分配一块主存空间, 把程序片断load入主存, 就算所需的程序片度只有几个字节也只能把这一块分配给它; 这样会造成很大的浪费, 平均浪费了50％的内存空间, 但时易于管理。
+- 页式管理: 把主存分为一页一页的, 每一页的空间要比一块一块的空间小很多, 显然这种方法的空间利用率要比块式管理高很多
+- 段式管理: 把主存分为一段一段的, 每一段的空间又要比一页一页的空间小很多, 这种方法在空间利用率上又比页式管理高很多, 但是也有另外一个缺点; 一个程序片断可能会被分为几十段, 这样很多时间就会被浪费在计算每一段的物理地址上, 计算机最耗时间的大家都知道是I/O吧
+- 段页式管理: 结合了段式管理和页式管理的优点。把主存分为若干页，每一页又分为若干段，好处就很明显
+
+#### C++编译器自动为类产生的四个确缺省函数
+- 默认构造函数
+- 拷贝构造函数
+- 析构函数
+- 赋值函数
+
+#### 动态连接库
+- 载入时动态链接 (load-time dynamic linking),模块非常明确调用某个导出函数, 使得他们就像本地函数一样
+- 这需要链接时链接那些函数所在DLL的导入库，导入库向系统提供了载入DLL时所需的信息及DLL函数定位
+- 运行时动态链接 (run-time dynamic linking), 运行时可以通过LoadLibrary或LoadLibraryEx 函数载入 DLL
+- DLL载入后，模块可以通过调用GetProcAddress获取DLL函数的出口地址，然后就可以通过返回的函数指针调用DLL函数了
+
+#### 函数模板（泛型）
+函数模板技术定义了参数化的非成员函数, 使得程序能够使用不同的参数类型调用相同的函数, 而至于是何种类型, 则是由编译器确定从模板中生成相应类型的代码
+```cpp
+template<class T>
+
+T Add (T a, T b) {
+   T result = a + b;
+   return a + b;        // 将两个参数使用“+”运算符进行运算，这两个参数并不知道是何种类型
+}
+```
+
+```cpp
+#include<iostream> // 包含标准输入输出头文件
+#include<string>   // C++中的字符串处理头文件
+
+using namespace std;
+
+template<class T>
+
+// 函数模板
+T Add (T a, T b) {
+   T result = a + b;
+   return a + b;    // 将两个参数使用 "+" 运算符进行运算，这两个参数并不知道是何种类型
+}
+
+int main (int argc, char* argv[]) {
+   cout << "2+3=" << Add(2,3) << endl;                               // 输出整形的+运算结果
+   cout << "sdf+123=" << Add(string("sdf"), string("123")) <<endl;
+  return 0;
+}
+```
+
+#### 泛型编程
+```cpp
+#include<iostream>
+#include<string>
+
+using namespaces std;
+
+template<class T>
+
+T Add(T a, T b) {
+
+   T result;           // 使用参数化的类型定义变量
+   result = a + b;
+  return result;
+}
+
+int main (int argc, char* argv[]) {
+  cout<<"2+3="<<Add(2,3)<<endl;  
+  cout<<"sdf+123="<<Add(string("sdf"), string("123"));
+  return 0;
+}
+```
+
+#### 参数传递的方式
+- 传值方式适合一般的数值传递, 并且不改变原数据, 但是要消耗内存空间
+- 传递指针方式适合传递数组和指针, 由于传递的是地址, 所以直接操作会改变原数据
+- 引用方式和指针方式比较类似, 是相对比较新的一种方式, 一般情况下能用传地址的就能用引用
+
+#### STL
+STL是一个标准的C++库，容器只是其中一个重要的组成部分,有顺序容器和关联容器
+- 顺序容器 vector<T>; deque<T>; list<T>
+- 关联容器 
+  
