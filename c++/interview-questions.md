@@ -361,6 +361,19 @@ String::String& operator = = (const String& rhs) {
 - 运行时动态链接 (run-time dynamic linking), 运行时可以通过LoadLibrary或LoadLibraryEx 函数载入 DLL
 - DLL载入后，模块可以通过调用GetProcAddress获取DLL函数的出口地址，然后就可以通过返回的函数指针调用DLL函数了
 
+#### 类模板
+描述了能够管理其他数据类型的通用数据类型，通常用于建立包含其他类型的容器类
+```
+template<class T>
+
+class TemplateSample {
+  private:
+    T&emtity;              // 使用参数类型成员
+  public:
+    void F(T& arg);        // 使用参数类型定义成员函数
+}
+```
+
 #### 函数模板（泛型）
 函数模板技术定义了参数化的非成员函数, 使得程序能够使用不同的参数类型调用相同的函数, 而至于是何种类型, 则是由编译器确定从模板中生成相应类型的代码
 ```cpp
@@ -423,6 +436,12 @@ int main (int argc, char* argv[]) {
 
 #### STL
 STL是一个标准的C++库，容器只是其中一个重要的组成部分,有顺序容器和关联容器
-- 顺序容器 vector<T>; deque<T>; list<T>
+- 顺序容器 
+  - vector<T>
+  - deque<T>
+  - list<T>
 - 关联容器 
-  
+  - set<Key>
+  - set<Key>
+  - map<Key, T>
+  - multimap<Key, T>
