@@ -21,14 +21,11 @@
 - WSAAsyncSelect
 - WSAEventSelect
 - 完成端口（IOCP）
-
-##### linux系统:
+##### linux系统:
 - select
 - poll
 - epoll
-
-
-层次：
+##### 层次：
 - 一: select和poll
 - 二: WSAAsyncSelect、WSAEventSelect、完成端口（IOCP）、epoll
 
