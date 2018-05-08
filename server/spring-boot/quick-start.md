@@ -10,6 +10,11 @@
 - src/main/resources：配置文件
 - src/test/java：测试程序
 
+#### 配置信息
+- Group：一般填写公司域名，比如百度公司填 com.baidu，演示使用 com.neo
+- Artifact：可以理解为项目的名称，可以根据实际情况来填，本次演示填写 helloWorld
+- Dependencies：在这块添加我们项目所依赖的 Spring Boot 组件，可以多选。本次选择 Web、devtools 两个模块
+
 #### 例子
 - Application.java：建议放到根目录下面，是项目的启动类，Spring Boot 项目只能有一个 main() 方法。
 - comm：目录建议放置公共的类，如全局的配置文件、工具类等。
