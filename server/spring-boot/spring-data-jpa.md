@@ -17,14 +17,14 @@ JPA（Java Persistence API）是 Sun 官方提出的 Java 持久化规范
 
 #### 添加配置文件
 ```config
-Spring.datasource.url=jdbc:mysql://localhost:3306/test
-Spring.datasource.username=root
-Spring.datasource.password=root
-Spring.datasource.driver-class-name=com.mysql.jdbc.Driver
+Spring.datasource.url = jdbc:mysql://localhost:3306/test
+Spring.datasource.username = root
+Spring.datasource.password = root
+Spring.datasource.driver-class-name = com.mysql.jdbc.Driver
 
-Spring.jpa.properties.hibernate.hbm2ddl.auto=update
-Spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL5InnoDBDialect
-Spring.jpa.show-sql= true
+Spring.jpa.properties.hibernate.hbm2ddl.auto = update
+Spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.MySQL5InnoDBDialect
+Spring.jpa.show-sql = true
 ```
 
 #### 添加实体类和 Dao
@@ -64,7 +64,7 @@ public class UserRepositoryTests {
   @Resource
   private UserRepository userRepository;
   @Test
-  public void test()  {
+  public void test() {
     Date date = new Date();
     DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG);        
     String formattedDate = dateFormat.format(date);
@@ -114,27 +114,27 @@ Long countByUserName(String userName)
 
 #### SQL 体系中的关键词都可以使用
 ```java
-List<User> findByEmailLike(String email);
-User findByUserNameIgnoreCase(String userName);
-List<User> findByUserNameOrderByEmailDesc(String email);
+List<User> findByEmailLike (String email);
+User findByUserNameIgnoreCase (String userName);
+List<User> findByUserNameOrderByEmailDesc (String email);
 ```
 
 #### 复杂查询
 - 分页查询
 ```java
 @Query("select u from User u")
-Page<User> findALL(Pageable pageable);
-Page<User> findByNickName(String nickName, Pageable pageable);
+Page<User> findALL (Pageable pageable);
+Page<User> findByNickName (String nickName, Pageable pageable);
 ```
 - Pageable 是 Spring 封装的分页实现类
 ```java
 @Test
-public void testPageQuery(){
+public void testPageQuery () {
   int page=1,size=10;
-  Sort sort = new Sort(Direction.DESC, "id");
-  Pageable pageable = new PageRequest(page, size, sort);
-  userRepository.findALL(pageable);
-  userRepository.findByNickName("testName", pageable);
+  Sort sort = new Sort (Direction.DESC, "id");
+  Pageable pageable = new PageRequest (page, size, sort);
+  userRepository.findALL (pageable);
+  userRepository.findByNickName ("testName", pageable);
 }
 ```
 
@@ -185,22 +185,22 @@ public class UserDetail implements Serializable {
 #### 结果集
 ```java
 public interface UserInfo {
-  String getUserName();
-  String getEmail();
-  String getAddress();
-  String getHobby();
+  String getUserName ();
+  String getEmail ();
+  String getAddress ();
+  String getHobby ();
 }
 
 @Query("select u.userName as userName, u.email as email, d.address as address , d.hobby as hobby from User u , UserDetail d " + "where u.id=d.userId  and  d.hobby = ?1 ")
-List<UserInfo> findUserInfo(String hobby);
+List<UserInfo> findUserInfo (String hobby);
 ```
 
 #### SQL 是 HQL，需要写类的名和属性
 ```java
 @Test
-public void testUserInfo() {
-  List<UserInfo> userInfos=userDetailRepository.findUserInfo("打球");
-  for (UserInfo userInfo:userInfos){
+public void testUserInfo () {
+  List<UserInfo> userInfos = userDetailRepository.findUserInfo("打球");
+  for (UserInfo userInfo : userInfos) {
     System.out.println("addree "+userInfo.getAddress());
   }
 }
@@ -227,7 +227,7 @@ spring.secondary.datasource.driver-class-name = com.mysql.jdbc.Driver
 public class DataSourceConfig {
   @Bean(name = "primaryDataSource")
   @Qualifier("primaryDataSource")
-  @ConfigurationProperties(prefix="spring.primary.datasource")
+  @ConfigurationProperties(prefix = "spring.primary.datasource")
   public DataSource primaryDataSource() {
     return DataSourceBuilder.create().build();
   }
@@ -235,7 +235,7 @@ public class DataSourceConfig {
   @Bean(name = "secondaryDataSource")
   @Qualifier("secondaryDataSource")
   @Primary
-  @ConfigurationProperties(prefix="spring.secondary.datasource")
+  @ConfigurationProperties(prefix = "spring.secondary.datasource")
   public DataSource secondaryDataSource() {
     return DataSourceBuilder.create().build();
   }
@@ -252,4 +252,3 @@ private UserType type;
 @Transient
 private String userName;
 ```
-
