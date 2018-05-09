@@ -1,3 +1,4 @@
+### 基于 Spring 配置的服务
 #### UserServiceBo
 ```java
 public interface UserServiceBo {
