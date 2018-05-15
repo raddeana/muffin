@@ -23,7 +23,7 @@
 - 通过processmon 的开机监控发现，系统登录时会启动atbroker.exe，然后atbroker.exe接着执行恶意程序Zloc.exejPnAtDoPy.exe，参数 woshiyizhixiaomaolv
 
 ##### 样本分析
-- IDA 打开Zloc.exejPnAtDoPy.exe(MD5:27d6209b6e10183a126906a714390577)
+- IDA 打开 Zloc.exe jPnAtDoPy.exe (MD5:27d6209b6e10183a126906a714390577)
 - Zloc.exejPnAtDoPy.exe主要是在temp目录下释放文件名随机，后缀名为lbll的模块并加载
 - 释放并加载ibll文件后，接着起rundll32加载idTemp.data，函数入口CgvSEcXgGkbWwkFa
 - IDA打开idTemp.data (MD5：201136f459c3982bc75d440f8afe40c4), 该模块主要是创建线程和释放挖矿文件到 C:\ProgramData\GTOrigin 目录下, 并解压挖矿文件到%appdata%/Wtrl目录下
