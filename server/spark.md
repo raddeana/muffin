@@ -118,6 +118,7 @@ RpcEnv => ActorSystem
 - 这和上面Inbox遥相呼应, 是一个mailbox似的实现方式
 
 ##### spark-network-common
+
 #### Spark RPC 核心技术总结
 - Spark RPC作为RPC传输层选择TCP协议，做可靠的、全双工的 binary stream 通道
 - CPU 和 I / O 之前天然存在着差异, 网络传输的延时不可控, CPU资源宝贵, 系统进程 / 线程资源宝贵
