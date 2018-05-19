@@ -8,13 +8,13 @@ C++ 会自动析构
 
 using namespace std;
 
-class NoName{
-public:
-    NoName():pstring(new std::string), i(0), d(0){}
-private:
-    std::string * pstring;
-    int i;
-    double d;
+class NoName {
+    public:
+        NoName():pstring(new std::string), i(0), d(0){}
+    private:
+        std::string * pstring;
+        int i;
+        double d;
 };
 ```
 
@@ -26,10 +26,11 @@ class NoName {
         cout << "构造函数被调用了！" << endl;
       }
       ~NoName();
+}
 
-  NoName::~NoName(){
-      cout << "析构函数被调用了！" << endl;
-  }
+NoName::~NoName(){
+  cout << "析构函数被调用了！" << endl;
+}
 ```
 
 #### 完整代码：析构函数、赋值构造函数、赋值运算符
