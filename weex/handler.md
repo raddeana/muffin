@@ -1,0 +1,11 @@
+#### 内置 handler
+- navigationHandler
+  - WeexSDK 内部提供了一个默认的 navigation 的 handler，该 handler 是在 navigation Module 中调用 push 和 pop 的一些操作时候被调用
+- imageLoaderHandler
+  - WeexSDK 图片组件需要从一个固定的 URI 中加载资源，这个加载行为也被封装到 image 的 handler 中，所以在接入 WeexSDK 时候，一定得提供图片 load 的handler
+- AppMonitorHandler
+  - 该 handler 是 WeexSDK 在渲染过程中性能统计，module 调用统计时候会将数据同步到该 handler 中，可以实现该 handler 将对应的数据上传到监控平台做性能的监控
+- JSEXceptionHandler
+  - JavaScript 在 runtime 可能会发生一些错误，首先由 JavaScript Engine 捕捉，然后抛出到 WeexSDK， WeexSDK 会通过 JSExceptionHandler 通知到外部调用
+- URLRewriteHandler
+  - image、video、web组件都在加载 URL 的时候会进行 URL 的重写，重写的规则就是由 URLRewriteHandler 提供，在这里 Handler 里面，可以将特定的 URL，重写为本地 URL 或者其他路径
