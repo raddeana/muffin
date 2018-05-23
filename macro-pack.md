@@ -1,4 +1,4 @@
-#### macro_pack
+#### Macro_Pack
 macro_pack 是一个用于自动生成混淆过的 MS Office 文档、VB 脚本等其他格式的工具，其主要目的是用于渗透测试、demo 以及社会工程学的评估
 
 #### 使用工具
