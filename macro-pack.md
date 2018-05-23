@@ -1,11 +1,11 @@
 #### macro_pack
-macro_pack是一个用于自动生成混淆过的MS Office文档、VB脚本等其他格式的工具，其主要目的是用于渗透测试、demo以及社会工程学的评估
+macro_pack 是一个用于自动生成混淆过的 MS Office 文档、VB 脚本等其他格式的工具，其主要目的是用于渗透测试、demo 以及社会工程学的评估
 
 #### 使用工具
 - 不需要配置
 - 一切都可以使用一行代码来完成
-- 生成大部分Office格式和基于VBS的格式
-- 高级VBA宏攻击以及DDE攻击
+- 生成大部分 Office 格式和基于 VBS 的格式
+- 高级 VBA 宏攻击以及 DDE 攻击
 
 #### 基本混淆
 - 命名函数
@@ -15,7 +15,7 @@ macro_pack是一个用于自动生成混淆过的MS Office文档、VB脚本等�
 - 编码字符串
 
 #### 生成
-Macro Pack可以生成多种MS Office文档和脚本格式
+Macro Pack 可以生成多种 MS Office 文档和脚本格式
 
 #### Ms Office支持的格式
 - MS Word 97 (.doc)
