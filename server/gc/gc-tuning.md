@@ -31,3 +31,6 @@ java -Xmx12g -XX:+UseConcMarkSweepGC Producer
 ```java
 java -Xmx12g -XX:+UseConcMarkSweepGC Producer
 ```
+
+#### next chapter
+https://blog.csdn.net/renfufei/article/details/56678064
