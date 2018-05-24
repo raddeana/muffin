@@ -1,16 +1,16 @@
 #### GC 算法 (实现篇) - GC参考手册
-- | Young                   | Tenured                 | JVM options            |
-- Incremental (增量GC)	     Incremental	            -Xincgc
-- Serial	                   Serial	                  -XX:+UseSerialGC
-- Parallel Scavenge	         Serial                   -XX:+UseParallelGC -XX:-UseParallelOldGC
-- Parallel New	             Serial	                  N/A
-- Serial	                   Parallel Old	            N/A
-- Parallel Scavenge	         Parallel Old	            -XX:+UseParallelGC -XX:+UseParallelOldGC
-- Parallel New	             Parallel Old	            N/A
-- Serial	                   CMS	                    -XX:-UseParNewGC -XX:+UseConcMarkSweepGC
-- Parallel                   Scavenge	CMS	            N/A
-- Parallel New	             CMS	                    -XX:+UseParNewGC -XX:+UseConcMarkSweepGC
-- G1	                                                -XX:+UseG1GC
+| Young                   | Tenured                | JVM options                                |
+| Incremental (增量GC)	  |  Incremental	          |  -Xincgc                                  |
+| Serial	                |  Serial	               |  -XX:+UseSerialGC                          |
+| Parallel Scavenge	      |  Serial                |  -XX:+UseParallelGC -XX:-UseParallelOldGC  |
+| Parallel New	          |  Serial	               |  N/A                                       |
+| Serial	                |  Parallel Old	         |  N/A                                       |
+| Parallel Scavenge	      |  Parallel Old	         |  -XX:+UseParallelGC -XX:+UseParallelOldGC  |
+| Parallel New	          |  Parallel Old	         |  N/A                                       |
+| Serial	                |  CMS	                 |  -XX:-UseParNewGC -XX:+UseConcMarkSweepGC  |
+| Parallel                |  Scavenge	CMS	         |  N/A                                       |
+| Parallel New	          |  CMS	                 |  -XX:+UseParNewGC -XX:+UseConcMarkSweepGC  |
+| G1	                                             |  -XX:+UseG1GC                              |
 
 #### 工作原理
 - 年轻代和老年代的串行GC (Serial GC)
