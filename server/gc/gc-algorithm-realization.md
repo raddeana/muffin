@@ -1,5 +1,6 @@
 #### GC 算法 (实现篇) - GC参考手册
 | Young                   | Tenured                | JVM options                                |
+| --------   | -----:  | :----:  |
 | Incremental (增量GC)	  |  Incremental	          |  -Xincgc                                  |
 | Serial	                |  Serial	               |  -XX:+UseSerialGC                          |
 | Parallel Scavenge	      |  Serial                |  -XX:+UseParallelGC -XX:-UseParallelOldGC  |
