@@ -38,3 +38,4 @@ jstat 对于快速确定GC行为是否健康非常有用
 - hprof 分析器内置于JDK之中; 在各种环境下都可以使用, 一般优先使用这款工具
 - Java VisualVM
 - AProf 是由 Devexperts 开发的 AProf
+- 内存分配分析器 AProf 也被打包为 Java agent 的形式
