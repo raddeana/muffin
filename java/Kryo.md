@@ -88,8 +88,8 @@ Kryo k = kryos.get();
 
 #### Kryo相关配置参数详解
 ```java
-kryo.setRegistrationRequired(false);//关闭注册行为
-kryo.setReferences(true);//支持循环引用
+kryo.setRegistrationRequired(false);         // 关闭注册行为
+kryo.setReferences(true);                    // 支持循环引用
 ```
 
 #### 常用Kryo工具类
