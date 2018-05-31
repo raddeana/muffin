@@ -1,3 +1,7 @@
+/**
+ * 内存管理实验代码 
+ * @author n/a
+ */
 struct chunk {
   char signature[4];
   struct chunk *next;
@@ -115,80 +119,93 @@ void free(void *ptr)
 
 void *calloc(size_t num, size_t size)
 {
-    char* a = malloc(num * size);
-    if(a == NULL)
-        return NULL;
-    int i;
-    int j;
-    for(i = 0; i < num; i++)
-    {
-        for(j = 0; j < size; j++)
-            a[size * i + j] = 0;
-    }
-    return a;
+  char* a = malloc(num * size);
+
+  if(a == NULL)
+  {
+    return NULL;
+  }
+
+  int i;
+  int j;
+    
+  for(i = 0; i < num; i++)
+  {
+      for(j = 0; j < size; j++)
+          a[size * i + j] = 0;
+  }
+  
+  return a;
 }
 
 void *calloc(size_t num, size_t size)
 {
-    char* a = malloc(num * size);
-    if(a == NULL) {
-        return NULL;
+  char* a = malloc(num * size);
+  if (a == NULL) {
+    return NULL;
+  }
+
+  int i;
+  int j;
+
+  for(i = 0; i < num; i++)
+  {
+    for(j = 0; j < size; j++) {
+        a[size * i + j] = 0;
     }
-    
-    int i;
-    int j;
-    
-    for(i = 0; i < num; i++)
-    {
-        for(j = 0; j < size; j++)
-            a[size * i + j] = 0;
-    }
-    
-    return a;
+  }
+
+  return a;
 }
 
 void *realloc(void *oldptr, size_t size)
 {   
     //如果oldptr是NULL，该函数等价于malloc(size)
-    if(oldptr == NULL)
-        return malloc(size);
+    if (oldptr == NULL) {
+      return malloc(size);
+    }
 
     // 得到指针对应的块
     struct chunk *achunk=(struct chunk *)(((uint8_t *)oldptr)-sizeof(struct chunk));
     
     // 验证oldptr的有效性
-    if(strncmp(achunk->signature,"OSEX",4)) {
-        return NULL;
+    if (strncmp(achunk->signature,"OSEX",4)) {
+      return NULL;
     }
 
     // 如果size是0，该函数等价于free(oldptr)
-    if(size == 0)
+    if (size == 0)
     {
-        free(oldptr);
-        return NULL;
+      free(oldptr);
+      return NULL;
     }
     
     char* a = malloc(size);
     char* b = (char*) oldptr;
     
-    if(a == b) {
-        return b;
+    if (a == b) {
+      return b;
     }
 
-    if(size >= achunk->size) {
+    if (size >= achunk->size) {
         // 如果新内存块比较大，复制整个旧内存块，而且不用初始化多出来的那部分
         int i;
-        for( i = 0; i < (achunk->size - sizeof(struct chunk)); i++)
-            a[i] = b[i];
-
+      
+        for ( i = 0; i < (achunk->size - sizeof(struct chunk)); i++) {
+          a[i] = b[i];
+        }
+      
         free(b);
         return a;
     } else {
-        // 如果新内存块比较小，只复制旧内存块的前面部分
-        int i;
-        for( i = 0; i < (size - sizeof(struct chunk)); i++)
-            a[i] = b[i];
-        free(b);
-        return a;
+      // 如果新内存块比较小，只复制旧内存块的前面部分
+      int i;
+      
+      for( i = 0; i < (size - sizeof(struct chunk)); i++) {
+        a[i] = b[i];
+      }
+      
+      free(b);
+      return a;
     }
 }
