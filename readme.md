@@ -1,6 +1,6 @@
-### Muffin
-- Very delicious and very happy
-- Life is very short, I play cat
-
-
-My name is Steudnera Koch.
+### muffin
+very delicious and very happy
+<br/>
+### Motto
+life is very short, I play cat
+my name is Steudnera C. Koch
