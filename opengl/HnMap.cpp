@@ -1,7 +1,7 @@
-# include <iostream>
-# include <fstream>
-# include <vector>
-# include <GL/glut.h>
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <GL/glut.h>
 
 class MapPoint
 {
