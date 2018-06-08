@@ -192,12 +192,151 @@ glLinkProgram(shaderProgram);
 ```
 
 #### 用glLinkProgram链接
+glCreateProgram函数创建一个程序
+```c
+glAttachShader(shaderProgram, vertexShader)
+glAttachShader(shaderProgram, fragmentShader)
+glLinkProgram(shaderProgram)
 ```
+着色器附加到了程序
+```c
 glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
 if(!success) {
     glGetProgramInfoLog(shaderProgram, 512, NULL, infoLog);
     ...
 }
 ```
-todo 
-https://learnopengl-cn.github.io/01%20Getting%20started/04%20Hello%20Triangle/
+
+#### 调用glUseProgram函数
+```c
+glUseProgram(shaderProgram);
+```
+
+```c
+glDeleteShader(vertexShader);
+glDeleteShader(fragmentShader);
+```
+
+#### 链接顶点属性
+顶点着色器允许我们指定任何以顶点属性为形式的输入，这使其具有很强的灵活性的同时，它还的确意味着我们必须手动指定输入数据的哪一个部分对应顶点着色器的哪一个顶点属性
+- 顶点着色器允许我们指定任何以顶点属性为形式的输入
+- 位置数据被储存为32位（4字节）浮点值
+- 每个位置包含3个这样的值
+- 在这3个值之间没有空隙（或其他值）。这几个值在数组中紧密排列(Tightly Packed)
+- 数据中第一个值在缓冲开始的位置
+
+使用glVertexAttribPointer函数告诉OpenGL该如何解析顶点数据
+```c
+glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+glEnableVertexAttribArray(0);
+```
+
+```c
+// 复制顶点数组到缓冲中供OpenGL使用
+glBindBuffer(GL_ARRAY_BUFFER, VBO);
+glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+// 设置顶点属性指针
+glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+glEnableVertexAttribArray(0);
+
+// 当我们渲染一个物体时要使用着色器程序
+glUseProgram(shaderProgram);
+
+// 绘制物体
+someOpenGLFunctionThatDrawsOurTriangle();
+```
+
+#### 顶点数组对象
+顶点数组对象(Vertex Array Object, VAO)可以像顶点缓冲对象那样被绑定，任何随后的顶点属性调用都会储存在这个VAO中
+顶点数组对象会储存以下这些内容
+- glEnableVertexAttribArray和glDisableVertexAttribArray的调用
+- 通过glVertexAttribPointer设置的顶点属性配置
+- 通过glVertexAttribPointer调用与顶点属性关联的顶点缓冲对象
+
+#### 创建一个VAO和创建一个VBO
+```c
+unsigned int VAO;
+glGenVertexArrays(1, &VAO);
+```
+
+```c
+#### ..:: 初始化代码（只运行一次 (除非你的物体频繁改变)） :: ..
+#### 绑定VAO
+glBindVertexArray(VAO);
+#### 把顶点数组复制到缓冲中供OpenGL使用
+glBindBuffer(GL_ARRAY_BUFFER, VBO);
+glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+#### 设置顶点属性指针
+glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+glEnableVertexAttribArray(0);
+
+[...]
+
+#### ..:: 绘制代码（渲染循环中） :: ..
+#### 绘制物体
+glUseProgram(shaderProgram);
+glBindVertexArray(VAO);
+someOpenGLFunctionThatDrawsOurTriangle();
+```
+
+#### 三角形
+要想绘制我们想要的物体，OpenGL给我们提供了glDrawArrays函数，它使用当前激活的着色器，之前定义的顶点属性配置，和VBO的顶点数据（通过VAO间接绑定）来绘制图元
+```c
+glUseProgram(shaderProgram);
+glBindVertexArray(VAO);
+glDrawArrays(GL_TRIANGLES, 0, 3);
+```
+glDrawArrays函数第一个参数是我们打算绘制的OpenGL图元的类型
+
+#### 索引缓冲对象
+在渲染顶点这一话题上我们还有最有一个需要讨论的东西——索引缓冲对象(Element Buffer Object，EBO，也叫Index Buffer Object，IBO)
+- 绘制两个三角形来组成一个矩形（OpenGL主要处理三角形）
+```c
+float vertices[] = {
+  // 第一个三角形
+  0.5f, 0.5f, 0.0f,       // 右上角
+  0.5f, -0.5f, 0.0f,      // 右下角
+  -0.5f, 0.5f, 0.0f,      // 左上角
+  
+  // 第二个三角形
+  0.5f, -0.5f, 0.0f,      // 右下角
+  -0.5f, -0.5f, 0.0f,     // 左下角
+  -0.5f, 0.5f, 0.0f       // 左上角
+};
+```
+- 定义（不重复的）顶点，和绘制出矩形所需的索引
+```c
+float vertices[] = {
+  0.5f, 0.5f, 0.0f,   // 右上角
+  0.5f, -0.5f, 0.0f,  // 右下角
+  -0.5f, -0.5f, 0.0f, // 左下角
+  -0.5f, 0.5f, 0.0f   // 左上角
+};
+
+// 注意索引从 0 开始
+unsigned int indices[] = { 
+  0, 1, 3, // 第一个三角形
+  1, 2, 3  // 第二个三角形
+};
+```
+- 需要创建索引缓冲对象
+```c
+unsigned int EBO;
+glGenBuffers(1, &EBO);
+```
+- 与VBO类似，我们先绑定EBO然后用glBufferData把索引复制到缓冲里
+```c
+glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+```
+- 使用glDrawElements时，我们会使用当前绑定的索引缓冲对象中的索引进行绘制
+```c
+glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+```
+
+#### 线框模式(Wireframe Mode)
+要想用线框模式绘制你的三角形，你可以通过glPolygonMode(GL_FRONT_AND_BACK, GL_LINE)函数配置OpenGL如何绘制图元
+第一个参数表示我们打算将其应用到所有的三角形的正面和背面，第二个参数告诉我们用线来绘制
+之后的绘制调用会一直以线框模式绘制三角形，直到我们用glPolygonMode(GL_FRONT_AND_BACK, GL_FILL)将其设置回默认模式
