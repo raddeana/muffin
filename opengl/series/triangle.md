@@ -69,7 +69,7 @@ glBufferData是一个专门用来把用户定义的数据复制到当前绑定�
 #### 顶点着色器
 用着色器语言GLSL(OpenGL Shading Language)编写顶点着色器
 ```c
-#version 330 core
+# version 330 core
 layout (location = 0) in vec3 aPos;
 
 void main()
@@ -116,7 +116,7 @@ if(!success)
 - 顶点着色器(Vertex Shader)是几个可编程着色器中的一个
 - 如果我们打算做渲染的话，现代OpenGL需要我们至少设置一个顶点和一个片段着色器
 ```c
-#version 330 core
+# version 330 core
 out vec4 FragColor;
 
 void main() {
@@ -162,7 +162,7 @@ if(!success)
 #### 片段着色器
 红色、绿色、蓝色和alpha(透明度)分量，通常缩写为RGBA
 ```c
-#version 330 core
+# version 330 core
 out vec4 FragColor;
 
 void main()
@@ -261,20 +261,20 @@ glGenVertexArrays(1, &VAO);
 ```
 
 ```c
-#### ..:: 初始化代码（只运行一次 (除非你的物体频繁改变)） :: ..
-#### 绑定VAO
+# ..:: 初始化代码（只运行一次 (除非你的物体频繁改变)） :: ..
+# 绑定VAO
 glBindVertexArray(VAO);
-#### 把顶点数组复制到缓冲中供OpenGL使用
+# 把顶点数组复制到缓冲中供OpenGL使用
 glBindBuffer(GL_ARRAY_BUFFER, VBO);
 glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-#### 设置顶点属性指针
+# 设置顶点属性指针
 glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 glEnableVertexAttribArray(0);
 
 [...]
 
-#### ..:: 绘制代码（渲染循环中） :: ..
-#### 绘制物体
+# ..:: 绘制代码（渲染循环中） :: ..
+# 绘制物体
 glUseProgram(shaderProgram);
 glBindVertexArray(VAO);
 someOpenGLFunctionThatDrawsOurTriangle();
