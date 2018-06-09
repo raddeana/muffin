@@ -340,5 +340,3 @@ glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 要想用线框模式绘制你的三角形，你可以通过glPolygonMode(GL_FRONT_AND_BACK, GL_LINE)函数配置OpenGL如何绘制图元
 第一个参数表示我们打算将其应用到所有的三角形的正面和背面，第二个参数告诉我们用线来绘制
 之后的绘制调用会一直以线框模式绘制三角形，直到我们用glPolygonMode(GL_FRONT_AND_BACK, GL_FILL)将其设置回默认模式
-
-https://learnopengl-cn.github.io/01%20Getting%20started/04%20Hello%20Triangle/
