@@ -1,7 +1,7 @@
-### muffin
+### Muffin
 very delicious and very happy
 <br />
-### motto
+### Motto
 life is very short, i play cat
 <br />
 my name is Steudnera C. Koch
