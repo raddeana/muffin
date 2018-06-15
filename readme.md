@@ -1,7 +1,9 @@
-### Muffin
-Very delicious and very happy
+### muffin
+very delicious and very happy.
 <br />
-### Motto
-Life is very short, i play cat
+### motto
+life is very short, i play cat.
 <br />
-My name is Steudnera C. Koch
+my name is steudnera c. koch.
+<br />
+even the smallest existence is better than the greatest vacant.
