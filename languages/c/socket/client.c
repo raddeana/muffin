@@ -17,7 +17,8 @@ int main () {
     char buf[MAX_DATA];                                /* 储存接收数据 */
 
     sockfd = socket(AF_INET, SOCK_STREAM, 0);          /* 建立socket */
-    if (sockfd==-1) {
+    
+    if (sockfd == -1) {
         printf("socket failed:%d",errno);
     }
 
@@ -27,7 +28,7 @@ int main () {
     dest_addr.sin_addr.s_addr = inet_addr(DEST_IP);
     bzero(&(dest_addr.sin_zero), 8);
 
-    if(connect(sockfd,(struct sockaddr*)&dest_addr, sizeof(struct sockaddr))==-1){
+    if(connect(sockfd, (struct sockaddr*) &dest_addr, sizeof(struct sockaddr)) == -1) {
         // 连接方法，传入句柄，目标地址和大小 
         printf("connect failed:%d",errno);    // 失败时可以打印errno
     } else{
@@ -35,6 +36,7 @@ int main () {
         recv(sockfd,buf,MAX_DATA,0);          // 将接收数据打入buf，参数分别是句柄，储存处，最大长度，其他信息（设为0即可）。 
         printf("Received:%s",buf);
     }
-    close(sockfd);//关闭socket 
+    
+    close(sockfd);                            // 关闭socket 
     return 0;
 } 
