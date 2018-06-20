@@ -30,10 +30,10 @@ int main () {
 
     if(connect(sockfd, (struct sockaddr*) &dest_addr, sizeof(struct sockaddr)) == -1) {
         // 连接方法，传入句柄，目标地址和大小 
-        printf("connect failed:%d",errno);    // 失败时可以打印errno
+        printf("connect failed:%d", errno);    // 失败时可以打印errno
     } else{
         printf("connect success");
-        recv(sockfd,buf,MAX_DATA,0);          // 将接收数据打入buf，参数分别是句柄，储存处，最大长度，其他信息（设为0即可）。 
+        recv(sockfd, buf, MAX_DATA, 0);          // 将接收数据打入buf，参数分别是句柄，储存处，最大长度，其他信息（设为0即可）。 
         printf("Received:%s",buf);
     }
     
