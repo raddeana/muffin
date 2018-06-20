@@ -18,7 +18,7 @@ int main () {
 
     sockfd = socket(AF_INET, SOCK_STREAM, 0);   /* 建立socket */ 
     
-    if (sockfd==-1) {
+    if (sockfd == -1) {
         printf("socket failed:%d", errno);
         return -1;
     }
