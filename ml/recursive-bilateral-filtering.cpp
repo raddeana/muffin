@@ -99,19 +99,19 @@ void runVerticalHorizontal(double *data, int width, int height, double spatialDe
 
 // 水平方向递归  
 void runHorizontalVertical(double *data, int width, int height, double spatialDecay, double *exptable, double *g_table)  
-{  
-    int length=width*height;
+{
+    int length = width * height;
     double* g = new double[length];
     double* p = new double[length];
     double* r = new double[length];
     memcpy(p,data, sizeof(double) * length);
     memcpy(r,data, sizeof(double) * length);
     double rho0=1.0/(2-spatialDecay);
-    for (int k2 = 0;k2 < height;++k2)
+    for (int k2 = 0; k2 < height; ++ k2)
     {
-        int startIndex=k2 * width;
+        int startIndex = k2 * width;
         
-        for (int k=startIndex+1,K=startIndex+width;k<K;++k)  
+        for (int k = startIndex + 1, K = startIndex + width; k < K;++ k)  
         {  
             int div0=fabs(p[k]-p[k-1]);  
             double mu =exptable[div0];  
@@ -119,24 +119,24 @@ void runHorizontalVertical(double *data, int width, int height, double spatialDe
   
         }
         
-        for (int k =startIndex + width - 2;startIndex <= k;--k)  
+        for (int k = startIndex + width - 2; startIndex <= k;-- k)  
         {  
-            int div0=fabs(r[k]-r[k+1]);  
+            int div0 = fabs(r[k]-r[k+1]);  
             double mu =exptable[div0];  
             r[k] = r[k + 1] * mu + r[k] * (1.0 - mu);//文献公式3  
         }
         
-        for (int k =startIndex,K=startIndex+width;k<K;k++)  
+        for (int k = startIndex, K = startIndex + width; k < K; k ++)  
         {  
             r[k]=(r[k]+p[k])*rho0- g_table[(int)data[k]];  
         }  
     }  
       
     int m = 0;
-    for (int k2=0;k2<height;k2++)  
+    for (int k2 = 0;k2 < height;k2 ++)  
     {  
-        int n = k2;  
-        for (int k1=0;k1<width;k1++)  
+        int n = k2;
+        for (int k1 = 0;k1 < width;k1 ++)  
         {  
             g[n] = r[m++];  
             n += height;  
@@ -146,27 +146,29 @@ void runHorizontalVertical(double *data, int width, int height, double spatialDe
     memcpy(p, g, sizeof(double) * height * width);  
     memcpy(r, g, sizeof(double) * height * width);
 
-    for (int k1=0;k1<width;++k1)  
+    for (int k1 = 0; k1 < width; ++ k1)  
     {  
-        int startIndex=k1 * height;  
-        double mu = 0.0;  
-        for (int k =startIndex+1,K =startIndex+height;k<K;++k)  
+        int startIndex = k1 * height;  
+        double mu = 0.0;
+        
+        for (int k = startIndex + 1, K = startIndex + height; k < K; ++ k)  
         {  
             int div0=fabs(p[k]-p[k-1]);  
             mu =exptable[div0];  
             p[k] = p[k - 1] * mu + p[k] * (1.0 - mu);  
-        }  
-        for (int k=startIndex+height-2;startIndex<=k;--k)  
+        }
+        
+        for (int k = startIndex + height - 2;startIndex <= k; -- k)
         {  
-            int div0=fabs(r[k]-r[k+1]);  
-            mu =exptable[div0];  
-            r[k] = r[k + 1] * mu + r[k] * (1.0 - mu);  
+            int div0=fabs(r[k]-r[k+1]);
+            mu =exptable[div0];
+            r[k] = r[k + 1] * mu + r[k] * (1.0 - mu);
         }  
     }  
   
-    double init_gain_mu=spatialDecay/(2-spatialDecay);
+    double init_gain_mu=spatialDecay / (2-spatialDecay);
     
-    for (int k = 0;k <length;++k)  
+    for (int k = 0; k < length; ++ k)  
     {  
         r[k]= (r[k]+p[k])*rho0- g[k]*init_gain_mu;  
     }
@@ -215,16 +217,16 @@ void ApplyBiExponentialEdgePreservingSmoother(double photometricStandardDeviatio
         double *data1 = new double[m_length];
         double* data2 = new double[m_length];
 
-        unsigned char *p1=p0+idxChannel;
+        unsigned char *p1 = p0 + idxChannel;
         for (int i = 0; i < m_length;++i)
         {
             data1[i] = p1[i * nChannel];
         }
-    
+
         memcpy(data2,data1, sizeof(double) * m_length);
   
-        runHorizontalVertical(data1, m_nWidth, m_nHeight,spatialDecay,m_exp_table,m_g_table);
-        runVerticalHorizontal(data2, m_nWidth, m_nHeight,spatialDecay,m_exp_table,m_g_table);
+        runHorizontalVertical(data1, m_nWidth, m_nHeight, spatialDecay, m_exp_table, m_g_table);
+        runVerticalHorizontal(data2, m_nWidth, m_nHeight, spatialDecay, m_exp_table, m_g_table);
         sum = 0;
         for (int i =0;i<m_length;++i)
         {
@@ -245,5 +247,5 @@ void f_Bilateralfilter(unsigned char* pImage, int nWidth, int nHeight, int nStri
         return;  
     }
     
-    ApplyBiExponentialEdgePreservingSmoother(std,std * 0.001,pImage, nWidth, nHeight, nStride);  
+    ApplyBiExponentialEdgePreservingSmoother(std, std * 0.001, pImage, nWidth, nHeight, nStride);  
 }
