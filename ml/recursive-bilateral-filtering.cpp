@@ -2,7 +2,7 @@
 #include "stdio.h"  
 #include "stdlib.h"  
 #include "math.h"  
-#include"SoftSkin.h"
+#include "SoftSkin.h"
 
 // 垂直方向递归  
 void runVerticalHorizontal(double *data, int width, int height, double spatialDecay, double *exp_table, double *g_table)  
