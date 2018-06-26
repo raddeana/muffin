@@ -31,7 +31,6 @@ fetch(`${url}`, {
 - same-origin
 - no-cors
 - cors
-- navigate
 
 ##### cache
 控制 fetch 请求如何和 HTTP 缓存协作的
