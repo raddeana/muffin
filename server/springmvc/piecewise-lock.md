@@ -7,9 +7,6 @@
 ```java
 import java.util.Map;
 
-/**
- * Created by louyuting on 17/1/10
- */
 public class StripedMap {
     // 同步策略: buckets[n]由locks[n%N_LOCKS]来保护
     private static final int N_LOCKS = 16;
