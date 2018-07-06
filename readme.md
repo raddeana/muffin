@@ -1,9 +1,9 @@
 ### muffin
-very delicious and very happy.
+very delicious and very happy
 <br />
 ### motto
-life is very short, i play cat.
+life is very short, i play cat
 <br />
-my name is steudnera c. koch.
+my name is steudnera c. koch
 <br />
-even the smallest existence is better than the greatest vacant.
+even the smallest existence is better than the greatest vacant
