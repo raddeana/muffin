@@ -38,6 +38,7 @@ public class RealSubject implements Subject {
     public void addSub(String name, String password) {
         System.out.println("RealSubject.addSub()   "+ name+"  "+ password);
     }
+    
     public String findSub(String id) {
         System.out.println("RealSubject.findSub()  "+ id);
         return "realSubject.findSub()";
@@ -59,13 +60,13 @@ public class SubjectStaticProxy implements Subject {
         this.realSubject = realSubject;
     }
     
-    public void addSub(String name, String password) {
+    public void addSub (String name, String password) {
         System.out.println("staticProxy do something before realSubject.add()");
-        //调用实际对象的方法
+        // 调用实际对象的方法
         realSubject.addSub(name, password);
     }
     
-    public String findSub(String id) {
+    public String findSub (String id) {
         System.out.println("staticProxy do something before realSubject.findSub()");
         return realSubject.findSub(id);
     }
