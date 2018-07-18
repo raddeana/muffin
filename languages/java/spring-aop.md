@@ -35,11 +35,11 @@ import com.qian.subject.*;
  *
  */
 public class RealSubject implements Subject {
-    public void addSub(String name, String password) {
+    public void addSub (String name, String password) {
         System.out.println("RealSubject.addSub()   "+ name+"  "+ password);
     }
     
-    public String findSub(String id) {
+    public String findSub (String id) {
         System.out.println("RealSubject.findSub()  "+ id);
         return "realSubject.findSub()";
     }
@@ -56,7 +56,7 @@ public class SubjectStaticProxy implements Subject {
     private Subject realSubject;
     
     // 这里我们通过构造函数拿到
-    public SubjectStaticProxy(Subject realSubject){
+    public SubjectStaticProxy (Subject realSubject) {
         this.realSubject = realSubject;
     }
     
@@ -84,7 +84,7 @@ public class SubjectDanamicProxy implements InvocationHandler {
     // 实际要传入的realSubject;
     private Object realSubject;
 
-    public Object getSubjectProxy(Object realSubject){
+    public Object getSubjectProxy (Object realSubject) {
         this.realSubject = realSubject;
         
         // 都是realSubject的；
@@ -96,14 +96,14 @@ public class SubjectDanamicProxy implements InvocationHandler {
         return proxy;
     }
 
-    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+    public Object invoke (Object proxy, Method method, Object[] args) throws Throwable {
         System.out.println("--proxy in invoke parameters is "+proxy.getClass().getName());
         checkInfo();
         Object result = method.invoke(realSubject, args);       
         return result;
     }
 
-    private void checkInfo(){
+    private void checkInfo () {
         System.out.println("Doing some checking things before method invocation");
     }
 }
@@ -128,11 +128,11 @@ public class CheckInfoAspect {
     // 定义advice应用到那些连接点上，也就是advice在应用程序上自行的点或者时机
     // poincuName()就是给这个poincut起个名；
     @Pointcut("execution(* add*(..)) || execution(* find*(..))")
-    private void poincutName(){}
+    private void poincutName () {}
 
     // advice也就是关注点的具体实现；before在连接点JointPoint的前面使用
     @Before("poincutName()")
-    public void checkInfo(){
+    public void checkInfo () {
         System.out.println("Doing some checking things before method invocation");
     }
 }
@@ -176,7 +176,7 @@ package com.qian.springaopxml;
  * @author Administrator
  */
 public class CheckInfoAspectXml {
-    public void checkInfo(){
+    public void checkInfo () {
         System.out.println("Doing some checking things before method invocation");
     }
 }
@@ -223,11 +223,11 @@ package com.qian.realsubject;
  * @author Administrator
  */
 public class RealSubjectCGLIB {
-    public void addSub(String name, String password) {
+    public void addSub (String name, String password) {
         System.out.println("RealSubject.addSub()   "+ name+"  "+ password);
     }
 
-    public String findSub(String id) {
+    public String findSub (String id) {
         System.out.println("RealSubject.findSub()  "+ id);
         return "realSubject.findSub()";
     }
@@ -280,27 +280,27 @@ public class RealSubjectBean {
     private String subName;
     private String password;
 
-    public String getSubName() {
+    public String getSubName () {
         return subName;
     }
 
-    public void setSubName(String subName) {
+    public void setSubName (String subName) {
         this.subName = subName;
     }
 
-    public String getPassword() {
+    public String getPassword () {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword (String password) {
         this.password = password;
     }
 
-    public void addSubBean() {
+    public void addSubBean () {
         System.out.println("RealSubjectBean.addSubBean()   "+ subName+"  "+ password);
     }
 
-    public String findSubBean(String subName) {
+    public String findSubBean (String subName) {
         System.out.println("RealSubjectBean.findSubBean()  "+ subName);
         return "realSubjectBean.findSubBean()";
     }
@@ -320,11 +320,11 @@ import org.springframework.aop.MethodBeforeAdvice;
  * @author Administrator
  */
 public class RealSubjectHelper implements AfterReturningAdvice, MethodBeforeAdvice {
-    public void before(Method arg0, Object[] arg1, Object arg2) throws Throwable {
+    public void before (Method arg0, Object[] arg1, Object arg2) throws Throwable {
         System.out.println(" RealSubjectHelper BeforMehtod: checking information");
     }
 
-    public void afterReturning(Object arg0, Method arg1, Object[] arg2, Object arg3) throws Throwable {
+    public void afterReturning (Object arg0, Method arg1, Object[] arg2, Object arg3) throws Throwable {
         System.out.println(" RealSubjectHelper AfterMehtod: checking information");
     }
 }
@@ -408,20 +408,20 @@ public class RealSubjectHelper implements AfterReturningAdvice, MethodBeforeAdvi
 
     <!-- (1)  注册Bean RealSubjectBean 和实现了 MethodBeforeAdvice AfterReturningAdvice接口的 RealSubjectHelper-->
     <bean id="realSubjectBean" class="com.qian.realsubject.RealSubjectBean">
-        <property name="subName" value="zhangsan"/>
-        <property name="password" value="zhangsan123"/>
+        <property name="subName" value="zhangsan" />
+        <property name="password" value="zhangsan123" />
     </bean>
-    <bean id="realSubjectHelper" class="com.qian.springaopproxy.RealSubjectHelper"/>
+    <bean id="realSubjectHelper" class="com.qian.springaopproxy.RealSubjectHelper" />
 
 
     <!-- (2) 使用正则表达式来表示切点Pointcut 和 横切点的具体实现Advice自动联合 使用类 RegexpMethodPointcutAdvisor-->
     <bean id="pointcutAdvisor" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
-        <property name="pattern" value=".*find.*"/>
-        <property name="advice" ref="realSubjectHelper"/>
+        <property name="pattern" value=".*find.*" />
+        <property name="advice" ref="realSubjectHelper" />
     </bean>
 
     <!--  (3) 生成目标对象RealSubjectBean的代理对象 使用类自动代理生成器 DefaultAdvisorAutoProxyCreator-->
-    <bean id="realSubjectBeanProxy" class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"/>
+    <bean id="realSubjectBeanProxy" class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" />
 </beans>
 ```
 
@@ -447,23 +447,21 @@ import com.qian.subject.Subject;
 public class Client {
 
     // 最通俗易懂的办法 但是耦合度太高了
-    public static void subjectImpl(){
+    public static void subjectImpl () {
         Subject subject = new RealSubject();
         subject.addSub("qian", "520");
         subject.findSub("511");
     }
 
     // 静态代理
-    public static void staticProxy(){
-
+    public static void staticProxy () {
         Subject subject = new SubjectStaticProxy(new RealSubject());
         subject.addSub("name", "password");
         subject.findSub("123");
     }
 
     // 动态代理
-    public static void dynamicProxy(){
-
+    public static void dynamicProxy () {
         Object proxy = new SubjectDanamicProxy().getSubjectProxy(new RealSubject());
         Subject subject = (Subject)proxy;
         subject.addSub("zhangsan", "pass123");
@@ -479,7 +477,7 @@ public class Client {
     }
 
     // 使用spring的aop-config进行配置、推崇
-    public static void springaopConfig(){
+    public static void springaopConfig () {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContextConfig.xml");
         Subject subject = (Subject) context.getBean("realSubject");
         subject.addSub("spring", "aop");
@@ -487,7 +485,7 @@ public class Client {
     }
 
     // 对没有实现接口的类使用CGLIB 并使用spring的aop-config进行配置
-    public static void springaopConfigCGLIB(){
+    public static void springaopConfigCGLIB () {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContextAopConfigCGLIB.xml");
         RealSubjectCGLIB subject = (RealSubjectCGLIB) context.getBean("realSubjectCGLIB");
         subject.addSub("spring", "aop");
@@ -495,7 +493,7 @@ public class Client {
     }
 
     // spring AOP动态代理
-    public static void springaopProxy(){
+    public static void springaopProxy () {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContextProxy.xml");
         RealSubjectBean subjectBean = (RealSubjectBean) context.getBean("realSubjectBeanProxy");
         subjectBean.addSubBean();
@@ -503,21 +501,11 @@ public class Client {
     }
 
     // spirng AOP自动进行匹配的动态代理
-    public static void springaopProxyV2(){
+    public static void springaopProxyV2 () {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContextProxyV2.xml");
         RealSubjectBean subjectBean = (RealSubjectBean) context.getBean("realSubjectBean");
         subjectBean.addSubBean();
         subjectBean.findSubBean("springaop4");
-    }
-    
-    public static void main(String[] args) {
-        //subjectImpl();
-        //staticProxy();
-        //dynamicProxy();
-        //springaopConfig();
-        //springaopConfigCGLIB();
-        //springaopProxy();
-        //springaopProxyV2();
     }
 }
 ```
