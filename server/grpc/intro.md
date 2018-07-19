@@ -30,8 +30,3 @@ gRPC 一开始由 google 开发，是一款语言中立、平台中立、开源�
 - Protobuf二进制可读性差（貌似提供了Text_Fromat功能） 
 - 默认不具备动态特性（可以通过动态定义生成消息类型或者动态编译支持）
 
-### gRPC通信方式
-- Simple RPC 
-- Server-side streaming RPC 
-- Client-side streaming RPC 
-- Bidirectional streaming RPC 
