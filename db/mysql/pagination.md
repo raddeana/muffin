@@ -3,12 +3,12 @@ mysql大数据量使用limit分页，随着页码的增大，查询效率越低�
 如果对于有where 条件，又想走索引用limit的，必须设计一个索引，将where 放第一位，limit用到的主键放第2位，而且只能select 主键
 
 #### 直接使用数据库提供的SQL语句
-- 语句样式: MySQL中,可用如下方法: SELECT * FROM 表名称 LIMIT M,N
+- 语句样式: MySQL中,可用如下方法: SELECT * FROM 表名称 LIMIT M, N
 - 适应场景: 适用于数据量较少的情况(元组百/千级)
 - 原因/缺点: 全表扫描,速度会很慢，且有的数据库结果集返回不稳定(如某次返回1, 2, 3,另外的一次返回2, 1, 3). Limit限制的是从结果集的M位置处取出N条输出，其余抛弃
 
 #### 建立主键或唯一索引，利用索引
-- 语句样式: MySQL中,可用如下方法: SELECT * FROM 表名称 WHERE id_pk > (pageNum*10) LIMIT M
+- 语句样式: MySQL中,可用如下方法: SELECT * FROM 表名称 WHERE id_pk > (pageNum * 10) LIMIT M
 - 适应场景: 适用于数据量多的情况(元组数上万)
 - 原因: 索引扫描，速度会很快
 
