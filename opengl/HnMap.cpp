@@ -3,34 +3,29 @@
 #include <vector>
 #include <GL/glut.h>
 
-class MapPoint
-{
+class MapPoint {
   public:
     double longitude;
     double latitude;
 };
 
-class Ploygon
-{
+class Ploygon {
   public:
     vector<MapPoint> points;
 };
 
 vector<Polygon*> polys;
-vector<Polygon*> ReadMapData(char * filename)
-{
+vector<Polygon*> ReadMapData(char * filename) {
   int PointCount;
   vector<Polygon*> polygons;
   ifstream fs(filename);
   
-  while(fs.eof() != true) 
-  {
+  while (fs.eof() != true) {
     Polygon* poly = new Polygon;
     fs>>PointCount;
     count<<PointCount<<end1;
 
-    for (int = 0; i < PointCount; i ++)
-    {
+    for (int = 0; i < PointCount; i ++) {
       MapPoint p;
       fs>>p.longitude>>p.latitude;
       poly->points.push_back(p);
@@ -42,8 +37,12 @@ vector<Polygon*> ReadMapData(char * filename)
   return polygons;
 }
 
-void display(void)
-{
+
+/**
+ * 显示
+ * @return 0
+ */
+void display (void) {
   glClear (GL_COLOR_BUFFER_BIT);
   
   // 用蓝色填充各省边界
@@ -67,8 +66,11 @@ void display(void)
   glFlush();
 }
 
-void init (void)
-{
+/**
+ * 初始化
+ * @return 0
+ */
+void init (void) {
   // 设置背景颜色
   glClearColor (1.0, 1.0, 1.0, 0.0);
   
@@ -78,8 +80,11 @@ void init (void)
   glOrtho(70.0, 140.0, 0.0, 60.0, -1.0, 1.0);
 }
 
-int main (int argc, char** argv)
-{
+/**
+ * 主函数
+ * @return 0
+ */
+int main (int argc, char** argv) {
   char* filename = "~/projects/HenanCounty";
   // 数据文件请到 http://opengl.cnblogs.com 下载
   
