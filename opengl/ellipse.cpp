@@ -11,8 +11,8 @@
 GLfloat theta = 0.0f;
 
 void init () {
-	glClearColor(0.0,0.0,0.0,0.0);
-	glColor3f(1.0,1.0,0.0);
+	glClearColor(0.0, 0.0, 0.0, 0.0);
+	glColor3f(1.0, 1.0, 0.0);
 	glMatrixMode(GL_PROJECTION);
 
 	// glLoadIdentity();
@@ -35,15 +35,14 @@ void display () {
 	glBegin(GL_POINTS);
 	
   for (int i = 0; i < n; i ++) {
-		glVertex2f(R1 * cos(2 * PI / n * i),R2 * sin(2*PI / n*i));
+	glVertex2f(R1 * cos(2 * PI / n * i),R2 * sin(2*PI / n*i));
 	}
   
   glEnd();
 	glFlush();
 }
 
-int main(int argc,char **argv)
-{
+int main (int argc,char **argv) {
 	glutInit(&argc,argv);
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
 	glutInitWindowSize(500,500);
