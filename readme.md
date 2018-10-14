@@ -12,4 +12,4 @@ Even the smallest existence is better than the greatest vacant
 - The corporation start to use mind control weapon to expel staffs
 - It becomes white terror
 - No free will in the city
-- warning： keep the distance from them, they break the basic humam right
+- Warning： Keep the distance, they break the basic humam right
