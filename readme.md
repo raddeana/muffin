@@ -19,4 +19,3 @@ I am ashamed and uneasy. But I still have human right.
   - Uncontrolled thinking
   - Others knows the details of your thought
   - Body touch feelings
-
