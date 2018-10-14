@@ -13,3 +13,9 @@ Even the smallest existence is better than the greatest vacant
 - It becomes white terror
 - No free will in the city
 - Warning： Keep the distance, they break the basic humam right
+- Some Characteristics To Help：
+  - Auditory hallucination
+  - Visions
+  - Uncontrolled thinking
+  - Others knows the details of your thought
+  - Body touch feelings
