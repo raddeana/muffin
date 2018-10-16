@@ -82,7 +82,7 @@ public:
     
 		if (p) {
 			delete p;
-    }
+    		}
 
 		len = strlen(a.p);
 		p = new char[len + 1];
@@ -104,9 +104,9 @@ public:
 		int i;
 		int j = 0;
 		
-    for (i = a.len; i <= l - 1; ++i, ++j) {
+    		for (i = a.len; i <= l - 1; ++i, ++j) {
 			c[i] = b.p[j];
-    }
+    		}
     
 		c[i] = 0;
 		return MyString(c);
@@ -119,16 +119,16 @@ public:
 		int i = len;
 		char *b = new char[len + 1];
 		
-    strcpy(b, p);
+    		strcpy(b, p);
 		delete p;
 		
-    len = len + strlen(a);
+    		len = len + strlen(a);
 		p = new char[len + 1];
 		
-    strcpy(p, b);
+    		strcpy(p, b);
 		int j = 0;
 		
-    for (; i <= len - 1; i++, j++) {
+    		for (; i <= len - 1; i++, j++) {
 			p[i] = a[j];
 		}
     
