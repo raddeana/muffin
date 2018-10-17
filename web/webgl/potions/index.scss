@@ -1,0 +1,433 @@
+// Color names from http://chir.ag/projects/name-that-color/
+$haiti: #15153b;
+$cyan: #3afafd;
+$aqua: #40fbef;
+$green-yellow: #86ff39;
+$chartreuse: #80f513;
+$celadon: #b8e8b8;
+$bright-turquoise: #2aeeea;
+$turquoise: #3ed8e0;
+$screamin-green: #79ff5c;
+$screamin-green-2: #66fc88;
+$aquamarine: #4afbd6;
+$bright-green: #72f81b;
+$port-gore: #1c1c48;
+$white: #fff;
+
+$font-size: 16px; // Change value to scale
+
+@mixin circle($size) {
+  height: $size;
+  width: $size;
+  border-radius: 50%;
+}
+
+@mixin absolute-horizontal-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+body {
+  background-color: $haiti;
+}
+
+.container {
+  font-size: $font-size;
+  width: max-content;
+  display: grid;
+  justify-items: center;
+  grid-row-gap: 4.5em;
+
+  .potion,
+  .potion__outer,
+  .potion__background {
+    grid-column: 1;
+  }
+
+  .potion__outer {
+    grid-row: 1;
+  }
+
+  .potion,
+  .potion__background {
+    grid-row: 2;
+  }
+
+  .potion__background {
+    position: relative;
+    top: 1.563em;
+    z-index: -1;
+  }
+}
+
+.potion {
+  @include flex-center;
+  @include circle(12.625em);
+  position: relative;
+  background: linear-gradient($cyan, $green-yellow);
+  box-shadow: 0 0 0 0.375em $haiti;
+
+}
+
+.potion__neck {
+  position: absolute;
+  top: -2.813em;
+  height: 4.875em;
+  width: 4.125em;
+  background-color: $aqua;
+
+  // hole
+  &::after {
+    content: "";
+    @include absolute-horizontal-center;
+    top: 0.813em;
+    width: calc(100% - 1.625em);
+    height: calc(100% - 0.813em);
+    background-color: $haiti;
+  }
+}
+
+.potion__mouth {
+  @include absolute-horizontal-center;
+  height: 2.063em;
+  width: 6.25em;
+  border-radius: 2.063em;
+  background-color: inherit;
+
+  // mouth hole
+  &::after {
+    content: "";
+    @include absolute-horizontal-center;
+    top: 0.813em;
+    height: 0.625em;
+    width: 4.75em;
+    border-radius: 0.625em;
+    background-color: $haiti;
+  }
+}
+
+.potion__innerWrapper {
+  @include flex-center;
+  @include circle(11em);
+  background-color: $haiti;
+  position: absolute;
+}
+
+.potion__inner {
+  @include circle(9.75em);
+  position: absolute;
+}
+
+.potion__head {
+  @include absolute-horizontal-center;
+  bottom: 0.25em;
+  height: 9.063em;
+  width: 9.063em;
+  z-index: 2;
+
+  &::after,
+  &::before {
+    content: "";
+    bottom: 0;
+    z-index: -1;
+  }
+
+  // face container
+  &::after {
+    position: absolute;
+    @include circle(inherit);
+    background: linear-gradient(
+      transparent 3.5em,
+      $cyan 3.5em,
+      $green-yellow 105%
+    );
+  }
+
+  // glows
+  &::before {
+    @include absolute-horizontal-center;
+    bottom: 0.063em;
+    width: 95%;
+    height: 5.45em;
+    border-radius: 0 0 5.45em 5.45em;
+    box-shadow: 0 0 3em rgba($green-yellow, 0.4),
+      0 0 1.875em rgba($green-yellow, 0.4), 0 -0.313em 0.625em -0.375em $cyan,
+      0 0.625em 1.25em -0.313em $green-yellow;
+  }
+}
+
+.potion__face {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 5.563em;
+  border-radius: 0 0 5.563em 5.563em;
+}
+
+.potion__faceEyes {
+  @include circle(1.063em);
+  @include absolute-horizontal-center;
+  top: 1.25em;
+  color: $haiti;
+  box-shadow: -1.5em 0, 1.5em 0, -2.1em 1em 0 -0.2em $turquoise,
+    2.1em 1em 0 -0.2em $turquoise;
+}
+
+.potion__faceMouth {
+  @include absolute-horizontal-center;
+  top: 2.5em;
+  height: 0.625em;
+  width: 1.313em;
+  border: 0.313em solid;
+  border-top: 0;
+  box-sizing: border-box;
+  color: $haiti;
+  border-radius: 0 0 0.625em 0.625em;
+
+  // rounded edge
+  &::after,
+  &::before {
+    content: "";
+    @include circle(0.313em);
+    position: absolute;
+    top: -0.1565em;
+    background-color: currentColor;
+  }
+
+  &::after {
+    left: -0.313em;
+  }
+
+  &::before {
+    right: -0.313em;
+  }
+}
+
+.potion__cut {
+  position: absolute;
+  height: 0.813em;
+  width: 0.813em;
+  z-index: 1;
+
+  &::after {
+    @include circle(inherit);
+    background-color: currentColor;
+  }
+
+  // background
+  &::before {
+    height: 1.25em;
+    width: 1.25em;
+    background-color: $haiti;
+    z-index: -1;
+  }
+
+  &::after,
+  &::before {
+    content: "";
+    position: absolute;
+  }
+
+  &:not(:nth-of-type(1)) {
+    color: $screamin-green;
+  }
+}
+
+.potion__cut:nth-of-type(1) {
+  top: 1.313em;
+  left: 2.188em;
+  color: $aquamarine;
+
+  &::after {
+    box-shadow: 1.063em -0.681em 0 0.006em $aqua, -0.869em 0.881em 0 0.006em;
+  }
+
+  &::before {
+    height: 2.5em;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) rotate(51deg);
+  }
+}
+
+.potion__cut:nth-of-type(2) {
+  bottom: 4.063em;
+  right: 0.306em;
+  color: $screamin-green-2;
+
+  &::after {
+    box-shadow: -0.519em 1.156em 0 0.01em $screamin-green;
+  }
+
+  &::before {
+    top: 0.313em;
+    left: -0.438em;
+    transform: rotate(26deg);
+  }
+}
+
+.potion__cut:nth-of-type(3) {
+  bottom: 1.938em;
+  right: 1.531em;
+
+  &::after {
+    box-shadow: -1em 0.875em 0 0.006em;
+  }
+
+  &::before {
+    top: 0.25em;
+    left: -0.688em;
+    transform: rotate(46deg);
+  }
+}
+
+.potion__innerBubbles {
+  @include circle(0.75em);
+  position: absolute;
+  right: 3.813em;
+  top: 1.3em;
+  background: linear-gradient(to right, $green-yellow -20%, $cyan);
+  box-shadow: -1.3em 1.3em 0 0.125em $cyan, -1em -1.8em 0 -0.125em $cyan,
+    -0.3em -3.5em $bright-green;
+  z-index: 1;
+}
+
+.potion__shine {
+  height: 3.125em;
+  width: 3.125em;
+  box-sizing: border-box;
+  border: 0.813em solid;
+  border-top-left-radius: 3.125em;
+  border-color: white transparent transparent transparent;
+  position: absolute;
+  left: 1em;
+  transform: rotate(16deg);
+
+  &::after,
+  &::before {
+    content: "";
+    position: absolute;
+    background-color: currentColor;
+  }
+
+  &::after {
+    @include circle(0.813em);
+    bottom: 1.563em;
+    left: 0.938em;
+    color: $white;
+    box-shadow: -0.938em 0.844em, -1.063em 1em 0 -0.019em, -1.65em 2.063em,
+      -1.594em 1.938em 0 -0.019em;
+  }
+
+  &::before {
+    color: $haiti;
+    height: 1.188em;
+    width: 2.375em;
+    right: -1.063em;
+    top: -0.75em;
+    transform: rotate(-28deg);
+    box-shadow: 0.125em 1.25em;
+  }
+}
+
+.potion__outer {
+  width: 11em;
+  height: 5.75em;
+  position: relative;
+}
+
+.potion__outerBubbles {
+  display: block;
+  position: absolute;
+}
+
+.potion__outerBubbles:nth-child(1) {
+  @include circle(0.75em);
+  color: $white;
+  background-color: currentColor;
+  right: 3.75em;
+  box-shadow: -0.625em 4.5em 0 -0.125em, -4.188em 2.313em 0 -0.125em;
+}
+
+.potion__outerBubbles:nth-child(2) {
+  @include circle(0.5em);
+  background: linear-gradient($chartreuse, $celadon);
+  top: 2.125em;
+  left: 4.625em;
+
+  &::after {
+    content: "";
+    @include circle(inherit);
+    position: absolute;
+    background-color: $bright-turquoise;
+    right: -2.813em;
+    bottom: -100%;
+  }
+
+  &::before {
+    content: "";
+    @include circle(1em);
+    position: absolute;
+    background: linear-gradient(to right, $chartreuse, $bright-turquoise);
+    left: -0.625em;
+    bottom: -1.688em;
+  }
+}
+
+.potion__outerStar {
+  position: absolute;
+  left: 3.625em;
+  top: 0.25em;
+  height: 1em;
+  width: 1em;
+
+  &::after,
+  &::before {
+    content: "";
+    position: absolute;
+    border-radius: 1em;
+    background: linear-gradient(to right, $chartreuse, $bright-turquoise);
+  }
+
+  &::after {
+    top: 50%;
+    transform: translateY(-50%);
+    height: 29.2%;
+    width: 100%;
+  }
+
+  &::before {
+    left: 50%;
+    transform: translateX(-50%);
+    width: 29.2%;
+    height: 100%;
+  }
+}
+
+.potion__background {
+  width: 18.5em;
+  height: 1.125em;
+  border-radius: 1.125em;
+  color: $port-gore;
+  background-color: currentColor;
+  box-shadow: -15.625em 1.125em $haiti, 16.25em 1.125em $haiti, 0 1.125em,
+    -2.25em 2.25em, 2.25em 2.25em, -16.25em 3.375em $haiti,
+    16.875em 3.375em $haiti, 0 3.375em, 1.25em 4.5em, -1.25em 4.5em,
+    -16.875em 5.625em $haiti, 17.5em 5.625em $haiti, 0 5.625em, -0.625em 6.75em,
+    0.625em 6.75em;
+}
+
+// Styles below for demonstration purposes only
+body {
+  display: grid;
+  height: 100vh;
+  margin: 0;
+  place-items: center center;
+}
