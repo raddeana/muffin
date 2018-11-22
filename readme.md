@@ -1,8 +1,8 @@
 ### muffin
-Very delicious and very happy
+very delicious and very happy
 <br />
 
 ### motto
-Life is very short, i play cat
+life is very short, i play cat
 <br />
-Even the smallest existence is better than the greatest vacant
+even the smallest existence is better than the greatest vacant
