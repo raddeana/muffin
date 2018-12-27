@@ -1,8 +1,15 @@
-### muffin
-very delicious and very happy
+### Muffin
+Very delicious and very happy
 <br />
 
-### motto
-life is very short, i play cat
+### Motto
+Life is very short, i play cat
 <br />
-even the smallest existence is better than the greatest vacant
+Even the smallest existence is better than the greatest vacant
+
+### Jedi Creeds
+- There is no emotion, there is peace.
+- There is no ignorance, there is knowledge.
+- There is no passion, there is serenity.
+- There is no chaos, there is harmony.
+- There is no death, there is the Force.
