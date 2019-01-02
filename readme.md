@@ -8,8 +8,8 @@ Life is very short, i play cat
 Even the smallest existence is better than the greatest vacant
 
 ### Jedi Creeds
-- There is no emotion, there is peace.
-- There is no ignorance, there is knowledge.
-- There is no passion, there is serenity.
-- There is no chaos, there is harmony.
-- There is no death, there is the Force.
+- No emotion, peace.
+- No ignorance, knowledge.
+- No passion, serenity.
+- No chaos, harmony.
+- No death, the Force.
