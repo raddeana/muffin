@@ -15,4 +15,4 @@ Even the smallest existence is better than the greatest vacant
 - No death, the Force.
 
 ### Theology Council
-a menu deie tet rimon
+Father, Son, Holy Spirit
