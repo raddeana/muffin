@@ -13,3 +13,6 @@ Even the smallest existence is better than the greatest vacant
 - No passion, serenity.
 - No chaos, harmony.
 - No death, the Force.
+
+### Theology Council
+a menu deie tet rimon
